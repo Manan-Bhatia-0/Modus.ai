@@ -6,19 +6,20 @@ class cipher:
     def __init__(self, journal_entry):
         self.journal_entry = journal_entry
         self.key = pd.read_csv(r"./keyDecoder/keyDecoder.csv",
-                      sep=',', names=['Character', 'Byte'], header=None, skiprows=[0])
+                               sep=',', names=['Character', 'Byte'], header=None, skiprows=[0])
 
         self.df = pd.DataFrame(data=self.key)
 
         self.df['Character'] = self.df['Character'].astype(str)
         self.df['Byte'] = self.df['Byte'].astype(str)
 
-    def encrypt_entry(self, journal_entry):
-        text = self.split(journal_entry)
+    def encrypt_entry(self):
+        text = self.split(self.journal_entry)
         encrypted_text = self.encode(text)
         return encrypted_text
 
-    def split(self, message):
+    @staticmethod
+    def split(message):
         return [char for char in message]
 
     def encode(self, text):
@@ -34,7 +35,7 @@ class cipher:
             encoded_text += encoded_char
         return encoded_text
 
-    def decode(self, encrypted_text):
+    def decrypt_entry(self, encrypted_text):
         new_word = ''
         original_text = []
 
