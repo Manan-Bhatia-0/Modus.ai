@@ -15,8 +15,7 @@ class Cipher:
         self.df['Byte'] = self.df['Byte'].astype(str)
 
     def encrypt_entry(self):
-        journal_entry_formatted = self.journal_entry.replace('\n', '')
-        journal_entry_formatted = journal_entry_formatted.replace('’', '\'')
+        journal_entry_formatted = self.format_text(self.journal_entry)
         text = self.split(journal_entry_formatted)
         encrypted_text = self.encode(text)
         return encrypted_text
@@ -54,3 +53,11 @@ class Cipher:
         new_word = ''.join(original_text)
 
         return new_word
+
+    @staticmethod
+    def format_text(original_text):
+        formatted_text = original_text.replace('\n', '')
+        formatted_text = formatted_text.replace('’', '\'')
+        formatted_text = formatted_text.replace('“', '\"')
+        formatted_text = formatted_text.replace('”', '\"')
+        return formatted_text
