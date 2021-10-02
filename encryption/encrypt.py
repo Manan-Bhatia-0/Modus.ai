@@ -1,11 +1,12 @@
 import pandas as pd
 
 
-class cipher:
+class Cipher:
 
     def __init__(self, journal_entry):
         self.journal_entry = journal_entry
-        self.key = pd.read_csv(r"./keyDecoder/keyDecoder.csv",
+        self.key = pd.read_csv(r"~/Desktop/Purdue/Junior Year/CS "
+                               r"307/CS307_project/encryption/keyDecoder/keyDecoder.csv",
                                sep=',', names=['Character', 'Byte'], header=None, skiprows=[0])
 
         self.df = pd.DataFrame(data=self.key)
@@ -14,7 +15,9 @@ class cipher:
         self.df['Byte'] = self.df['Byte'].astype(str)
 
     def encrypt_entry(self):
-        text = self.split(self.journal_entry)
+        journal_entry_formatted = self.journal_entry.replace('\n', '')
+        journal_entry_formatted = journal_entry_formatted.replace('’', '\'')
+        text = self.split(journal_entry_formatted)
         encrypted_text = self.encode(text)
         return encrypted_text
 
