@@ -4,6 +4,7 @@ This folder contains files related to exploring and testing different NLP and se
 *Note: this is currently through Jupyter notebooks, but will later be converted to .py files*
 
 ### In Progress:
+- sklearn
 - NLTK
 
 ### TODO:
