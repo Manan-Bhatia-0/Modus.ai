@@ -5,8 +5,8 @@ class Cipher:
 
     def __init__(self, journal_entry):
         self.journal_entry = journal_entry
-        self.key = pd.read_csv(r"~/Desktop/Purdue/Junior Year/CS "
-                               r"307/CS307_project/encryption/keyDecoder/keyDecoder.csv",
+        self.key = pd.read_csv(r"~/Desktop/Purdue/Junior Year/CS 307/CS307_project/encryption/key_decoder/key_decoder"
+                               r".csv",
                                sep=',', names=['Character', 'Byte'], header=None, skiprows=[0])
 
         self.df = pd.DataFrame(data=self.key)
@@ -14,7 +14,7 @@ class Cipher:
         self.df['Character'] = self.df['Character'].astype(str)
         self.df['Byte'] = self.df['Byte'].astype(str)
 
-    def encrypt_entry(self):
+    def encrypt_text(self):
         journal_entry_formatted = self.format_text(self.journal_entry)
         text = self.split(journal_entry_formatted)
         encrypted_text = self.encode(text)
@@ -37,7 +37,7 @@ class Cipher:
             encoded_text += encoded_char
         return encoded_text
 
-    def decrypt_entry(self, encrypted_text):
+    def decrypt_text(self, encrypted_text):
         new_word = ''
         original_text = []
 
@@ -53,6 +53,27 @@ class Cipher:
         new_word = ''.join(original_text)
 
         return new_word
+
+    @staticmethod
+    def image_cipher(path_to_image, path_to_store_image, image_encryption_key):
+        try:
+            fin = open(path_to_image, 'rb')
+            image = fin.read()
+            fin.close()
+            # converting image into byte array
+            image = bytearray(image)
+            for index, values in enumerate(image):
+                image[index] = values ^ image_encryption_key
+
+            # open file to write encrypted/decrypted image
+            fin = open(path_to_store_image, 'wb')
+
+            # writing encrypted/decrypted data in image
+            fin.write(image)
+            fin.close()
+
+        except Exception:
+            print('Error: ', Exception.__name__)
 
     @staticmethod
     def format_text(original_text):
