@@ -1,6 +1,7 @@
-# NLP
+# NLP Models
 
-This folder contains files related to exploring and testing different NLP and sentiment analysis algoirthms that will be potentially used for the project.
+This folder contains files related to exploring and testing different NLP and sentiment analysis algoirthms that will be potentially used for the project.  
+*Note: this is currently through Jupyter notebooks, but will later be converted to .py files*
 
 ### In Progress:
 - NLTK
