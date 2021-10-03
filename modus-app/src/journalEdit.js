@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./journalDashboard.css";
+import "./journalEdit.css";
 
 function App() {
   return (
@@ -18,8 +18,11 @@ function App() {
           </div>
         </a>
       </header>
-      <section className="topDashboard" id="topDashboard"></section>
-      <section className="mainDashboard" id="mainDashboard"></section>
+      <section className="journalEdit" id="journalEdit">
+        <div className="title"></div>
+        <div className="entryContent"></div>
+        <div className="buttons"></div>
+      </section>
     </div>
   );
 }
