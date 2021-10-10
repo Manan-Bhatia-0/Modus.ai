@@ -6,8 +6,9 @@ This folder contains files related to exploring and testing different NLP and se
 ### In Progress:
 - sklearn
 - NLTK
+- TextBlob
+- Spacy
 
 ### TODO:
 - T2E
-- TextBlob
-- Spacy
+
