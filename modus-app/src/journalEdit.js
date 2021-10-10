@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./journalEdit.css";
 
-function App() {
+function JournalEdit() {
   return (
     <div className="dashboard">
       <header>
@@ -42,4 +42,4 @@ function App() {
   );
 }
 
-export default App;
+export default JournalEdit;

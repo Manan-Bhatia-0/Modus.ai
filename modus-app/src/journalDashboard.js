@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./journalDashboard.css";
 
-function App() {
+function JournalDashboard() {
   return (
     <div className="dashboard">
       <header>
@@ -31,4 +31,4 @@ function App() {
   );
 }
 
-export default App;
+export default JournalDashboard;
