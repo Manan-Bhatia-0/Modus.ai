@@ -9,7 +9,7 @@ from matplotlib.axes import Axes as ax
 
 class RawScoresChart:
 
-    def plot_from_df(self):
+    def line_plot_from_df(self):
         # TODO call aggregation here
 
         # plot two moods' scores at once. Later change to multiple line plots per mood
@@ -23,6 +23,27 @@ class RawScoresChart:
         plt.xlabel('happy', fontsize=14)
         plt.ylabel('surprise', fontsize=14)
         plt.grid(True)
+        plt.show()
+
+    # per journal entry pie chart distribution of the
+    # qualitative variables (moods)
+    def pie_chart_from_df(self):
+        import matplotlib.pyplot as plt
+
+        dict_scores = {"happy": 0.0,
+                       "sad": 0.2,
+                       "fear": 0.1,
+                       "anger": 0.1,
+                       "surprise": 0.2}
+        labels = []
+        sizes = []
+
+        for x, y in dict_scores.items():
+            labels.append(x)
+            sizes.append(y)
+        plt.pie(sizes, labels=labels)
+
+        # plt.axis('equal')
         plt.show()
 
     def main(self):
