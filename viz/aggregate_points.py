@@ -9,7 +9,7 @@ import numpy as np
 import numpy.ma as ma
 
 
-class Aggregate:
+class AggregateScores:
 
     def __init__(self, score_dicts, list_keys):
         # score_dicts is a list of dictionaries of scores
@@ -19,12 +19,19 @@ class Aggregate:
     # average per day (favorable approach)
     def avg(self):
         aggregated_scores = []
+        index = 0
         dict_len = len(self.keys)  # same as len of each dictionary element of the scores list
-        for i in dict_len:
+        for i in self.keys:
+
             sum_scores = 0
+            inner_index = 0
+
             for j in self.scores:
-                score_dict = self.scores[i]
-                sum_scores += score_dict[self.keys[j]]
+                score_dict = self.scores[index]
+                sum_scores += score_dict[self.keys[inner_index]]
+                inner_index += 1
+
+            index += 1
 
             avg_score = sum_scores / len(self.scores)
             aggregated_scores.append(avg_score)
