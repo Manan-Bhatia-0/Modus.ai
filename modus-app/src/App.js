@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import JournalDashboard from './JournalDashboard.js';
-import NavBar from './Navbar.js';
-import JournalEdit from './JournalEdit';
-import Profile from './Profile.js';
-import Library from './Library.js';
-import Analysis from './Analysis.js';
-import Faq from './Faq.js';
-import Logout from './Logout';
+import JournalDashboard from './pages/JournalDashboard.js';
+import NavBar from './components/Navbar.js';
+import JournalEdit from './pages/JournalEdit';
+import Profile from './pages/Profile.js';
+import Library from './pages/Library.js';
+import Analysis from './pages/Analysis.js';
+import Faq from './pages/Faq.js';
+import Logout from './pages/Logout';
 
 function App() {
   return (

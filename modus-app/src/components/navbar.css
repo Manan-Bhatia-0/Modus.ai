@@ -1,0 +1,10 @@
+.navbar {
+    background-color: rgb(118, 153, 228);
+    width: 10rem;
+    justify-content: left;
+    height: 30rem;
+  }
+
+.text {
+    color: white;
+}
