@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import SunEditor from "suneditor-react";
+import "suneditor/dist/css/suneditor.min.css"; // import Sun Editor's CSS File
 import "./journalEdit.css";
 
 function App() {
@@ -15,6 +17,7 @@ function App() {
         <div className="entryContent">
           <h3>Entry Content</h3>
           /* text box WITH editing options */
+          <SunEditor />
         </div>
         <div className="buttons">
           /* save allows the user to come back and edit but NO analysis */
