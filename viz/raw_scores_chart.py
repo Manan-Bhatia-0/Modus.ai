@@ -9,25 +9,35 @@ from matplotlib.axes import Axes as ax
 
 class RawScoresChart:
 
-    def line_plot_from_df(self):
-        # TODO call aggregation here
+    # This function will plot as many values are passed
+    # The caller must only pass the number of data points
+    # that are to be plotted.
+    @staticmethod
+    def line_plot_from_list_scores(list_dict_scores: list[dict]):
 
-        # plot two moods' scores at once. Later change to multiple line plots per mood
-        dict_scores = {"happy": [0.2, 0.2, 0.3, 0.2, 0.0, 0.0, 0.1],
-                       "surprise": [0.4, 0.1, 0.1, 0.1, 0.0, 0.0, 0.4]}
+        # to get x-axis values
+        x = []
+        i = 0
+        while i < len(list_dict_scores):
+            x.append(i + 1)
+            i += 1
 
-        df = pd.DataFrame(dict_scores, columns=['happy', 'surprise'])
+        keys = list_dict_scores[0].keys()
 
-        plt.plot(df['happy'], df['surprise'], color='red', marker='o')
-        plt.title('happy vs surprise', fontsize=14)
-        plt.xlabel('happy', fontsize=14)
-        plt.ylabel('surprise', fontsize=14)
-        plt.grid(True)
+        for j in keys:
+            y = RawScoresChart.to_list(list_dict_scores, j)
+            plt.plot(x, y, marker='D', mfc='red', label=j)
+
+        plt.legend()
+        plt.xlabel('Days')
+        plt.ylabel('Mood Scores (%)')
+        plt.savefig('test_plot1.png')
         plt.show()
 
     # per journal entry pie chart distribution of the
     # qualitative variables (moods)
-    def pie_chart_from_df(self):
+    @staticmethod
+    def pie_chart_from_df(scores_dict):
         import matplotlib.pyplot as plt
 
         dict_scores = {"happy": 0.0,
@@ -46,59 +56,35 @@ class RawScoresChart:
         # plt.axis('equal')
         plt.show()
 
-    def main(self):
-        dict_scores_1 = {"happy": 0.0,
-                         "sad": 0.2,
-                         "fear": 0.1,
-                         "anger": 0.1,
-                         "surprise": 0.2}
+    @staticmethod
+    def to_list(list_dict_scores: list[dict], key: str):
+        scores = []
+        counter = 0
+        for i in list_dict_scores:
+            dict_scores = list_dict_scores[counter]
+            scores.append(dict_scores[key] * 100)
+            counter += 1
+        return scores
 
-        dict_scores_2 = {"happy": 0.0,
-                         "sad": 0.3,
-                         "fear": 0.0,
-                         "anger": 0.5,
-                         "surprise": 0.0}
 
-        dict_scores_3 = {"happy": 0.5,
-                         "sad": 0.2,
-                         "fear": 0.1,
-                         "anger": 0.1,
-                         "surprise": 0.1}
+def main():
+    dict_scores = {"happy": 0.0,
+                   "sad": 0.2,
+                   "fear": 0.1,
+                   "anger": 0.1,
+                   "surprise": 0.2}
 
-        dict_scores_4 = {"happy": 0.2,
-                         "sad": 0.4,
-                         "fear": 0.3,
-                         "anger": 0.1,
-                         "surprise": 0.0}
+    dict_scores2 = {"happy": 0.2,
+                    "sad": 0.4,
+                    "fear": 0.6,
+                    "anger": 0.8,
+                    "surprise": 1.0}
+    list_scores_dict = [dict_scores, dict_scores2]
+    # print(RawScoresChart.to_list('happy'))
 
-        dict_scores_5 = {"happy": 1.0,
-                         "sad": 0.0,
-                         "fear": 0.0,
-                         "anger": 0.0,
-                         "surprise": 0.0}
+    RawScoresChart.line_plot_from_list_scores(list_scores_dict)
+    # RawScoresChart.pie_chart_from_df()
 
-        plt.style.use(plt.style.available[4])
-        plt.xlabel('Key')
-        plt.ylabel('Value')
-        moods = list(dict_scores_1.keys())
-        raw_scores = list(dict_scores_1.values())
-        ax.plot_date(moods, raw_scores, '-')  # x-axis
 
-        moods = list(dict_scores_2.keys())
-        raw_scores = list(dict_scores_2.values())
-        ax.plot_date(moods, raw_scores, '-')
-
-        moods = list(dict_scores_3.keys())
-        raw_scores = list(dict_scores_3.values())
-        ax.plot_date(moods, raw_scores, '-')
-
-        moods = list(dict_scores_4.keys())
-        raw_scores = list(dict_scores_4.values())
-        ax.plot_date(moods, raw_scores, '-')
-
-        moods = list(dict_scores_5.keys())
-        raw_scores = list(dict_scores_5.values())
-        ax.plot_date(moods, raw_scores, '-')
-
-    if __name__ == '__main__':
-        main()
+if __name__ == '__main__':
+    main()
