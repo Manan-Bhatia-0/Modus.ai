@@ -1,9 +1,11 @@
-# This will be used to create a chart to display raw scores as a line chart
+# This will be used to create a chart to display scores:
+# as a line chart, pie chart, or histogram.
+# Histograms and pie charts can also be used for aggregated data.
 
 import matplotlib.pyplot as plt
 
 
-class RawScoresChart:
+class PlotScores:
 
     # This function will plot as many values are passed
     # The caller must only pass the number of data points
@@ -21,7 +23,7 @@ class RawScoresChart:
         keys = list_dict_scores[0].keys()
 
         for j in keys:
-            y = RawScoresChart.to_list(list_dict_scores, j)
+            y = PlotScores.to_list(list_dict_scores, j)
             plt.plot(x, y, marker='D', mfc='red', label=j)
 
         plt.legend()
@@ -58,6 +60,8 @@ class RawScoresChart:
         return scores
 
     # to be used for sentence by sentence analysis or most recent entry analysis
+    # may also be used to display aggregated analysis but the caller must pass
+    # a dict with aggregated scores in that case.
     @staticmethod
     def histogram_from_dict(dict_scores: dict):
         keys = dict_scores.keys()
@@ -68,27 +72,3 @@ class RawScoresChart:
         plt.xlabel('Moods')
         plt.ylabel('Mood Scores (%)')
         plt.show()
-
-
-def main():
-    dict_scores = {"happy": 0.4,
-                   "sad": 0.2,
-                   "fear": 0.6,
-                   "anger": 0.8,
-                   "surprise": 0.2}
-
-    dict_scores2 = {"happy": 0.2,
-                    "sad": 0.4,
-                    "fear": 0.6,
-                    "anger": 0.8,
-                    "surprise": 1.0}
-    list_scores_dict = [dict_scores, dict_scores2]
-    # print(RawScoresChart.to_list('happy'))
-
-    # RawScoresChart.line_plot_from_list_scores(list_scores_dict)
-    # RawScoresChart.pie_chart_from_df()
-    # RawScoresChart.histogram_from_dict(dict_scores)
-    RawScoresChart.pie_chart_from_dict(dict_scores)
-
-if __name__ == '__main__':
-    main()
