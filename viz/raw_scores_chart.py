@@ -1,10 +1,6 @@
 # This will be used to create a chart to display raw scores as a line chart
 
-from matplotlib.backends.backend_pdf import PdfPages
-import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
-from matplotlib.axes import Axes as ax
 
 
 class RawScoresChart:
@@ -31,27 +27,22 @@ class RawScoresChart:
         plt.legend()
         plt.xlabel('Days')
         plt.ylabel('Mood Scores (%)')
+        plt.ylim(0, 100)
         plt.savefig('test_plot1.png')
         plt.show()
 
     # per journal entry pie chart distribution of the
     # qualitative variables (moods)
     @staticmethod
-    def pie_chart_from_df(scores_dict):
-        import matplotlib.pyplot as plt
+    def pie_chart_from_dict(dict_scores: dict):
 
-        dict_scores = {"happy": 0.0,
-                       "sad": 0.2,
-                       "fear": 0.1,
-                       "anger": 0.1,
-                       "surprise": 0.2}
         labels = []
         sizes = []
 
         for x, y in dict_scores.items():
             labels.append(x)
             sizes.append(y)
-        plt.pie(sizes, labels=labels)
+        plt.pie(sizes, labels=labels, colors=['green', 'red', 'brown', 'orange', 'cyan'])
 
         # plt.axis('equal')
         plt.show()
@@ -66,12 +57,24 @@ class RawScoresChart:
             counter += 1
         return scores
 
+    # to be used for sentence by sentence analysis or most recent entry analysis
+    @staticmethod
+    def histogram_from_dict(dict_scores: dict):
+        keys = dict_scores.keys()
+        values = dict_scores.values()
+        values = [i * 100 for i in values]
+        plt.bar(keys, values, color=['green', 'red', 'brown', 'orange', 'cyan'])
+        plt.ylim(0, 100)
+        plt.xlabel('Moods')
+        plt.ylabel('Mood Scores (%)')
+        plt.show()
+
 
 def main():
-    dict_scores = {"happy": 0.0,
+    dict_scores = {"happy": 0.4,
                    "sad": 0.2,
-                   "fear": 0.1,
-                   "anger": 0.1,
+                   "fear": 0.6,
+                   "anger": 0.8,
                    "surprise": 0.2}
 
     dict_scores2 = {"happy": 0.2,
@@ -82,9 +85,10 @@ def main():
     list_scores_dict = [dict_scores, dict_scores2]
     # print(RawScoresChart.to_list('happy'))
 
-    RawScoresChart.line_plot_from_list_scores(list_scores_dict)
+    # RawScoresChart.line_plot_from_list_scores(list_scores_dict)
     # RawScoresChart.pie_chart_from_df()
-
+    # RawScoresChart.histogram_from_dict(dict_scores)
+    RawScoresChart.pie_chart_from_dict(dict_scores)
 
 if __name__ == '__main__':
     main()
