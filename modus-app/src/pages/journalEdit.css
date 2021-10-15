@@ -4,7 +4,7 @@ section {
   height: 024px;
   left: 63px;
   top: 0px;
-  background: #f5f8ff;
+  /* background: #f5f8ff; */
 }
 
 .journalEdit {
@@ -13,7 +13,7 @@ section {
   height: 899px;
   left: 326px;
   top: 52px;
-  background: #ffffff;
+  /* background: #ffffff; */
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
