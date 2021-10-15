@@ -2,9 +2,11 @@
     background-color: rgb(118, 153, 228);
     width: 10rem;
     justify-content: left;
-    height: 30rem;
+    height: 100vh;
+    text-decoration: none;
   }
 
 .text {
     color: white;
+    text-decoration: none;
 }
