@@ -48,10 +48,6 @@ class TestPlotScores(unittest.TestCase):
 
     list_scores_dict = [dict_scores1, dict_scores2, dict_scores3, dict_scores4, dict_scores5, dict_scores6,
                         dict_scores7]
-    # print(PlotScores.to_list('happy'))
-
-    # RawScoresChart.pie_chart_from_df()
-    # RawScoresChart.histogram_from_dict(dict_scores1)
 
     def test_line_plot_from_list(self):
         PlotScores.line_plot_from_list_scores(self.list_scores_dict)
