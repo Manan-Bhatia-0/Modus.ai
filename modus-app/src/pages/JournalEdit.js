@@ -17,8 +17,6 @@ function JournalEdit() {
           <TextField
             id="title"
             label="Title"
-            value={this.state.title}
-            onChange={this.handleChange("title")}
             margine="normal"
           />
         </div>
