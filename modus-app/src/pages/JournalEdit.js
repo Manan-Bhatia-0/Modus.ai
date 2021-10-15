@@ -14,13 +14,7 @@ function JournalEdit() {
         <div className="title">
           <h3>Title</h3>
           /* text box WITHOUT editing options */
-          <TextField
-            id="title"
-            label="Title"
-            value={this.state.title}
-            onChange={this.handleChange("title")}
-            margine="normal"
-          />
+          <SunEditor />
         </div>
         <div className="entryContent">
           <h3>Entry Content</h3>
