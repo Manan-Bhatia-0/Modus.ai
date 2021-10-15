@@ -1,0 +1,94 @@
+section {
+  position: absolute;
+  width: 1377px;
+  height: 024px;
+  left: 63px;
+  top: 0px;
+  background: #f5f8ff;
+}
+
+.journalEdit {
+  position: absolute;
+  width: 852px;
+  height: 899px;
+  left: 326px;
+  top: 52px;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+h2 {
+  position: absolute;
+  width: 687px;
+  height: 44px;
+  left: 358px;
+  top: 82px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 42px;
+  color: #474747;
+}
+
+h4 {
+  position: absolute;
+  width: 55px;
+  height: 32px;
+  left: 1071px;
+  top: 98px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  color: #474747;
+}
+
+h3 {
+  position: absolute;
+  width: 687px;
+  height: 44px;
+  left: 358px;
+  top: 82px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 30px;
+  color: #474747;
+}
+
+.title {
+  position: absolute;
+  width: 783px;
+  height: 62px;
+  left: 358px;
+  top: 139px;
+}
+
+.entryContent {
+  position: absolute;
+  width: 783px;
+  height: 624px;
+  left: 358px;
+  top: 230px;
+}
+
+.save {
+  position: absolute;
+  width: 169px;
+  height: 35px;
+  left: 753px;
+  top: 884px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.1));
+}
+
+.submit {
+  position: absolute;
+  width: 169px;
+  height: 35px;
+  left: 972px;
+  top: 884px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.1));
+}

@@ -12,6 +12,8 @@ class TestEncryption(unittest.TestCase):
 
         test_cipher1 = Cipher(formatted_text1)
         encrypted_text = test_cipher1.encrypt_text()
+
+        self.assert_(formatted_text1 != encrypted_text)
         decrypted_text = test_cipher1.decrypt_text(encrypted_text)
 
         self.assertEqual(decrypted_text, formatted_text1)
@@ -21,6 +23,7 @@ class TestEncryption(unittest.TestCase):
         formatted_text2 = self.format_text(original_text2)
         test_cipher2 = Cipher(formatted_text2)
         encrypted_text = test_cipher2.encrypt_text()
+        self.assert_(formatted_text2 != encrypted_text)
         decrypted_text = test_cipher2.decrypt_text(encrypted_text)
 
         self.assertEqual(decrypted_text, formatted_text2)
