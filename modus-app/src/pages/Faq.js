@@ -2,8 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
+import "./Faq.css";
 
-function Faq() {
+function App() {
   return (
       <div className="dashboard">
         <section className="faq" id="faq">
@@ -42,4 +43,4 @@ function Faq() {
   );
 }
 
-export default Faq;
+export default App;

@@ -1,10 +1,10 @@
 import unittest
 from viz.aggregate_points import AggregateScores
 
+
 class TestAggregationScores(unittest.TestCase):
 
     def test_list_scores_dicts(self):
-
         list_scores = []
         list_keys = ['happy', 'sad', 'fear', 'anger', 'surprise']
         dict_scores_1 = {"happy": 0.0,
@@ -50,9 +50,7 @@ class TestAggregationScores(unittest.TestCase):
         print(list_scores)
         print(avg_list)
 
-
-
-        self.assertEqual(avg_list, list_calculated_avg)  # add assertion here
+        self.assertEqual(avg_list, list_calculated_avg)
 
 
 if __name__ == '__main__':
