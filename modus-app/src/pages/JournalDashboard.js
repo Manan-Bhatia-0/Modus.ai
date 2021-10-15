@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./journalDashboard.css";
+import "./JournalDashboard.css";
 
 function JournalDashboard() {
   return (

@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import SunEditor from "suneditor-react";
-import "suneditor/dist/css/suneditor.min.css"
-import TextField from '@mui/material/TextField';
+import "suneditor/dist/css/suneditor.min.css";
+import TextField from "@mui/material/TextField";
+import "./JournalEdit.css";
 
 function JournalEdit() {
   return (
