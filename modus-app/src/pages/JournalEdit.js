@@ -13,23 +13,14 @@ function JournalEdit() {
         <h4>Date</h4>
         <div className="title">
           <h3>Title</h3>
-          /* text box WITHOUT editing options */
-          <TextField
-            id="title"
-            label="Title"
-            margine="normal"
-          />
+          <TextField />
         </div>
         <div className="entryContent">
           <h3>Entry Content</h3>
-          /* text box WITH editing options */
           <SunEditor />
         </div>
         <div className="buttons">
-          /* save allows the user to come back and edit but NO analysis */
           <button className="save">Save</button>
-          /* submit allows the user to get analysis of the journal but no edit /
-          delete*/
           <button className="submit">Submit</button>
         </div>
       </section>
