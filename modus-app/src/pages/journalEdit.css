@@ -1,17 +1,14 @@
 section {
   position: absolute;
-  width: 1377px;
-  height: 024px;
-  left: 63px;
-  top: 0px;
-  /* background: #f5f8ff; */
+  width: 100%;
+  height: 100%;
+  background: #f5f8ff;
 }
 
 .dashboard {
   position: absolute;
   width: 1377px;
   height: 529px;
-  left: 53px;
   top: 0px;
   opacity: 0.5;
 }
