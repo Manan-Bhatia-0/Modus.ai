@@ -18,23 +18,23 @@ function Library() {
         <Grid item xs={10}>
           <h1 
             style={{
-              marginTop: "10rem"
+              marginTop: "5rem"
             }}>
               User's Library
           </h1>
         </Grid>
         <Grid item xs style={{
-              marginTop: "9rem"
+              marginTop: "3rem"
             }}
             >
-          <InputLabel id="sort-by-label">Sort by</InputLabel>
+          <InputLabel id="sort-by-label" style={{marginBottom: 5}}>Sort by</InputLabel>
           <Select
             labelId="sort-by-label"
             id="sort-by"
             value={sort}
             label="Sort by"
             onChange={handleChange}
-            style={{minwidth: 100}}
+            style={{minwidth: 100, marginBottom: 20}}
           >
             <MenuItem value={"dateSaved"}>Date Saved</MenuItem>
             <MenuItem value={"alpha"}>Alphabetical</MenuItem>
