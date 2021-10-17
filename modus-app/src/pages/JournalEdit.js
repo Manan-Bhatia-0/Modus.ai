@@ -17,7 +17,7 @@ function JournalEdit() {
         </div>
         <div className="entryContent">
           <h3>Entry Content</h3>
-          <SunEditor />
+          <SunEditor setOptions={{ height: "500px", width: "1000px" }} />
         </div>
         <div className="buttons">
           <button className="save">Save</button>
