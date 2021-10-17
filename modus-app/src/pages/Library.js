@@ -4,7 +4,7 @@ import {Grid, Divider, Pagination, Select, MenuItem, InputLabel} from '@mui/mate
 import "../components/LibraryCard.css"
 
 function Library() {
-  const [sort, setSort] = React.useState('');
+  const [sort, setSort] = React.useState('dateSaved');
 
   const handleChange = (event) => {
     setSort(event.target.value);
@@ -34,7 +34,7 @@ function Library() {
             value={sort}
             label="Sort by"
             onChange={handleChange}
-            style={{minwidth: 100, marginBottom: 20}}
+            style={{minwidth: 150, marginBottom: 20}}
           >
             <MenuItem value={"dateSaved"}>Date Saved</MenuItem>
             <MenuItem value={"alpha"}>Alphabetical</MenuItem>
