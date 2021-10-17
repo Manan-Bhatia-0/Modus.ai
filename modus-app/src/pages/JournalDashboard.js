@@ -7,7 +7,9 @@ function JournalDashboard() {
     <div className="dashboard">
       <section className="topDashboard" id="topDashboard">
         <h2>Hi User. How are you today?</h2>
-        <button className="writeButton">Write New Entry</button>
+        <a href="write">
+          <button className="writeButton">Write New Entry</button>
+        </a>
       </section>
       <section className="mainDashboard" id="mainDashboard">
         <h3>Recent Entries</h3>
