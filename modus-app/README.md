@@ -1,3 +1,18 @@
+# Getting Started with JSON-Server
+
+JSON Server is a fake REST API that mainly serves as a tool to provide a dummy backend for frontend developers.
+
+## Install JSON-Server
+To install JSON-Server, run:
+### `npm install -g json-server`
+
+## Running JSON-Server
+To run our fake REST API, run:
+### `json-server --watch src/data/db.json`
+
+## Available resources
+- /library (dummy resource for the library page)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

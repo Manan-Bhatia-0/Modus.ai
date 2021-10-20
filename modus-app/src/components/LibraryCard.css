@@ -1,0 +1,22 @@
+root {
+    background-color: #f5f8ff;
+    margin-top: 30 rem;
+}
+
+h1 {
+    font-family: Spectral;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 73px;
+    color: #578ff1;
+  }
+
+  title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 42px;
+    color: #474747;
+  }

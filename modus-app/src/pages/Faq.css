@@ -1,9 +1,7 @@
 .dashboard {
   position: absolute;
-  width: 1377px;
-  height: 1024px;
-  left: 63px;
-  top: 0px;
+  width: 100rem;
+  height: 100rem;
   background: #f5f8ff;
 }
 
