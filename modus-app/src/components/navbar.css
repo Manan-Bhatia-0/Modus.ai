@@ -1,12 +1,12 @@
 .navbar {
-    background-color: rgb(118, 153, 228);
-    width: 10rem;
-    justify-content: left;
-    height: 100vh;
-    text-decoration: none;
-  }
+  background-color: rgb(118, 153, 228);
+  width: 10rem;
+  justify-content: left;
+  height: 100vh;
+  text-decoration: none;
+}
 
 .text {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
