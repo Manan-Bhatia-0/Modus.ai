@@ -69,8 +69,6 @@ function Welcome() {
               <Route path='/library' component={Library} />
               <Route path='/anaylsis' component={Analysis} />
               <Route path='/faq' component={Faq} />
-              <Route path='/logout' component={Logout} />
-
           </Switch>
         </Grid>
       </Grid>
