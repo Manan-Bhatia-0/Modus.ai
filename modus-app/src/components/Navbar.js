@@ -15,7 +15,7 @@ function NavBar() {
         <Nav.Link href="/library">Library</Nav.Link>
         <Nav.Link href="/analysis">Analysis</Nav.Link>
         <Nav.Link href="/faq">FAQ</Nav.Link>
-        <Nav.Link onClick={() => SignOut()}>Logout</Nav.Link>
+        <Nav.Link href="/" onClick={() => SignOut()}>Logout</Nav.Link>
       </div>
     </Navbar>
   );
