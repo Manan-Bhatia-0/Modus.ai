@@ -37,9 +37,9 @@ function App() {
 
     return (
         <div className="App">
-        <header>
+        {/* <header>
             <h1>Welcome to Modus.ai</h1>
-        </header>
+        </header> */}
         <section>
             {user ? <Welcome /> : <SignIn />}
         </section>
