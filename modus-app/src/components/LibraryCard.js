@@ -1,6 +1,7 @@
 import React from "react";
-import { Card, Grid } from "@mui/material";
+import { Card, Grid, IconButton } from "@mui/material";
 import { makeStyles } from '@mui/styles';
+import DeleteIcon from '@mui/icons-material/Delete';
 import "./LibraryCard.css";
 
 const useStyles = makeStyles({
@@ -17,6 +18,11 @@ function LibraryCard() {
       <div>
         <Card className={classes.card}>
             <Grid container direction="column">
+              <Grid container style={{marginBottom: 5}} justifyContent='end'>
+                <IconButton onClick={() => console.log("Deleted Entry")}>
+                  <DeleteIcon/>
+                </IconButton>
+              </Grid>
               <Grid container>
                 <Grid container item>
                   <Grid item xs 
