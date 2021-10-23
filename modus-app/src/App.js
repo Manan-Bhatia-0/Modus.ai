@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Grid from '@mui/material/Grid';
 
@@ -17,6 +18,9 @@ import 'firebase/compat/auth'
 import {useAuthState} from "react-firebase-hooks/auth";
 import {useCollectionData} from "react-firebase-hooks/firestore";
 
+var admin = require("firebase-admin");
+var serviceAccount = require("./modusdb-4d7ed-firebase-adminsdk-nkovy-a64f42c83d.json");
+
 firebase.initializeApp({
     apiKey: "AIzaSyDXtGR1FNQz9zxOk79Ikkqzg9j8IYi2mh0",
     authDomain: "modusdb-4d7ed.firebaseapp.com",
@@ -24,8 +28,10 @@ firebase.initializeApp({
     storageBucket: "modusdb-4d7ed.appspot.com",
     messagingSenderId: "738850813503",
     appId: "1:738850813503:web:e7e97619a1eaa6510daa8a",
-    measurementId: "G-84F8J1Y1VY"
+    measurementId: "G-84F8J1Y1VY",
+    credential: admin.credential.cert(serviceAccount)
 })
+
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
@@ -34,6 +40,7 @@ const analytics = firebase.analytics
 function App() {
 
     const [user] = useAuthState(auth);
+
 
     return (
         <div className="App">
@@ -91,9 +98,16 @@ function SignIn() {
 
 }
 
+function save_journal() {
+  //var func = JournalEdit
+  //str func.entryContent
+  //str.db
+}
+
 // connect this to logout page.
 export function SignOut() {
   return auth.currentUser && (auth.signOut())
     // <button className="sign-out" onClick={() => auth.signOut()}>Sign Out</button>
 }
 export default App;
+

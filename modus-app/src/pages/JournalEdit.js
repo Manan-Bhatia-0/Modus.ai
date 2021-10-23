@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 import React from "react";
 import ReactDOM from "react-dom";
 import SunEditor from "suneditor-react";
@@ -21,11 +22,20 @@ function JournalEdit() {
         </div>
         <div className="buttons">
           <button className="save">Save</button>
-          <button className="submit">Submit</button>
+          <button className="submit" onClick={submitfn()} >Submit</button>
+
         </div>
       </section>
     </div>
   );
+}
+
+function submitfn() {
+  var title = document.getElementsByClassName('title').value;
+  var entry_content = document.getElementsByClassName('entryContent').value;
+  console.log('Client-side code running');
+  console.log(title)
+  console.log(entry_content)
 }
 
 export default JournalEdit;
