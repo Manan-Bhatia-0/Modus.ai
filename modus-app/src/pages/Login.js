@@ -44,8 +44,12 @@ function Login() {
         >
           Log in
         </button>
-        <a href="#">Forget your password?</a>
-        <a href="#">Create account</a>
+        <button className="googleLogin" onClick={signInWithGoogle}>
+          {" "}
+          Login with Google{" "}
+        </button>
+        <a href="/reset">Forget your password?</a>
+        <a href="/register">Create account</a>
         <input
           type="checkbox"
           name="save_login_state"
