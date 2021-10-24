@@ -15,19 +15,19 @@ function Library() {
     setSort(event.target.value);
   }
 
-  React.useEffect(() => {
-    fetch('http://localhost:8000/users')
-      .then(response => {
-        return response.json();
-      })
-      .then((data) => {
-        // console.log(data);
-        // console.log(data[0].uid[0].journalEntries[0].jid1[0].createdAt);
-        // console.log(data[0].uid[0].journalEntries);
-        setEntries(data[0].uid[0].journalEntries);
+  // React.useEffect(() => {
+  //   fetch('http://localhost:8000/users')
+  //     .then(response => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       // console.log(data);
+  //       // console.log(data[0].uid[0].journalEntries[0].jid1[0].createdAt);
+  //       // console.log(data[0].uid[0].journalEntries);
+  //       setEntries(data[0].uid[0].journalEntries);
         
-      })
-  }, []);
+  //     })
+  // }, []);
   return (
     <div
       style={{margin: "5rem"}}

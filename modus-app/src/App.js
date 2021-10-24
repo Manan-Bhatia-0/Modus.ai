@@ -9,6 +9,7 @@ import Profile from './pages/Profile.js';
 import Library from './pages/Library.js';
 import Analysis from './pages/Analysis.js';
 import Faq from './pages/Faq.js';
+import MoodResources from "./pages/MoodResources.js";
 import Logout from './pages/Logout';
 
 import firebase from 'firebase/compat/app';
@@ -76,6 +77,7 @@ function Welcome() {
               <Route path='/library' component={Library} />
               <Route path='/anaylsis' component={Analysis} />
               <Route path='/faq' component={Faq} />
+              <Route path='/resources' component={MoodResources} />
           </Switch>
         </Grid>
       </Grid>
