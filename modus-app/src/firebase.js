@@ -16,6 +16,7 @@ export const app = firebase.initializeApp(firebaseConfig);
 export const auth = app.auth();
 export const db = app.firestore();
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
+export const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
 export const signInWithGoogle = async () => {
   try {
@@ -38,6 +39,29 @@ export const signInWithGoogle = async () => {
     alert(err.message);
   }
 };
+
+export const signInWithFacebook = async () => {
+  try {
+    const res = await auth.signInWithPopup(facebookProvider);
+    const user = res.user;
+    const query = await db
+      .collection("users")
+      .where("uid", "==", user.uid)
+      .get();
+    if (query.docs.length === 0) {
+      await db.collection("users").add({
+        uid: user.uid,
+        name: user.displayName,
+        authProvider: "google",
+        email: user.email,
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
 export const signInWithEmailAndPassword = async (email, password) => {
   try {
     await auth.signInWithEmailAndPassword(email, password);
@@ -46,6 +70,7 @@ export const signInWithEmailAndPassword = async (email, password) => {
     alert(err.message);
   }
 };
+
 export const registerWithEmailAndPassword = async (name, email, password) => {
   try {
     const res = await auth.createUserWithEmailAndPassword(email, password);
@@ -61,6 +86,7 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
     alert(err.message);
   }
 };
+
 export const sendPasswordResetEmail = async (email) => {
   try {
     await auth.sendPasswordResetEmail(email);
@@ -70,6 +96,7 @@ export const sendPasswordResetEmail = async (email) => {
     alert(err.message);
   }
 };
+
 export const logout = () => {
   auth.signOut();
 };

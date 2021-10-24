@@ -4,6 +4,7 @@ import {
   auth,
   signInWithEmailAndPassword,
   signInWithGoogle,
+  signInWithFacebook,
 } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./Login.css";
@@ -47,6 +48,10 @@ function Login() {
         <button className="googleLogin" onClick={signInWithGoogle}>
           {" "}
           Login with Google{" "}
+        </button>
+        <button className="facebookLogin" onClick={signInWithFacebook}>
+          {" "}
+          Login with Facebook{" "}
         </button>
         <a href="/reset">Forget your password?</a>
         <a href="/register">Create account</a>
