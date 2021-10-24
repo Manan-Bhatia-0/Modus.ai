@@ -9,7 +9,7 @@ import {
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./CreateAccount.css";
 
-export function CreateAccount() {
+function CreateAccount() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -21,7 +21,7 @@ export function CreateAccount() {
   };
   useEffect(() => {
     if (loading) return;
-    if (user) history.replace("/dashboard");
+    if (user) history.replace("/home");
   }, [user, loading]);
   return (
     <div>
@@ -54,3 +54,4 @@ export function CreateAccount() {
     </div>
   );
 }
+export default CreateAccount;

@@ -9,6 +9,8 @@ import Library from "./pages/Library.js";
 import Analysis from "./pages/Analysis.js";
 import Faq from "./pages/Faq.js";
 import Login from "./pages/Login.js";
+import CreateAccount from "./pages/CreateAccount.js";
+import Reset from "./pages/ResetPassword.js";
 import Logout from "./pages/Logout";
 
 import firebase from "firebase/compat/app";
@@ -41,7 +43,25 @@ const analytics = firebase.analytics;
 
 const LoginContainer = () => (
   <div className="container">
-    <Route exact path="/" component={Login} />
+    <Grid item>
+      <Route exact path="/" component={Login} />
+    </Grid>
+  </div>
+);
+
+const ResetContainer = () => (
+  <div className="container">
+    <Grid item>
+      <Route exact path="/reset" component={Reset} />
+    </Grid>
+  </div>
+);
+
+const CreateContainer = () => (
+  <div className="container">
+    <Grid item>
+      <Route exact path="/register" component={CreateAccount} />
+    </Grid>
   </div>
 );
 
@@ -66,6 +86,8 @@ function Welcome() {
     <Router>
       <Switch>
         <Route exact path="/" component={LoginContainer} />
+        <Route exact path="/register" component={CreateContainer} />
+        <Route exact path="/reset" component={ResetContainer} />
         <Route component={DefaultContainer} />
       </Switch>
     </Router>

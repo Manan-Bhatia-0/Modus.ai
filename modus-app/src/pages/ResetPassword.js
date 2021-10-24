@@ -11,7 +11,7 @@ function ResetPassword() {
   const history = useHistory();
   useEffect(() => {
     if (loading) return;
-    if (user) history.replace("/dashboard");
+    if (user) history.replace("/home");
   }, [user, loading]);
   return (
     <div className="Reset">
@@ -31,3 +31,4 @@ function ResetPassword() {
     </div>
   );
 }
+export default ResetPassword;
