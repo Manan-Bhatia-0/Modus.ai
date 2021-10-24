@@ -3,6 +3,7 @@ import 'firebase/compat/firestore'
 import 'firebase/compat/auth'
 
 import {useAuthState} from "react-firebase-hooks/auth";
+import {firestore} from "firebase-admin";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDXtGR1FNQz9zxOk79Ikkqzg9j8IYi2mh0",
@@ -26,7 +27,7 @@ export const signInWithGoogle = async () => {
             .where("uid", "==", user.uid)
             .get();
         if (query.docs.length === 0) {
-            await db.collection("users").add({
+            await db.collection("users").doc(user.email).set({
                 uid: user.uid,
                 name: user.displayName,
                 authProvider: "google",
@@ -52,9 +53,9 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
         const user = res.user;
         await db.collection("users").add({
             uid: user.uid,
-            name,
+            name: name,
             authProvider: "local",
-            email,
+            email: email,
         });
     } catch (err) {
         console.error(err);
@@ -73,3 +74,33 @@ export const sendPasswordResetEmail = async (email) => {
 export const logout = () => {
     auth.signOut();
 };
+
+// assumes that ID is generated automatically by firestore as the docID for each journal entry
+export const submitJournalEntry = async (title, text) => {
+    await db.collection('users').doc(user.email).collection('journalEntries').add({
+        jid: '', // will this be added later by the ML Engine??
+        text: text,
+        title: title,
+        createdAt: firestore.FieldValue.serverTimestamp(),
+        status: 'submitted',
+        t2eEntryMoodAnalysis: '',
+        t2eSentMoodAnalysis: '',
+        polarityEntryMoodAnalysis: '',
+        polaritySentMoodAnalysis: ''
+    })
+}
+
+// assumes that ID is generated automatically by firestore as the docID for each journal entry
+export const saveJournalEntry = async (title, text) => {
+    await db.collection('users').doc(user.email).collection('journalEntries').add({
+        jid: '', // will this be added later by the ML Engine??
+        text: text,
+        title: title,
+        createdAt: firestore.FieldValue.serverTimestamp(),
+        status: 'saved',
+        t2eEntryMoodAnalysis: '',
+        t2eSentMoodAnalysis: '',
+        polarityEntryMoodAnalysis: '',
+        polaritySentMoodAnalysis: ''
+    })
+}
