@@ -11,7 +11,8 @@ To run our fake REST API, run:
 ### `json-server --watch src/data/db.json`
 
 ## Available resources
-- /library (dummy resource for the library page)
+- /users (dummy resource page that replicates the firebase database)
+    - updated on 10/24
 
 # Getting Started with Create React App
 
