@@ -1,8 +1,6 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore'
 import 'firebase/compat/auth'
-
-import {useAuthState} from "react-firebase-hooks/auth";
 import {firestore} from "firebase-admin";
 
 const firebaseConfig = {
@@ -14,7 +12,14 @@ const firebaseConfig = {
     appId: "1:738850813503:web:e7e97619a1eaa6510daa8a",
     measurementId: "G-84F8J1Y1VY"
 };
-const app = firebase.initializeApp(firebaseConfig);
+
+let app;
+if (!firebase.apps.length) {
+    app = firebase.initializeApp(firebaseConfig);
+}else {
+   app = firebase.app(); // if already initialized, use that one
+}
+// const app = firebase.initializeApp(firebaseConfig);
 let currentUser;
 export const auth = app.auth();
 export const db = app.firestore();
@@ -81,11 +86,11 @@ export const logout = () => {
 
 // assumes that ID is generated automatically by firestore as the docID for each journal entry
 export const submitJournalEntry = async (title, text) => {
-    await db.collection('users').doc(user.email).collection('journalEntries').add({
+    await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').add({
         jid: '', // will this be added later by the ML Engine??
         text: text,
         title: title,
-        createdAt: firestore.FieldValue.serverTimestamp(),
+        createdAt: Date.now(),
         status: 'submitted',
         t2eEntryMoodAnalysis: '',
         t2eSentMoodAnalysis: '',
@@ -96,11 +101,11 @@ export const submitJournalEntry = async (title, text) => {
 
 // assumes that ID is generated automatically by firestore as the docID for each journal entry
 export const saveJournalEntry = async (title, text) => {
-    await db.collection('users').doc(user.email).collection('journalEntries').add({
+    await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').add({
         jid: '', // will this be added later by the ML Engine??
         text: text,
         title: title,
-        createdAt: firestore.FieldValue.serverTimestamp(),
+        createdAt: Date.now(),
         status: 'saved',
         t2eEntryMoodAnalysis: '',
         t2eSentMoodAnalysis: '',
