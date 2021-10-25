@@ -15,6 +15,7 @@ const firebaseConfig = {
     measurementId: "G-84F8J1Y1VY"
 };
 const app = firebase.initializeApp(firebaseConfig);
+let currentUser;
 export const auth = app.auth();
 export const db = app.firestore();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -22,6 +23,7 @@ export const signInWithGoogle = async () => {
     try {
         const res = await auth.signInWithPopup(googleProvider);
         const user = res.user;
+        currentUser = user;
         const query = await db
             .collection("users")
             .where("uid", "==", user.uid)
