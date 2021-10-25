@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import "./journalEdit.css";
 import {useRef } from 'react'
 import {useState} from 'react' 
-import { saveJournalEntry } from "../firebase";
+import {saveJournalEntry, submitJournalEntry} from "../firebase";
 
 function JournalEdit() {
   const [myValue, setValue] = useState('') 
