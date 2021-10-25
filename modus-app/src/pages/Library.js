@@ -1,7 +1,10 @@
 import React from "react";
 import LibraryCard from "../components/LibraryCard";
-import {Grid, Divider, Pagination, Select, MenuItem, InputLabel} from '@mui/material'
+import {Button, Grid, Divider, Pagination, Select, MenuItem, InputLabel, TextField} from '@mui/material'
 import "../components/LibraryCard.css"
+import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DateAdapter from '@mui/lab/AdapterDateFns';
 
 function Library() {
   const [sort, setSort] = React.useState('dateSaved');
@@ -14,6 +17,12 @@ function Library() {
   const handleChange = (event) => {
     setSort(event.target.value);
   }
+
+  const [date, setDate] = React.useState(new Date('2021-10-18T21:11:54'));
+
+  const handleDateChange = (newValue) => {
+    setDate(newValue);
+  };
 
   // React.useEffect(() => {
   //   fetch('http://localhost:8000/users')
@@ -33,7 +42,7 @@ function Library() {
       style={{margin: "5rem"}}
     >
       <Grid container>
-        <Grid item xs={10}>
+        <Grid item xs={5}>
           <h1 
             style={{
               marginTop: "5rem"
@@ -41,7 +50,32 @@ function Library() {
               User's Library
           </h1>
         </Grid>
-        <Grid item xs style={{
+        <Grid item xs={3} style={{
+          marginTop: "5rem"
+          }}
+        >
+          <LocalizationProvider dateAdapter={DateAdapter}>
+            <DesktopDatePicker
+              label="Search date"
+              inputFormat="MM/dd/yyyy"
+              value={date}
+              onChange={handleDateChange}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+        </Grid>
+        <Grid item xs={4} style={{marginTop:"5rem"}}>
+          {/* <form action="/" method="get"> */}
+          <form>
+            <input
+                type="text"
+                id="header-search"
+                placeholder="Search journal entries"
+            />
+            <Button type ="submit" variant="outlined" style={{marginBottom: "5px"}}>Search</Button>
+          </form>
+        </Grid>
+        <Grid item xs={2} style={{
               marginTop: "3rem"
             }}
             >
