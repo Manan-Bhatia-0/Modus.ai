@@ -15,6 +15,7 @@ const firebaseConfig = {
     measurementId: "G-84F8J1Y1VY"
 };
 const app = firebase.initializeApp(firebaseConfig);
+let currentUser;
 export const auth = app.auth();
 export const db = app.firestore();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -22,6 +23,7 @@ export const signInWithGoogle = async () => {
     try {
         const res = await auth.signInWithPopup(googleProvider);
         const user = res.user;
+        currentUser = user;
         const query = await db
             .collection("users")
             .where("uid", "==", user.uid)
@@ -41,7 +43,8 @@ export const signInWithGoogle = async () => {
 };
 export const signInWithEmailAndPassword = async (email, password) => {
     try {
-        await auth.signInWithEmailAndPassword(email, password);
+        const res = await auth.signInWithEmailAndPassword(email, password);
+        currentUser = res.user;
     } catch (err) {
         console.error(err);
         alert(err.message);
@@ -51,6 +54,7 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
     try {
         const res = await auth.createUserWithEmailAndPassword(email, password);
         const user = res.user;
+        currentUser = user;
         await db.collection("users").add({
             uid: user.uid,
             name: name,
