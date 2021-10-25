@@ -86,8 +86,9 @@ export const logout = () => {
 
 // assumes that ID is generated automatically by firestore as the docID for each journal entry
 export const submitJournalEntry = async (title, text) => {
-    await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').add({
-        jid: '', // will this be added later by the ML Engine??
+    const jid = getJID()
+    await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
+        jid: jid, // will this be added later by the ML Engine??
         text: text,
         title: title,
         createdAt: Date.now(),
@@ -101,8 +102,9 @@ export const submitJournalEntry = async (title, text) => {
 
 // assumes that ID is generated automatically by firestore as the docID for each journal entry
 export const saveJournalEntry = async (title, text) => {
-    await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').add({
-        jid: '', // will this be added later by the ML Engine??
+    const jid = getJID()
+    await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
+        jid: jid, 
         text: text,
         title: title,
         createdAt: Date.now(),
@@ -113,3 +115,15 @@ export const saveJournalEntry = async (title, text) => {
         polaritySentMoodAnalysis: ''
     })
 }
+
+function getJID() {
+    const uuidv4 = require("uuid/v4")
+    return uuidv4()
+}
+//export const getJID = async () => {
+    //const uuidv4 = require("uuid/v4")
+    //uuidv4()
+    //const jid = await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).get()
+    //if (jid)
+    
+//}
