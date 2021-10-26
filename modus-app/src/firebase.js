@@ -118,7 +118,7 @@ export const saveJournalEntry = async (title, text) => {
 }
 
 function getJID() {
-    const uuidv4 = require("uuid/v4")
+    const {v4: uuidv4} = require('uuid')
     return uuidv4()
 }
 //export const getJID = async () => {
