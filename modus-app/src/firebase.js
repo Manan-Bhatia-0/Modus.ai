@@ -84,11 +84,12 @@ export const logout = () => {
     auth.signOut();
 };
 
-// assumes that ID is generated automatically by firestore as the docID for each journal entry
+// This is a generic function.
+// the caller must check if entry already exists (check by title?)
 export const submitJournalEntry = async (title, text) => {
-    const jid = getJID()
+    const jid = "123" //getJID()
     await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
-        jid: jid, // will this be added later by the ML Engine??
+        jid: jid,
         text: text,
         title: title,
         createdAt: Date.now(),
@@ -102,7 +103,7 @@ export const submitJournalEntry = async (title, text) => {
 
 // assumes that ID is generated automatically by firestore as the docID for each journal entry
 export const saveJournalEntry = async (title, text) => {
-    const jid = getJID()
+    const jid = "123"
     await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
         jid: jid, 
         text: text,
@@ -116,10 +117,10 @@ export const saveJournalEntry = async (title, text) => {
     })
 }
 
-function getJID() {
-    const uuidv4 = require("uuid/v4")
-    return uuidv4()
-}
+// function getJID() {
+//     const uuidv4 = require("uuid/v4")
+//     return uuidv4()
+// }
 //export const getJID = async () => {
     //const uuidv4 = require("uuid/v4")
     //uuidv4()
