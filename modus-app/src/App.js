@@ -9,6 +9,7 @@ import Profile from './pages/Profile.js';
 import Library from './pages/Library.js';
 import Analysis from './pages/Analysis.js';
 import Faq from './pages/Faq.js';
+import MoodResources from "./pages/MoodResources.js";
 import Logout from './pages/Logout';
 
 import firebase from 'firebase/compat/app';
@@ -21,16 +22,16 @@ import {useCollectionData} from "react-firebase-hooks/firestore";
 var admin = require("firebase-admin");
 var serviceAccount = require("./modusdb-4d7ed-firebase-adminsdk-nkovy-a64f42c83d.json");
 
-firebase.initializeApp({
-    apiKey: "AIzaSyDXtGR1FNQz9zxOk79Ikkqzg9j8IYi2mh0",
-    authDomain: "modusdb-4d7ed.firebaseapp.com",
-    projectId: "modusdb-4d7ed",
-    storageBucket: "modusdb-4d7ed.appspot.com",
-    messagingSenderId: "738850813503",
-    appId: "1:738850813503:web:e7e97619a1eaa6510daa8a",
-    measurementId: "G-84F8J1Y1VY",
-    credential: admin.credential.cert(serviceAccount)
-})
+// firebase.initializeApp({
+//     apiKey: "AIzaSyDXtGR1FNQz9zxOk79Ikkqzg9j8IYi2mh0",
+//     authDomain: "modusdb-4d7ed.firebaseapp.com",
+//     projectId: "modusdb-4d7ed",
+//     storageBucket: "modusdb-4d7ed.appspot.com",
+//     messagingSenderId: "738850813503",
+//     appId: "1:738850813503:web:e7e97619a1eaa6510daa8a",
+//     measurementId: "G-84F8J1Y1VY",
+//     credential: admin.credential.cert(serviceAccount)
+// })
 
 
 const auth = firebase.auth();
@@ -76,6 +77,7 @@ function Welcome() {
               <Route path='/library' component={Library} />
               <Route path='/anaylsis' component={Analysis} />
               <Route path='/faq' component={Faq} />
+              <Route path='/resources' component={MoodResources} />
           </Switch>
         </Grid>
       </Grid>
