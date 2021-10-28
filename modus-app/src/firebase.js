@@ -84,10 +84,12 @@ export const logout = () => {
     auth.signOut();
 };
 
-// assumes that ID is generated automatically by firestore as the docID for each journal entry
+// This is a generic function.
+// the caller must check if entry already exists (check by title?)
 export const submitJournalEntry = async (title, text) => {
-    await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').add({
-        jid: '', // will this be added later by the ML Engine??
+    const jid = getJID()
+    await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
+        jid: jid,
         text: text,
         title: title,
         createdAt: Date.now(),
@@ -101,8 +103,9 @@ export const submitJournalEntry = async (title, text) => {
 
 // assumes that ID is generated automatically by firestore as the docID for each journal entry
 export const saveJournalEntry = async (title, text) => {
-    await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').add({
-        jid: '', // will this be added later by the ML Engine??
+    const jid = getJID()
+    await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
+        jid: jid, 
         text: text,
         title: title,
         createdAt: Date.now(),
@@ -113,3 +116,63 @@ export const saveJournalEntry = async (title, text) => {
         polaritySentMoodAnalysis: ''
     })
 }
+
+export const getJournalEntries = async () => {
+    await db.collection('users').doc(auth.currentUser.email).collection('jounalEntries').get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(jid) {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(jid.jid, " => ", jid.data());
+            //const ref = doc(db, "jid", jid.jid).withConverter(entryConverter);
+        });
+    });
+}
+
+class JournalEntry {
+    constructor (jid, text, title, createdAt, status, t2eEntryMoodAnalysis, t2eSentMoodAnalysis, polarityEntryMoodAnalysis, polaritySentMoodAnalysis) {
+        this.jid = jid;
+        this.text = text;
+        this.title = title;
+        this.createdAt = createdAt;
+        this.status = status;
+        this.t2eEntryMoodAnalysis = t2eEntryMoodAnalysis;
+        this.t2eSentMoodAnalysis = t2eSentMoodAnalysis;
+        this.polarityEntryMoodAnalysis = polarityEntryMoodAnalysis;
+        this.polaritySentMoodAnalysis = polaritySentMoodAnalysis;
+    }
+    toString() {
+        return this.jid + ', ' + this.text + ', ' + this.title+ ', ' + this.createdAt + ', ' + this.status + ', ' + this.t2eEntryMoodAnalysis + ', ' + this.t2eSentMoodAnalysis + ', ' + this.polarityEntryMoodAnalysis + ', ' + this.polaritySentMoodAnalysis;
+    }
+}
+
+// Firestore data converter
+const entryConverter = {
+    toFirestore: (jid) => {
+        return {
+            jid: jid.jid,
+            text: jid.text,
+            title: jid.title,
+            createdAt: jid.createdAt,
+            status:  jid.status, 
+            t2eEntryMoodAnalysis: jid.t2eEntryMoodAnalysis,
+            t2eSentMoodAnalysis: jid.t2eSentMoodAnalysis,
+            polarityEntryMoodAnalysis: jid.polarityEntryMoodAnalysis,
+            polaritySentMoodAnalysis: jid.polaritySentMoodAnalysis
+        };
+    },
+    fromFirestore: (snapshot, options) => {
+        const data = snapshot.data(options);
+        return new JournalEntry(data.jid, data.text, data.title, data.createdAt, data.status, data.t2eEntryMoodAnalysis, data.t2eSentMoodAnalysis, data.polarityEntryMoodAnalysis, data.polaritySentMoodAnalysis);
+    }
+};
+
+function getJID() {
+    const {v4: uuidv4} = require('uuid')
+    return uuidv4()
+}
+//export const getJID = async () => {
+    //const uuidv4 = require("uuid/v4")
+    //uuidv4()
+    //const jid = await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).get()
+    //if (jid)
+    
+//}
