@@ -11,12 +11,21 @@ import {useState} from 'react'
 function JournalEdit() {
   const [myValue, setValue] = useState('') 
   const [textfield, setValue2] = useState('')
+  const [value, setValue3] = useState('')
   
   const handleSubmit = (e) => {
     e.preventDefault();
     const entry = { myValue, textfield };
     console.log(entry);
+    console.log(document.activeElement.getAttribute('value'));
+    submitfn(myValue, textfield) 
   }
+  // const onSave = handleSubmit(e => {
+  //   e.submitAction = 'decline'
+  //   console.log("save")
+  // })
+
+ // <form onSubmit={handleSubmit}> 
 
   return (
     <div className="dashboard">
@@ -38,8 +47,7 @@ function JournalEdit() {
         </div>
         <div className="buttons">
           <button className="save">Save</button>
-          <button className="submit">Submit</button>
-
+          <button className="submit" >Submit</button>
         </div>
         </form>
       </section>
@@ -47,16 +55,22 @@ function JournalEdit() {
   );
 }
 
+function submit() // no ';' here
+{
+    var elem = document.getElementsByClassName("submit2");
+    console.log(elem.value);
+}
 
-// function submitfn(e, textfield) {
 
-//   console.log(e)
-//   console.log(textfield)
-//   // var title = document.getElementsByClassName('title').value;
-//   // var entry_content = document.getElementsByClassName('entryContent').useRef;
-//   console.log('Client-side code running');
-//   // console.log(title)
-//   // console.log(entry_content)
-// }
+function submitfn(myValue, textfield) {
+
+  console.log(myValue)
+  console.log(textfield)
+  // var title = document.getElementsByClassName('title').value;
+  // var entry_content = document.getElementsByClassName('entryContent').useRef;
+  console.log('Client-side code running');
+  // console.log(title)
+  // console.log(entry_content)
+}
 
 export default JournalEdit;
