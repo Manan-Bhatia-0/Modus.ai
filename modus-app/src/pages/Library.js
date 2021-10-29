@@ -22,8 +22,7 @@ function Library() {
   const handleChange = (event) => {
     setSort(event.target.value);
   }
-
-  const [date, setDate] = React.useState(new Date('2021-10-18T21:11:54'));
+  const [date, setDate] = React.useState(new Date());
 
   const handleDateChange = (newValue) => {
     setDate(newValue);
