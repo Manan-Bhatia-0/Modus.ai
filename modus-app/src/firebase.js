@@ -3,6 +3,7 @@ import 'firebase/compat/firestore'
 import 'firebase/compat/auth'
 import {firestore} from "firebase-admin";
 import { collection, getDocs } from "firebase/firestore";
+import { doc, getDoc} from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -120,6 +121,7 @@ export const saveJournalEntry = async (title, text) => {
 }
 
 export const getJournalEntries = async () => {
+    var journalEntries = [];
     // await db.collection('users').doc(auth.currentUser.email).collection('jounalEntries').get().then(function(querySnapshot) {
     //     querySnapshot.forEach(function(jid) {
     //         // doc.data() is never undefined for query doc snapshots
@@ -127,12 +129,15 @@ export const getJournalEntries = async () => {
     //         //const ref = doc(db, "jid", jid.jid).withConverter(entryConverter);
     //     });
     // });
-    const querySnapshot = await getDocs(collection(db.collection('users').doc(auth.currentUser.email), 'journalEntries'));
+    const querySnapshot = await getDocs(collection(db.collection('users').doc(auth.currentUser.email), 'journalEntries').withConverter(entryConverter));
     querySnapshot.forEach((doc) => {
     // doc.data() is never undefined for query doc snapshots
-    console.log(doc.id, " => ", doc.data());
+    //console.log(doc.id, " => ", doc.data());
+    const entry = doc.data();
+    journalEntries.push(entry);
+;
 });
-
+    return journalEntries;
 }
 
 class JournalEntry {
