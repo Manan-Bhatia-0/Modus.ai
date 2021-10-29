@@ -2,8 +2,10 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore'
 import 'firebase/compat/auth'
 import {firestore} from "firebase-admin";
-import { collection, getDocs } from "firebase/firestore";
-import { doc, getDoc} from "firebase/firestore";
+import {collection, getDocs } from "firebase/firestore";
+import {doc, getDoc, deleteDoc} from "firebase/firestore";
+import { getAuth, deleteUser } from "firebase/auth";
+import { SignOut } from './App';
 
 
 const firebaseConfig = {
@@ -86,6 +88,29 @@ export const sendPasswordResetEmail = async (email) => {
 export const logout = () => {
     auth.signOut();
 };
+
+export const deleteCurrentUser = async () => {
+    deleteUserData()
+    deleteUser(auth.currentUser).then(() => {
+       console.log('deleted user')
+      }).catch((error) => {
+        console.log(error)
+      });  
+}
+
+// This function must be called to avoid OOM errors
+const deleteUserData = async () => {
+        // deleting files in batch
+        // var batch = firebase.firestore().batch()
+    
+        // await firebase.firestore().collection('users').doc(auth.currentUser.email).collection('journalEntries').getDocs().then(val => {
+        //     val.map((val) => {
+        //         batch.delete(val)
+        //     })
+        //     batch.commit()
+        // })
+        await deleteDoc(doc(db, 'users', auth.currentUser.email));  
+}
 
 // This is a generic function.
 // the caller must check if entry already exists (check by title?)
