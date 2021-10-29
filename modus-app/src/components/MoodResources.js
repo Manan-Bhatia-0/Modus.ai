@@ -15,6 +15,7 @@ function MoodResources() {
                 }}>
                   Mental Health Resources
               </h1>
+              <Divider style={{width: "50rem"}}/>
               <h5 
                 style={{
                   marginTop: "1rem"
@@ -23,7 +24,7 @@ function MoodResources() {
               </h5>
             </Grid>
           </Grid>
-          <Divider style={{width: "50rem"}}/>
+         
           <Grid container direction="column" style={{marginTop: "2rem"}}>
             <Grid item>
                 <Card style={{width: "50rem", height: "40px", padding: "10px", margin: "10px"}}>
