@@ -104,7 +104,6 @@ export const submitJournalEntry = async (title, text) => {
     })
 }
 
-// assumes that ID is generated automatically by firestore as the docID for each journal entry
 export const saveJournalEntry = async (title, text) => {
     const jid = getJID()
     await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
@@ -122,26 +121,19 @@ export const saveJournalEntry = async (title, text) => {
 
 export const getJournalEntries = async () => {
     var journalEntries = [];
-    // await db.collection('users').doc(auth.currentUser.email).collection('jounalEntries').get().then(function(querySnapshot) {
-    //     querySnapshot.forEach(function(jid) {
-    //         // doc.data() is never undefined for query doc snapshots
-    //         console.log(jid.jid, " => ", jid.data());
-    //         //const ref = doc(db, "jid", jid.jid).withConverter(entryConverter);
-    //     });
-    // });
-    const querySnapshot = await getDocs(collection(db.collection('users').doc(auth.currentUser.email), 'journalEntries').withConverter(entryConverter));
-    querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    //console.log(doc.id, " => ", doc.data());
+    const querySnapshot = await getDocs(collection(db.collection('users').
+        doc(auth.currentUser.email), 'journalEntries').withConverter(entryConverter));
+    
+    querySnapshot.forEach((doc) => { 
     const entry = doc.data();
     journalEntries.push(entry);
-;
 });
     return journalEntries;
 }
 
 class JournalEntry {
-    constructor (jid, text, title, createdAt, status, t2eEntryMoodAnalysis, t2eSentMoodAnalysis, polarityEntryMoodAnalysis, polaritySentMoodAnalysis) {
+    constructor (jid, text, title, createdAt, status, t2eEntryMoodAnalysis,
+         t2eSentMoodAnalysis, polarityEntryMoodAnalysis, polaritySentMoodAnalysis) {
         this.jid = jid;
         this.text = text;
         this.title = title;
@@ -153,7 +145,10 @@ class JournalEntry {
         this.polaritySentMoodAnalysis = polaritySentMoodAnalysis;
     }
     toString() {
-        return this.jid + ', ' + this.text + ', ' + this.title+ ', ' + this.createdAt + ', ' + this.status + ', ' + this.t2eEntryMoodAnalysis + ', ' + this.t2eSentMoodAnalysis + ', ' + this.polarityEntryMoodAnalysis + ', ' + this.polaritySentMoodAnalysis;
+        return this.jid + ', ' + this.text + ', ' + this.title+ ', ' + 
+        this.createdAt + ', ' + this.status + ', ' + this.t2eEntryMoodAnalysis + 
+        ', ' + this.t2eSentMoodAnalysis + ', ' + this.polarityEntryMoodAnalysis + 
+        ', ' + this.polaritySentMoodAnalysis;
     }
 }
 
@@ -185,10 +180,3 @@ function getJID() {
     const {v4: uuidv4} = require('uuid')
     return uuidv4()
 }
-//export const getJID = async () => {
-    //const uuidv4 = require("uuid/v4")
-    //uuidv4()
-    //const jid = await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).get()
-    //if (jid)
-    
-//}
