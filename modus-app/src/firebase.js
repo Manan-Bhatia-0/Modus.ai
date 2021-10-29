@@ -143,7 +143,7 @@ export const saveJournalEntry = async (title, text) => {
         polarityEntryMoodAnalysis: '',
         polaritySentMoodAnalysis: ''
     })
-    searchByDate(new Date())
+    // searchByDate(new Date())
 }
 
 export const getJournalEntries = async () => {
