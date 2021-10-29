@@ -143,6 +143,7 @@ export const saveJournalEntry = async (title, text) => {
         polarityEntryMoodAnalysis: '',
         polaritySentMoodAnalysis: ''
     })
+    searchByDate(new Date())
 }
 
 export const getJournalEntries = async () => {
@@ -214,6 +215,32 @@ export const searchByTitle = async (title) => {
     //   console.log("search by title: ", title, entry)
     });
     return result
+}
+
+export const searchByDate = async (date) => {
+    var millis = getMillisFromDate(date)
+    var upperLimit = 86400000 + millis // adding 24 hours
+
+    var result = []
+    const q = query(collection(db.collection('users').
+    doc(auth.currentUser.email), 'journalEntries'), where("createdAt", '<', upperLimit), where("createdAt", '>=', millis));
+
+    const querySnapshot = await getDocs(q.withConverter(entryConverter))
+    querySnapshot.forEach((doc) => {
+      const entry = doc.data()
+      result.push(entry)
+      console.log("search by date: ", date, entry)
+    });
+    return result
+
+}
+
+function getMillisFromDate(date) {
+  date.setHours(0,0,0,0)
+  const millis = Date.parse(date)
+  return millis
+//   console.log(millis)
+//   console.log(date);
 }
 
 function getJID() {
