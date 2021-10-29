@@ -75,7 +75,7 @@ function Welcome() {
               <Route path='/profile' component={Profile} />
               <Route path='/write' component={JournalEdit} />
               <Route path='/library' component={Library} />
-              <Route path='/anaylsis' component={Analysis} />
+              <Route path='/analysis' component={Analysis} />
               <Route path='/faq' component={Faq} />
               <Route path='/resources' component={MoodResources} />
           </Switch>
