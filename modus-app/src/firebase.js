@@ -2,6 +2,8 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore'
 import 'firebase/compat/auth'
 import {firestore} from "firebase-admin";
+import { collection, getDocs } from "firebase/firestore";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyDXtGR1FNQz9zxOk79Ikkqzg9j8IYi2mh0",
@@ -118,13 +120,19 @@ export const saveJournalEntry = async (title, text) => {
 }
 
 export const getJournalEntries = async () => {
-    await db.collection('users').doc(auth.currentUser.email).collection('jounalEntries').get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(jid) {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(jid.jid, " => ", jid.data());
-            //const ref = doc(db, "jid", jid.jid).withConverter(entryConverter);
-        });
-    });
+    // await db.collection('users').doc(auth.currentUser.email).collection('jounalEntries').get().then(function(querySnapshot) {
+    //     querySnapshot.forEach(function(jid) {
+    //         // doc.data() is never undefined for query doc snapshots
+    //         console.log(jid.jid, " => ", jid.data());
+    //         //const ref = doc(db, "jid", jid.jid).withConverter(entryConverter);
+    //     });
+    // });
+    const querySnapshot = await getDocs(collection(db.collection('users').doc(auth.currentUser.email), 'journalEntries'));
+    querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    console.log(doc.id, " => ", doc.data());
+});
+
 }
 
 class JournalEntry {
@@ -161,7 +169,10 @@ const entryConverter = {
     },
     fromFirestore: (snapshot, options) => {
         const data = snapshot.data(options);
-        return new JournalEntry(data.jid, data.text, data.title, data.createdAt, data.status, data.t2eEntryMoodAnalysis, data.t2eSentMoodAnalysis, data.polarityEntryMoodAnalysis, data.polaritySentMoodAnalysis);
+        return new JournalEntry(data.jid, data.text, data.title, 
+            data.createdAt, data.status, data.t2eEntryMoodAnalysis,
+             data.t2eSentMoodAnalysis, data.polarityEntryMoodAnalysis,
+              data.polaritySentMoodAnalysis);
     }
 };
 

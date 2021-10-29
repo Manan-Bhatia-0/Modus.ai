@@ -49,6 +49,7 @@ function JournalEdit() {
         <div className="buttons">
           <button className="save"
           onClick={() => saveJournalEntry(myValue, textfield)}>Save</button>
+          {/* onClick={() => getJournalEntries()}>Save</button> */}
           <button className="submit" onClick={() => submitJournalEntry(myValue, textfield)}>Submit</button>
         </div>
         </form>
