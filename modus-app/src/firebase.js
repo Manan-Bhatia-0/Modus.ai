@@ -2,8 +2,8 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore'
 import 'firebase/compat/auth'
 import {firestore} from "firebase-admin";
-import {collection, getDocs } from "firebase/firestore";
-import {doc, getDoc, deleteDoc} from "firebase/firestore";
+import {collection, getDocs} from "firebase/firestore";
+import {doc, getDoc, deleteDoc, query, where} from "firebase/firestore";
 import { getAuth, deleteUser } from "firebase/auth";
 import { SignOut } from './App';
 
@@ -127,6 +127,7 @@ export const submitJournalEntry = async (title, text) => {
         polarityEntryMoodAnalysis: '',
         polaritySentMoodAnalysis: ''
     })
+    searchByTitle('orange7')
 }
 
 export const saveJournalEntry = async (title, text) => {
@@ -151,7 +152,7 @@ export const getJournalEntries = async () => {
     
     querySnapshot.forEach((doc) => { 
     const entry = doc.data();
-    journalEntries.push(entry);
+    journalEntries.push(entry)
 });
     return journalEntries;
 }
@@ -200,6 +201,20 @@ const entryConverter = {
               data.polaritySentMoodAnalysis);
     }
 };
+
+export const searchByTitle = async (title) => {
+    var result = []
+    const q = query(collection(db.collection('users').
+    doc(auth.currentUser.email), 'journalEntries'), where("title", "==", title));
+
+    const querySnapshot = await getDocs(q.withConverter(entryConverter))
+    querySnapshot.forEach((doc) => {
+      const entry = doc.data()
+      result.push(entry)
+    //   console.log("search by title: ", title, entry)
+    });
+    return result
+}
 
 function getJID() {
     const {v4: uuidv4} = require('uuid')
