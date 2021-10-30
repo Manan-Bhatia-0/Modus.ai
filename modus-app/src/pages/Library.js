@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LibraryCard from "../components/LibraryCard";
 import {Button, Grid, Divider, Pagination, Select, MenuItem, InputLabel, TextField} from '@mui/material'
 import "../components/LibraryCard.css"
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateAdapter from '@mui/lab/AdapterDateFns';
+import {getJournalEntries} from "../firebase";
 
 function Library() {
+  useEffect(() => {
+    const entries = getJournalEntries();
+    console.log(entries);
+  });
   const [sort, setSort] = React.useState('dateSaved');
   // const [title, setTitle] = React.useState('');
   // const [date, setDate] = React.useState('');
@@ -17,8 +22,7 @@ function Library() {
   const handleChange = (event) => {
     setSort(event.target.value);
   }
-
-  const [date, setDate] = React.useState(new Date('2021-10-18T21:11:54'));
+  const [date, setDate] = React.useState(new Date());
 
   const handleDateChange = (newValue) => {
     setDate(newValue);

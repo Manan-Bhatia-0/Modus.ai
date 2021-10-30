@@ -2,6 +2,11 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore'
 import 'firebase/compat/auth'
 import {firestore} from "firebase-admin";
+import {collection, getDocs} from "firebase/firestore";
+import {doc, getDoc, deleteDoc, query, where} from "firebase/firestore";
+import { getAuth, deleteUser } from "firebase/auth";
+import { SignOut } from './App';
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyDXtGR1FNQz9zxOk79Ikkqzg9j8IYi2mh0",
@@ -84,6 +89,29 @@ export const logout = () => {
     auth.signOut();
 };
 
+export const deleteCurrentUser = async () => {
+    deleteUserData()
+    deleteUser(auth.currentUser).then(() => {
+       console.log('deleted user')
+      }).catch((error) => {
+        console.log(error)
+      });  
+}
+
+// This function must be called to avoid OOM errors
+const deleteUserData = async () => {
+        // deleting files in batch
+        // var batch = firebase.firestore().batch()
+    
+        // await firebase.firestore().collection('users').doc(auth.currentUser.email).collection('journalEntries').getDocs().then(val => {
+        //     val.map((val) => {
+        //         batch.delete(val)
+        //     })
+        //     batch.commit()
+        // })
+        await deleteDoc(doc(db, 'users', auth.currentUser.email));  
+}
+
 // This is a generic function.
 // the caller must check if entry already exists (check by title?)
 export const submitJournalEntry = async (title, text) => {
@@ -99,9 +127,9 @@ export const submitJournalEntry = async (title, text) => {
         polarityEntryMoodAnalysis: '',
         polaritySentMoodAnalysis: ''
     })
+    searchByTitle('orange7')
 }
 
-// assumes that ID is generated automatically by firestore as the docID for each journal entry
 export const saveJournalEntry = async (title, text) => {
     const jid = getJID()
     await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
@@ -115,20 +143,24 @@ export const saveJournalEntry = async (title, text) => {
         polarityEntryMoodAnalysis: '',
         polaritySentMoodAnalysis: ''
     })
+    // searchByDate(new Date())
 }
 
 export const getJournalEntries = async () => {
-    await db.collection('users').doc(auth.currentUser.email).collection('jounalEntries').get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(jid) {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(jid.jid, " => ", jid.data());
-            //const ref = doc(db, "jid", jid.jid).withConverter(entryConverter);
-        });
-    });
+    var journalEntries = [];
+    const querySnapshot = await getDocs(collection(db.collection('users').
+        doc(auth.currentUser.email), 'journalEntries').withConverter(entryConverter));
+    
+    querySnapshot.forEach((doc) => { 
+    const entry = doc.data();
+    journalEntries.push(entry)
+});
+    return journalEntries;
 }
 
 class JournalEntry {
-    constructor (jid, text, title, createdAt, status, t2eEntryMoodAnalysis, t2eSentMoodAnalysis, polarityEntryMoodAnalysis, polaritySentMoodAnalysis) {
+    constructor (jid, text, title, createdAt, status, t2eEntryMoodAnalysis,
+         t2eSentMoodAnalysis, polarityEntryMoodAnalysis, polaritySentMoodAnalysis) {
         this.jid = jid;
         this.text = text;
         this.title = title;
@@ -140,7 +172,10 @@ class JournalEntry {
         this.polaritySentMoodAnalysis = polaritySentMoodAnalysis;
     }
     toString() {
-        return this.jid + ', ' + this.text + ', ' + this.title+ ', ' + this.createdAt + ', ' + this.status + ', ' + this.t2eEntryMoodAnalysis + ', ' + this.t2eSentMoodAnalysis + ', ' + this.polarityEntryMoodAnalysis + ', ' + this.polaritySentMoodAnalysis;
+        return this.jid + ', ' + this.text + ', ' + this.title+ ', ' + 
+        this.createdAt + ', ' + this.status + ', ' + this.t2eEntryMoodAnalysis + 
+        ', ' + this.t2eSentMoodAnalysis + ', ' + this.polarityEntryMoodAnalysis + 
+        ', ' + this.polaritySentMoodAnalysis;
     }
 }
 
@@ -161,18 +196,54 @@ const entryConverter = {
     },
     fromFirestore: (snapshot, options) => {
         const data = snapshot.data(options);
-        return new JournalEntry(data.jid, data.text, data.title, data.createdAt, data.status, data.t2eEntryMoodAnalysis, data.t2eSentMoodAnalysis, data.polarityEntryMoodAnalysis, data.polaritySentMoodAnalysis);
+        return new JournalEntry(data.jid, data.text, data.title, 
+            data.createdAt, data.status, data.t2eEntryMoodAnalysis,
+             data.t2eSentMoodAnalysis, data.polarityEntryMoodAnalysis,
+              data.polaritySentMoodAnalysis);
     }
 };
+
+export const searchByTitle = async (title) => {
+    var result = []
+    const q = query(collection(db.collection('users').
+    doc(auth.currentUser.email), 'journalEntries'), where("title", "==", title));
+
+    const querySnapshot = await getDocs(q.withConverter(entryConverter))
+    querySnapshot.forEach((doc) => {
+      const entry = doc.data()
+      result.push(entry)
+    //   console.log("search by title: ", title, entry)
+    });
+    return result
+}
+
+export const searchByDate = async (date) => {
+    var millis = getMillisFromDate(date)
+    var upperLimit = 86400000 + millis // adding 24 hours
+
+    var result = []
+    const q = query(collection(db.collection('users').
+    doc(auth.currentUser.email), 'journalEntries'), where("createdAt", '<', upperLimit), where("createdAt", '>=', millis));
+
+    const querySnapshot = await getDocs(q.withConverter(entryConverter))
+    querySnapshot.forEach((doc) => {
+      const entry = doc.data()
+      result.push(entry)
+      console.log("search by date: ", date, entry)
+    });
+    return result
+
+}
+
+function getMillisFromDate(date) {
+  date.setHours(0,0,0,0)
+  const millis = Date.parse(date)
+  return millis
+//   console.log(millis)
+//   console.log(date);
+}
 
 function getJID() {
     const {v4: uuidv4} = require('uuid')
     return uuidv4()
 }
-//export const getJID = async () => {
-    //const uuidv4 = require("uuid/v4")
-    //uuidv4()
-    //const jid = await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).get()
-    //if (jid)
-    
-//}

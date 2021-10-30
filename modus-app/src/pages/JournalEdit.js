@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import "./journalEdit.css";
 import {useRef } from 'react'
 import {useState} from 'react' 
-import {getJournalEntries, saveJournalEntry, submitJournalEntry} from "../firebase";
+import {deleteCurrentUser, getJournalEntries, saveJournalEntry, submitJournalEntry} from "../firebase";
 
 function JournalEdit() {
   const [myValue, setValue] = useState('') 
@@ -48,7 +48,7 @@ function JournalEdit() {
         </div>
         <div className="buttons">
           <button className="save"
-          onClick={() => saveJournalEntry(myValue, textfield)}>Save</button>
+          onClick={() => saveJournalEntry(myValue, textfield)}>Save</button>  
           <button className="submit" onClick={() => submitJournalEntry(myValue, textfield)}>Submit</button>
         </div>
         </form>
