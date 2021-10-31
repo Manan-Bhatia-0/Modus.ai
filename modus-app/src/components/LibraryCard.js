@@ -3,6 +3,7 @@ import { Card, Grid, IconButton } from "@mui/material";
 import { makeStyles } from '@mui/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import "./LibraryCard.css";
+import {deleteJournalEntry} from "../firebase";
 
 const useStyles = makeStyles({
   card: {
@@ -18,7 +19,7 @@ function LibraryCard() {
           <Card className={classes.card}>
           <Grid container direction="column">
             <Grid container style={{marginBottom: 5}} justifyContent='end'>
-              <IconButton onClick={() => console.log("Deleted Entry")}>
+              <IconButton onClick={() => deleteJournalEntry()}>
                 <DeleteIcon/>
               </IconButton>
             </Grid>
