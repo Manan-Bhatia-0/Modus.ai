@@ -147,16 +147,27 @@ export const saveJournalEntry = async (title, text) => {
     // searchByDate(new Date())
 }
 
+// deletes a journal entry given a journal entry id
+// TODO: Add journal id as argument
 export const deleteJournalEntry = async () => {
-    
-    const jid = getJID()
     const querySnapshot = db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc('b46ae050-8325-4bb6-8b26-4eeb10258081').get().then(function(result) {
         console.log(result);
         result.ref.delete();
      })
-
      console.log("deleted journal entry!!")
- 
+}
+
+// receives mental health resources given a specific mental health type (from mood score)
+// TODO:  connect title and links to display on UI
+// TODO: determine what type of mental health resource needed based on mood score
+export const getMHResources = async (resourceType) => {
+    const querySnapshot = db.collection('mentalHealthResources').doc(resourceType).get().then(function(result) {
+        const data = result.data();
+        const title = data['Title'];
+        const link = data['Link'];
+        console.log(title + ": " + link);    
+     })
+     console.log("received resources")
 }
 
 export const getJournalEntries = async () => {

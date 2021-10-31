@@ -3,7 +3,7 @@ import { Card, Grid, IconButton } from "@mui/material";
 import { makeStyles } from '@mui/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import "./LibraryCard.css";
-import {deleteJournalEntry} from "../firebase";
+import {deleteJournalEntry, getMHResources} from "../firebase";
 
 const useStyles = makeStyles({
   card: {
