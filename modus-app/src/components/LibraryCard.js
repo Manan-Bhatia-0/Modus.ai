@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 
 function LibraryCard(entry) {
   const classes = useStyles();
-  entry&&(console.log(entry[0].title))
+  // entry&&(console.log(entry[0].title))
     return (
       <div>
           <Card className={classes.card}>
