@@ -3,6 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "./navbar.css";
 import "bootstrap/dist/css/bootstrap.css";
+import { logout } from "../firebase";
 
 function NavBar() {
   return (
@@ -14,6 +15,9 @@ function NavBar() {
         <Nav.Link href="/library">Library</Nav.Link>
         <Nav.Link href="/analysis">Analysis</Nav.Link>
         <Nav.Link href="/faq">FAQ</Nav.Link>
+        <Nav.Link href="/" onPress={() => this.logout()}>
+          Log Out
+        </Nav.Link>
       </div>
     </Navbar>
   );
