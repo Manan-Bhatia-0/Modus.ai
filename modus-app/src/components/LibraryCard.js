@@ -12,8 +12,9 @@ const useStyles = makeStyles({
   },
 });
 
-function LibraryCard() {
+function LibraryCard(entry) {
   const classes = useStyles();
+  entry&&(console.log(entry[0].title))
     return (
       <div>
           <Card className={classes.card}>
@@ -31,7 +32,7 @@ function LibraryCard() {
                     marginBottom: 10
                   }}
                 >
-                  Title
+                  {/* {entry[0][0].title} */}
                 </Grid>
                 <Grid item 
                   style={{
