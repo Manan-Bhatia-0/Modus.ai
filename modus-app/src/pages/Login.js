@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   signInWithGoogle,
   signInWithFacebook,
+  staySignedIn,
 } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./Login.css";
@@ -59,6 +60,7 @@ function Login() {
           type="checkbox"
           name="save_login_state"
           label="Keep me signed in"
+          onClick={staySignedIn}
         />
       </div>
     </div>

@@ -40,6 +40,41 @@ export const signInWithGoogle = async () => {
   }
 };
 
+const isPasswordConfirmed = (password, confimPassword) => {
+  if (password && confimPassword && password === confimPassword) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+export const staySignedIn = async () => {
+  firebase
+    .auth()
+    .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+    .then(() => {
+      return firebase.auth().signInWithEmailAndPassword(email, password);
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+    });
+};
+
+export const staySignedInGoogle = async () => {
+  firebase
+    .auth()
+    .setPersistence(firebase.auth.Auth.Persistence.NONE)
+    .then(() => {
+      var provider = new firebase.auth.GoogleAuthProvider();
+      return firebase.auth().signInWithRedirect(provider);
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+    });
+};
+
 export const signInWithFacebook = async () => {
   try {
     const res = await auth.signInWithPopup(facebookProvider);
@@ -71,8 +106,13 @@ export const signInWithEmailAndPassword = async (email, password) => {
   }
 };
 
+//add passwordconfirm to the state
 export const registerWithEmailAndPassword = async (name, email, password) => {
   try {
+    if (!isPasswordConfirmed(user.password, user.passwordConfirm)) {
+      //error message
+      return;
+    }
     const res = await auth.createUserWithEmailAndPassword(email, password);
     const user = res.user;
     await db.collection("users").add({

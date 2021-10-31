@@ -50,7 +50,11 @@ function CreateAccount() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <input type="confirm" placeholder="Confirm Password " />
+      <input
+        type="passwordConfirm"
+        placeholder="Confirm Password "
+        className="confirmPassword"
+      />
       <button className="registerButton" onClick={register}>
         Sign Up
       </button>
