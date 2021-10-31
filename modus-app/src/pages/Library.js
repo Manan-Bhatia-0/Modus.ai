@@ -9,16 +9,17 @@ import {getJournalEntries} from "../firebase";
 
 function Library() {
   useEffect(() => {
-    const entries = getJournalEntries();
-    console.log(entries);
-  });
+    const promise = getJournalEntries();
+    promise.then(function(result) {
+      var entryArray = new Array(result);
+      setEntries(entryArray);
+      console.log(result);
+    })
+  }, 
+  []);
   const [sort, setSort] = React.useState('dateSaved');
-  // const [title, setTitle] = React.useState('');
-  // const [date, setDate] = React.useState('');
-  // const [content, setContent] = React.useState('');
-  // const [status, setStatus] = React.useState('');
-  const [entries, setEntries] = React.useState(null);
-
+  var [entries, setEntries] = React.useState(null);
+  
   const handleChange = (event) => {
     setSort(event.target.value);
   }
@@ -28,19 +29,6 @@ function Library() {
     setDate(newValue);
   };
 
-  // React.useEffect(() => {
-  //   fetch('http://localhost:8000/users')
-  //     .then(response => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       // console.log(data);
-  //       // console.log(data[0].uid[0].journalEntries[0].jid1[0].createdAt);
-  //       // console.log(data[0].uid[0].journalEntries);
-  //       setEntries(data[0].uid[0].journalEntries);
-        
-  //     })
-  // }, []);
   return (
     <div
       style={{margin: "5rem"}}
@@ -102,7 +90,10 @@ function Library() {
       <Divider style={{width: "65rem"}}/>
       <Grid container direction="column" style={{marginTop: "2rem"}}>
         <Grid item>
-          <LibraryCard/>
+          {/* {entries.map((entry) => (
+            <LibraryCard entry={entry}/>
+          ))} */}
+          <LibraryCard entry={entries} />
         </Grid>
         <Grid container item justifyContent="center">
           <Pagination count={2} />
