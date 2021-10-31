@@ -57,11 +57,7 @@ function JournalEdit() {
   );
 }
 
-function submit() // no ';' here
-{
-    var elem = document.getElementsByClassName("submit2");
-    console.log(elem.value);
-}
+
 
 
 function submitfn(myValue, textfield) {
