@@ -13,7 +13,8 @@ function Library() {
     promise.then(function(result) {
       var entryArray = new Array(result);
       setEntries(entryArray);
-      console.log(result);
+      // console.log(result);
+      // console.log(result[0])
     })
   }, 
   []);

@@ -15,6 +15,7 @@ const useStyles = makeStyles({
 function LibraryCard(entry) {
   const classes = useStyles();
   // entry&&(console.log(entry[0].title))
+  console.log(entry.entry[0][0].status)
     return (
       <div>
           <Card className={classes.card}>
@@ -32,7 +33,7 @@ function LibraryCard(entry) {
                     marginBottom: 10
                   }}
                 >
-                  {/* {entry[0][0].title} */}
+                  {entry.entry[0][0].title}
                 </Grid>
                 <Grid item 
                   style={{
@@ -41,12 +42,12 @@ function LibraryCard(entry) {
                     marginBottom: 10
                   }}
                 >
-                  Date
+                  {entry.entry[0][0].createdAt}
                 </Grid>
               </Grid>
             </Grid>
             <Grid item xs>
-            I went to the carnival today and I rode a lot of roller coasters and it was very exciting! I can't wait to go there again.
+            {entry.entry[0][0].text}
             </Grid>
             <Grid item xs 
                   style={{
@@ -54,7 +55,7 @@ function LibraryCard(entry) {
                     marginTop: 20
                   }}
             >
-              Status
+              {entry.entry[0][0].status}
             </Grid>  
           </Grid>
       </Card>
