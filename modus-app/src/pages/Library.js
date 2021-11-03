@@ -44,7 +44,7 @@ function Library() {
             style={{
               marginTop: "5rem"
             }}>
-              User's Library
+              Library
           </h1>
         </Grid>
         <Grid item xs={3} style={{
