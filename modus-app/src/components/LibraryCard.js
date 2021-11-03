@@ -19,7 +19,7 @@ function LibraryCard( {entry} ) {
     deleteJournalEntry(entry.jid)
     .then(() => {
       console.log("DELETE JOURNAL ENTRY")
-      window.location.href='/library';
+      // window.location.href='/library';
     }) 
   }
 
