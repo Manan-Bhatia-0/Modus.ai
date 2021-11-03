@@ -8,17 +8,18 @@ import DateAdapter from '@mui/lab/AdapterDateFns';
 import {getJournalEntries} from "../firebase";
 
 function Library() {
+  const [sort, setSort] = React.useState('dateSaved');
+  var [entries, setEntries] = React.useState(null);
+  // const [deleteClick, setDeleteClick] = React.useState(false);
+
+
   useEffect(() => {
     const promise = getJournalEntries();
     promise.then(function(result) {
-      var entryArray = new Array(result);
-      setEntries(entryArray);
-      console.log(result);
+      setEntries(result);
     })
   }, 
   []);
-  const [sort, setSort] = React.useState('dateSaved');
-  var [entries, setEntries] = React.useState(null);
   
   const handleChange = (event) => {
     setSort(event.target.value);
@@ -29,6 +30,10 @@ function Library() {
     setDate(newValue);
   };
 
+  // const handleDeleteChange = () => {
+  //   console.log("HANDLE DELETE CHANGE")
+  //   setDeleteClick(true);
+  // }
   return (
     <div
       style={{margin: "5rem"}}
@@ -39,7 +44,7 @@ function Library() {
             style={{
               marginTop: "5rem"
             }}>
-              User's Library
+              Library
           </h1>
         </Grid>
         <Grid item xs={3} style={{
@@ -71,8 +76,8 @@ function Library() {
               marginTop: "3rem"
             }}
             >
-          <InputLabel id="sort-by-label" style={{marginBottom: 5}}>Sort by</InputLabel>
-          <Select
+          {/* <InputLabel id="sort-by-label" style={{marginBottom: 5}}>Sort by</InputLabel> */}
+          {/* <Select
             labelId="sort-by-label"
             id="sort-by"
             value={sort}
@@ -83,17 +88,16 @@ function Library() {
             <MenuItem value={"dateSaved"}>Date Saved</MenuItem>
             <MenuItem value={"alpha"}>Alphabetical</MenuItem>
             <MenuItem value={"dateCreated"}>Date Created</MenuItem>
-          </Select>
+          </Select> */}
         </Grid>
       </Grid>
       
       <Divider style={{width: "65rem"}}/>
       <Grid container direction="column" style={{marginTop: "2rem"}}>
         <Grid item>
-          {/* {entries.map((entry) => (
-            <LibraryCard entry={entry}/>
-          ))} */}
-          <LibraryCard entry={entries} />
+          {entries && entries.map((entry) => {
+            return (<LibraryCard entry={entry}/>)
+          })}
         </Grid>
         <Grid container item justifyContent="center">
           <Pagination count={2} />
