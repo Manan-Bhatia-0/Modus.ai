@@ -6,7 +6,7 @@ import {collection, getDocs} from "firebase/firestore";
 import {doc, getDoc, deleteDoc, updateDoc, deleteField, query, where} from "firebase/firestore";
 import { getAuth, deleteUser } from "firebase/auth";
 import { SignOut } from './App';
-
+import $ from 'jquery';
 
 
 const firebaseConfig = {
@@ -116,23 +116,23 @@ const deleteUserData = async () => {
 // This is a generic function.
 // the caller must check if entry already exists (check by title?)
 export const submitJournalEntry = async (title, text) => {
-    const jid = getJID()
+    const jid = getJID();
+    const moodAnalysis = getMoodAnalysis(text);
     await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
         jid: jid,
         text: text,
         title: title,
         createdAt: Date.now(),
         status: 'submitted',
-        t2eEntryMoodAnalysis: '',
-        t2eSentMoodAnalysis: '',
-        polarityEntryMoodAnalysis: '',
-        polaritySentMoodAnalysis: ''
+        t2eEntryMoodAnalysis: moodAnalysis.t2eEntry,
+        t2eSentMoodAnalysis: moodAnalysis.t2eSent,
+        polarityEntryMoodAnalysis: moodAnalysis.polarEntry,
+        polaritySentMoodAnalysis: moodAnalysis.polarSent
     })
-    searchByTitle('orange7')
 }
 
 export const saveJournalEntry = async (title, text) => {
-    const jid = getJID()
+    const jid = getJID();
     await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
         jid: jid, 
         text: text,
@@ -151,10 +151,10 @@ export const saveJournalEntry = async (title, text) => {
 // TODO: Add journal id as argument
 export const deleteJournalEntry = async () => {
     const querySnapshot = db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc('b46ae050-8325-4bb6-8b26-4eeb10258081').get().then(function(result) {
-        console.log(result);
+        //console.log(result);
         result.ref.delete();
      })
-     console.log("deleted journal entry!!")
+     //console.log("deleted journal entry!!")
 }
 
 // receives mental health resources given a specific mental health type (from mood score)
@@ -270,4 +270,23 @@ function getMillisFromDate(date) {
 function getJID() {
     const {v4: uuidv4} = require('uuid')
     return uuidv4()
+}
+
+function getMoodAnalysis(text) {
+    var moodDict = {t2eEntry: '', t2eSent:'', polarEntry:'', polarSent:''};
+    $.ajax({
+        type: "GET",
+        url: "~/Desktop/CS307_project/NLP/mood_analysis.py",
+        data: text
+      }).done(function(response) {
+          console.log(response);
+      });
+    /*fetch(`/getdata/${text}`)
+      .then(function (response) {
+          return response.text();
+      }).then(function (text) {
+          console.log('GET response text:');
+          console.log(text); 
+      });*/
+      return moodDict;
 }

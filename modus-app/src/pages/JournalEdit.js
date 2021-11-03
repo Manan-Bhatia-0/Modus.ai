@@ -19,7 +19,7 @@ function JournalEdit() {
     const entry = { myValue, textfield };
     console.log(entry);
     console.log(document.activeElement.getAttribute('value'));
-    submitfn(myValue, textfield) 
+    /*submitfn(myValue, textfield)*/
   }
   // const onSave = handleSubmit(e => {
   //   e.submitAction = 'decline'
@@ -49,7 +49,10 @@ function JournalEdit() {
         <div className="buttons">
           <button className="save"
           onClick={() => saveJournalEntry(myValue, textfield)}>Save</button>  
-          <button className="submit" onClick={() => submitJournalEntry(myValue, textfield)}>Submit</button>
+          <button className="submit" 
+          onClick={() => submitJournalEntry(myValue, textfield)}
+          //onClick={() => getMoodAnalysis(textfield)}
+          >Submit</button>
         </div>
         </form>
       </section>
@@ -62,11 +65,11 @@ function JournalEdit() {
 
 function submitfn(myValue, textfield) {
 
-  console.log(myValue)
-  console.log(textfield)
+  //console.log(myValue)
+  //console.log(textfield)
   // var title = document.getElementsByClassName('title').value;
   // var entry_content = document.getElementsByClassName('entryContent').useRef;
-  console.log('Client-side code running');
+  //console.log('Client-side code running');
   // console.log(title)
   // console.log(entry_content)
 }
