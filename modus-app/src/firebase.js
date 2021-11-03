@@ -149,14 +149,6 @@ export const saveJournalEntry = async (title, text) => {
 
 // deletes a journal entry given a journal entry id
 // TODO: Add journal id as argument
-<<<<<<< HEAD
-export const deleteJournalEntry = async () => {
-    const querySnapshot = db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc('b46ae050-8325-4bb6-8b26-4eeb10258081').get().then(function(result) {
-        //console.log(result);
-        result.ref.delete();
-     })
-     //console.log("deleted journal entry!!")
-=======
 export const deleteJournalEntry = async (jid) => {
     const querySnapshot = db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).get()
     .then(function(result) {
@@ -168,7 +160,6 @@ export const deleteJournalEntry = async (jid) => {
     //  })
      
     //  console.log("deleted journal entry!!")
->>>>>>> 0946734e7dbcf1bdc12d84263f9dd289ad3ccfca
 }
 
 // receives mental health resources given a specific mental health type (from mood score)
