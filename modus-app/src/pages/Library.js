@@ -8,18 +8,18 @@ import DateAdapter from '@mui/lab/AdapterDateFns';
 import {getJournalEntries} from "../firebase";
 
 function Library() {
+  const [sort, setSort] = React.useState('dateSaved');
+  var [entries, setEntries] = React.useState(null);
+  // const [deleteClick, setDeleteClick] = React.useState(false);
+
+
   useEffect(() => {
     const promise = getJournalEntries();
     promise.then(function(result) {
-      var entryArray = new Array(result);
-      setEntries(entryArray);
-      // console.log(result);
-      // console.log(result[0])
+      setEntries(result);
     })
   }, 
   []);
-  const [sort, setSort] = React.useState('dateSaved');
-  var [entries, setEntries] = React.useState(null);
   
   const handleChange = (event) => {
     setSort(event.target.value);
@@ -30,6 +30,10 @@ function Library() {
     setDate(newValue);
   };
 
+  // const handleDeleteChange = () => {
+  //   console.log("HANDLE DELETE CHANGE")
+  //   setDeleteClick(true);
+  // }
   return (
     <div
       style={{margin: "5rem"}}
@@ -91,10 +95,9 @@ function Library() {
       <Divider style={{width: "65rem"}}/>
       <Grid container direction="column" style={{marginTop: "2rem"}}>
         <Grid item>
-          {/* {entries.map((entry) => (
-            <LibraryCard entry={entry}/>
-          ))} */}
-          <LibraryCard entry={entries} />
+          {entries && entries.map((entry) => {
+            return (<LibraryCard entry={entry}/>)
+          })}
         </Grid>
         <Grid container item justifyContent="center">
           <Pagination count={2} />

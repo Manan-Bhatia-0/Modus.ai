@@ -4,6 +4,7 @@ import { makeStyles } from '@mui/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import "./LibraryCard.css";
 import {deleteJournalEntry, getMHResources} from "../firebase";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles({
   card: {
@@ -12,16 +13,23 @@ const useStyles = makeStyles({
   },
 });
 
-function LibraryCard(entry) {
+function LibraryCard( {entry} ) {
+  // const history = useHistory();
+  const handleDeleteEntry = () => {
+    deleteJournalEntry(entry.jid)
+    .then(() => {
+      console.log("DELETE JOURNAL ENTRY")
+      window.location.href='/library';
+    }) 
+  }
+
   const classes = useStyles();
-  // entry&&(console.log(entry[0].title))
-  console.log(entry.entry[0][0].status)
     return (
       <div>
           <Card className={classes.card}>
           <Grid container direction="column">
             <Grid container style={{marginBottom: 5}} justifyContent='end'>
-              <IconButton onClick={() => deleteJournalEntry()}>
+              <IconButton onClick={() => handleDeleteEntry()}>
                 <DeleteIcon/>
               </IconButton>
             </Grid>
@@ -33,7 +41,7 @@ function LibraryCard(entry) {
                     marginBottom: 10
                   }}
                 >
-                  {entry.entry[0][0].title}
+                  {entry.title}
                 </Grid>
                 <Grid item 
                   style={{
@@ -42,12 +50,12 @@ function LibraryCard(entry) {
                     marginBottom: 10
                   }}
                 >
-                  {entry.entry[0][0].createdAt}
+                  {/* {entry.createdAt} */}
                 </Grid>
               </Grid>
             </Grid>
             <Grid item xs>
-            {entry.entry[0][0].text}
+              {entry.text}
             </Grid>
             <Grid item xs 
                   style={{
@@ -55,7 +63,7 @@ function LibraryCard(entry) {
                     marginTop: 20
                   }}
             >
-              {entry.entry[0][0].status}
+              {entry.status}
             </Grid>  
           </Grid>
       </Card>
