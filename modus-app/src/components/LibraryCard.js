@@ -25,10 +25,6 @@ function LibraryCard( {entry} ) {
   }
 
   const classes = useStyles();
-<<<<<<< HEAD
-  //entry&&(console.log(entry[0].title))
-=======
->>>>>>> 0946734e7dbcf1bdc12d84263f9dd289ad3ccfca
     return (
       <div>
           <Card className={classes.card}>
