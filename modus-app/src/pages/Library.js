@@ -76,8 +76,8 @@ function Library() {
               marginTop: "3rem"
             }}
             >
-          <InputLabel id="sort-by-label" style={{marginBottom: 5}}>Sort by</InputLabel>
-          <Select
+          {/* <InputLabel id="sort-by-label" style={{marginBottom: 5}}>Sort by</InputLabel> */}
+          {/* <Select
             labelId="sort-by-label"
             id="sort-by"
             value={sort}
@@ -88,7 +88,7 @@ function Library() {
             <MenuItem value={"dateSaved"}>Date Saved</MenuItem>
             <MenuItem value={"alpha"}>Alphabetical</MenuItem>
             <MenuItem value={"dateCreated"}>Date Created</MenuItem>
-          </Select>
+          </Select> */}
         </Grid>
       </Grid>
       

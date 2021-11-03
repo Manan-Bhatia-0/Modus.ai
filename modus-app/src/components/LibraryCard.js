@@ -9,7 +9,8 @@ import { useHistory } from "react-router";
 const useStyles = makeStyles({
   card: {
     width: 300,
-    padding: 20
+    padding: 20,
+    margin: 15
   },
 });
 
