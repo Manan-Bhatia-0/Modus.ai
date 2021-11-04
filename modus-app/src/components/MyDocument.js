@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 });
 
 // Create Document Component
-const MyDocument = ({entry}) => (
+function MyDocument({entry}) {
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.section}>
@@ -26,4 +26,4 @@ const MyDocument = ({entry}) => (
       </View>
     </Page>
   </Document>
-);
+} export default MyDocument;

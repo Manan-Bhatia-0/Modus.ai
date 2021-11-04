@@ -4,6 +4,9 @@ import { makeStyles } from '@mui/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {deleteJournalEntry, searchByTitle, getMHResources} from "../firebase";
 import { useHistory, useParams } from "react-router";
+import ReactPDF from '@react-pdf/renderer';
+
+import MyDocument from '../components/MyDocument.js'
 
 const useStyles = makeStyles({
   card: {
@@ -35,6 +38,10 @@ function SingleJournal() {
       history.push('/library');
       alert("Journal entry deleted");
     }) 
+  }
+
+  const submitExport = (entry) => {
+    ReactPDF.render(<MyDocument entry={entry}/>, `${__dirname}/journal_entry.pdf`);
   }
   
   
@@ -86,7 +93,7 @@ function SingleJournal() {
           </Grid>
       </Card>
       <Grid style={{marginLeft: 20}}>
-        <Button variant="contained">
+        <Button variant="contained" onClick={() => submitExport(entry)}>
           Export Mood Analysis
         </Button>
       </Grid>
