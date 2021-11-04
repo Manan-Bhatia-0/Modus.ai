@@ -187,10 +187,14 @@ export const submitJournalEntry = async (title, text) => {
         title: title,
         createdAt: Date.now(),
         status: 'submitted',
-        t2eEntryMoodAnalysis: moodAnalysis.t2eEntry,
-        t2eSentMoodAnalysis: moodAnalysis.t2eSent,
-        polarityEntryMoodAnalysis: moodAnalysis.polarEntry,
-        polaritySentMoodAnalysis: moodAnalysis.polarSent
+        // t2eEntryMoodAnalysis: moodAnalysis.t2eEntry,
+        // t2eSentMoodAnalysis: moodAnalysis.t2eSent,
+        // polarityEntryMoodAnalysis: moodAnalysis.polarEntry,
+        // polaritySentMoodAnalysis: moodAnalysis.polarSent
+        t2eEntryMoodAnalysis: '',
+        t2eSentMoodAnalysis: '',
+        polarityEntryMoodAnalysis: '',
+        polaritySentMoodAnalysis: ''
     })
 }
 
