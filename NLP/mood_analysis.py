@@ -3,16 +3,17 @@
 
 import text2emotion as te
 import nltk
-import pandas as pd
 from nltk.tokenize import sent_tokenize
 import string
 from textblob import TextBlob
 from nltk.sentiment import SentimentIntensityAnalyzer
+
+from viz.plot_scores import PlotScores
+
 nltk.download('vader_lexicon')
 from flask import Flask
 from flask_cors import CORS, cross_origin
 from flask_restful import Resource, Api, reqparse
-import ast
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -25,7 +26,7 @@ class MoodAnalysis(Resource):
     def t2e_entry_analysis(text):
         mood = te.get_emotion(text)
         return mood
-    
+
     @staticmethod
     def t2e_sent_analysis(text):
         sent_tokenized = {}
@@ -35,14 +36,14 @@ class MoodAnalysis(Resource):
             mood = te.get_emotion(sentence)
             mood_list.append(mood)
         return mood_list
-    
+
     @staticmethod
     def polarity_entry_analysis(text):
         sia = SentimentIntensityAnalyzer()
         mood = sia.polarity_scores(text)
         mood['cummulative'] = TextBlob(text).sentiment.polarity
         return mood
-    
+
     @staticmethod
     def polarity_sent_analysis(text):
         sia = SentimentIntensityAnalyzer()
@@ -54,29 +55,29 @@ class MoodAnalysis(Resource):
             mood['cummulative'] = TextBlob(sentence).sentiment.polarity
             mood_list.append(mood)
         return mood_list
+
     @cross_origin()
     def post(self):
         parser = reqparse.RequestParser()  # initialize
-        
+
+        parser.add_argument('jid', required=True)
         parser.add_argument('text', required=True)  # add args
-        
+
         args = parser.parse_args()  # parse arguments to dictionary
-        
+
+        jid = args['jid']
         text = args['text']
-        
-        mood_analysis_dict = {'t2e_entry_analysis': {}, 't2e_sent_analysis':{}, 'polarity_entry_analysis':{}, 'polarity_sent_analysis':{}}
-        
-        mood_analysis_dict['t2e_entry_analysis'] = MoodAnalysis.t2e_entry_analysis(text)
-        
-        mood_analysis_dict['t2e_sent_analysis'] = MoodAnalysis.t2e_sent_analysis(text)
-        
-        mood_analysis_dict['polarity_entry_analysis'] = MoodAnalysis.polarity_entry_analysis(text)
-        
-        mood_analysis_dict['polarity_sent_analysis'] = MoodAnalysis.polarity_sent_analysis(text)
-        
+
+        mood_analysis_dict = {'t2e_entry_analysis': MoodAnalysis.t2e_entry_analysis(text),
+                              't2e_sent_analysis': MoodAnalysis.t2e_sent_analysis(text),
+                              'polarity_entry_analysis': MoodAnalysis.polarity_entry_analysis(text),
+                              'polarity_sent_analysis': MoodAnalysis.polarity_sent_analysis(text)}
+
+        PlotScores.pie_chart_from_dict(jid, mood_analysis_dict['t2e_entry_analysis'])
         return {'data': mood_analysis_dict}, 200
 
-api.add_resource(MoodAnalysis, '/moodanalysis') 
+
+api.add_resource(MoodAnalysis, '/moodanalysis')
 
 if __name__ == '__main__':
     app.run()  # run our Flask app

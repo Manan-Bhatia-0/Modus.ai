@@ -36,7 +36,7 @@ class PlotScores:
     # per journal entry pie chart distribution of the
     # qualitative variables (moods)
     @staticmethod
-    def pie_chart_from_dict(dict_scores: dict):
+    def pie_chart_from_dict(jid: str, dict_scores: dict):
 
         labels = []
         sizes = []
@@ -47,6 +47,7 @@ class PlotScores:
         plt.pie(sizes, labels=labels, colors=['green', 'red', 'brown', 'orange', 'cyan'])
 
         # plt.axis('equal')
+        plt.savefig(jid + ".png")
         plt.show()
 
     @staticmethod
