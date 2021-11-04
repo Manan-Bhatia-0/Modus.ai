@@ -8,6 +8,7 @@ import {doc, getDoc, deleteDoc, updateDoc, deleteField, query, where} from "fire
 import { getAuth, deleteUser } from "firebase/auth";
 import { SignOut } from './App';
 import $ from 'jquery';
+import * as Plotly from 'plotly.js';
 import { useHistory } from "react-router-dom";
 
 
@@ -181,21 +182,23 @@ const deleteUserData = async () => {
 export const submitJournalEntry = async (title, text) => {
     const jid = getJID();
     const moodAnalysis = getMoodAnalysis(text);
+    plotPieChart(moodAnalysis.t2eEntry);
     await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
         jid: jid,
         text: text,
         title: title,
         createdAt: Date.now(),
         status: 'submitted',
-        // t2eEntryMoodAnalysis: moodAnalysis.t2eEntry,
-        // t2eSentMoodAnalysis: moodAnalysis.t2eSent,
-        // polarityEntryMoodAnalysis: moodAnalysis.polarEntry,
-        // polaritySentMoodAnalysis: moodAnalysis.polarSent
-        t2eEntryMoodAnalysis: '',
-        t2eSentMoodAnalysis: '',
-        polarityEntryMoodAnalysis: '',
-        polaritySentMoodAnalysis: ''
+        t2eEntryMoodAnalysis: moodAnalysis.t2eEntry,
+        t2eSentMoodAnalysis: moodAnalysis.t2eSent,
+        polarityEntryMoodAnalysis: moodAnalysis.polarEntry,
+        polaritySentMoodAnalysis: moodAnalysis.polarSent
+        //t2eEntryMoodAnalysis: '',
+        //t2eSentMoodAnalysis: '',
+        //polarityEntryMoodAnalysis: '',
+        //polaritySentMoodAnalysis: ''
     })
+
 }
 
 export const saveJournalEntry = async (title, text) => {
@@ -354,4 +357,18 @@ function getMoodAnalysis(text) {
         moodDict.polarSent = response.data.polarity_sent_analysis;
       });
       return moodDict;
+}
+
+// submit passes moodDict t2e to this func
+function plotPieChart(dict_t2e) {
+    var data = [{
+        values: Object.values(dict_t2e),
+        labels: Object.keys(dict_t2e),
+        type: 'pie'
+    }];
+    var layout = {
+        height: 400,
+        width: 500
+    };
+    Plotly.newPlot('myDiv', data, layout);
 }
