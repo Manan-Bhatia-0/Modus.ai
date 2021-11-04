@@ -180,7 +180,7 @@ const deleteUserData = async () => {
 // the caller must check if entry already exists (check by title?)
 export const submitJournalEntry = async (title, text) => {
     const jid = getJID();
-    const moodAnalysis = getMoodAnalysis(text);
+    const moodAnalysis = getMoodAnalysis(jid, text);
     await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
         jid: jid,
         text: text,
@@ -338,11 +338,11 @@ function getJID() {
     return uuidv4()
 }
 
-function getMoodAnalysis(text) {
+function getMoodAnalysis(jid, text) {
     var moodDict = {t2eEntry: '', t2eSent:'', polarEntry:'', polarSent:''};
     //var m = {};
     $.post({
-        url: "http://127.0.0.1:5000/moodanalysis?text=" + text,
+        url: "http://127.0.0.1:5000/moodanalysis?jid=" + jid + "&text=" + text,
       }).done(function(response) {
         //m = response;
         moodDict.t2eEntry = response.data.t2e_entry_analysis;
