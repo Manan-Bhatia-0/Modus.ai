@@ -1,28 +1,69 @@
-import React from "react";
-import { GoogleLogin} from react-google-Login;
+import React, { useEffect, useState, useRef } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { Form, Button, Card, Alert } from "react-bootstrap";
+import {
+  auth,
+  signInWithEmailAndPassword,
+  signInWithGoogle,
+  signInWithFacebook,
+} from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 import "./Login.css";
 
-export function Login() {
+function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [user, loading, error] = useAuthState(auth);
+  const history = useHistory();
+  useEffect(() => {
+    if (loading) {
+      //loading screen
+      return;
+    }
+    if (user) history.replace("/home");
+  }, [user, loading]);
+
   return (
-    <div>
-      <GoogleLogin
-        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-        buttonText="Log in with Google"
-        cookiePolicy={'single_host_origin'}
-      />
+    <div className="loginPage">
       <h2>Log in </h2>
-      <Input type="email" placeholder="Email Address " />
-      <Input type="password" placeholder="Password " />
-      <button className="login">Log in</button>
-      <a href="#">Forget your password?</a>
-      <a href="#">Create account</a>
-      <Input
-        type="checkbox"
-        name="save_login_state"
-        label="Keep me signed in"
-        checked={this.state.saveLoginState}
-        onChange={this.toggleLoginState.bind(this)}
-      />
+      <div className="loginContainer">
+        <input
+          type="text"
+          placeholder="Email Address "
+          className="loginText"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password "
+          className="passwordText"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button
+          className="login"
+          onClick={() => signInWithEmailAndPassword(email, password)}
+        >
+          Log in
+        </button>
+        <button className="googleLogin" onClick={signInWithGoogle}>
+          {" "}
+          Login with Google{" "}
+        </button>
+        <button className="facebookLogin" onClick={signInWithFacebook}>
+          {" "}
+          Login with Facebook{" "}
+        </button>
+        <a href="/reset">Forget your password?</a>
+        <a href="/register">Create account</a>
+        <input
+          type="checkbox"
+          name="save_login_state"
+          label="Keep me signed in"
+        />
+      </div>
     </div>
   );
 }
+export default Login;

@@ -1,16 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Link, useHistory } from "react-router-dom";
+
+import { auth, registerWithEmailAndPassword } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 import "./CreateAccount.css";
 
-export function Login() {
+function CreateAccount() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [user, loading, error] = useAuthState(auth);
+  const history = useHistory();
+  const register = () => {
+    if (!name) alert("Please enter name");
+    registerWithEmailAndPassword(name, email, password);
+  };
+  useEffect(() => {
+    if (loading) return;
+    if (user) history.replace("/dashboard");
+  }, [user, loading]);
+
   return (
     <div>
       <h2>Create Account</h2>
-      <Input type="firstname" placeholder="First Name " />
-      <Input type="lastname" placeholder="Last Name " />
-      <Input type="email" placeholder="Email Address " />
-      <Input type="password" placeholder="Password " />
-      <Input type="confirm" placeholder="Confirm Password " />
-      <button className="login">Sign Up</button>
+      <input
+        type="text"
+        placeholder="Full Name"
+        className="registerName"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Email Address "
+        className="registerEmail"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password "
+        className="registerPassword"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button className="registerButton" onClick={registerWithEmailAndPassword}>
+        Sign Up
+      </button>
     </div>
   );
 }
+export default CreateAccount;

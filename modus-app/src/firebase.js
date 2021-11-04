@@ -1,3 +1,4 @@
+
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore'
 import 'firebase/compat/auth'
@@ -7,17 +8,27 @@ import {doc, getDoc, deleteDoc, updateDoc, deleteField, query, where} from "fire
 import { getAuth, deleteUser } from "firebase/auth";
 import { SignOut } from './App';
 import $ from 'jquery';
+import { useHistory } from "react-router-dom";
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDXtGR1FNQz9zxOk79Ikkqzg9j8IYi2mh0",
-    authDomain: "modusdb-4d7ed.firebaseapp.com",
-    projectId: "modusdb-4d7ed",
-    storageBucket: "modusdb-4d7ed.appspot.com",
-    messagingSenderId: "738850813503",
-    appId: "1:738850813503:web:e7e97619a1eaa6510daa8a",
-    measurementId: "G-84F8J1Y1VY"
+  apiKey: "AIzaSyDXtGR1FNQz9zxOk79Ikkqzg9j8IYi2mh0",
+  authDomain: "modusdb-4d7ed.firebaseapp.com",
+  projectId: "modusdb-4d7ed",
+  storageBucket: "modusdb-4d7ed.appspot.com",
+  messagingSenderId: "738850813503",
+  appId: "1:738850813503:web:e7e97619a1eaa6510daa8a",
+  measurementId: "G-84F8J1Y1VY",
+  // apiKey: "AIzaSyCzMuDRDmQMFsvabbAuOzi_ca8wz-fdjcY",
+  // authDomain: "modusai.firebaseapp.com",
+  // databaseURL: "https://modusai-default-rtdb.firebaseio.com",
+  // projectId: "modusai",
+  // storageBucket: "modusai.appspot.com",
+  // messagingSenderId: "986175331521",
+  // appId: "1:986175331521:web:1da20cf1eab28207060840",
+  // measurementId: "G-JCXJ2W0FTL",
 };
+
 
 let app;
 if (!firebase.apps.length) {
@@ -27,9 +38,12 @@ if (!firebase.apps.length) {
 }
 // const app = firebase.initializeApp(firebaseConfig);
 let currentUser;
+
 export const auth = app.auth();
 export const db = app.firestore();
-const googleProvider = new firebase.auth.GoogleAuthProvider();
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+export const facebookProvider = new firebase.auth.FacebookAuthProvider();
+
 export const signInWithGoogle = async () => {
     try {
         const res = await auth.signInWithPopup(googleProvider);
@@ -52,16 +66,56 @@ export const signInWithGoogle = async () => {
         alert(err.message);
     }
 };
+
+export const signInWithFacebook = async () => {
+  try {
+    const res = await auth.signInWithPopup(facebookProvider);
+    const user = res.user;
+    const query = await db
+      .collection("users")
+      .where("uid", "==", user.uid)
+      .get();
+    if (query.docs.length === 0) {
+      await db.collection("users").add({
+        uid: user.uid,
+        name: user.displayName,
+        authProvider: "facebook",
+        email: user.email,
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
 export const signInWithEmailAndPassword = async (email, password) => {
-    try {
-        const res = await auth.signInWithEmailAndPassword(email, password);
-        currentUser = res.user;
+  try {
+    const res = await auth.signInWithEmailAndPassword(email, password);
+       currentUser = res.user;
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+//add passwordconfirm to the state
+export const registerWithEmailAndPassword = async (name, email, password) => {
+  try {
+        const res = await auth.createUserWithEmailAndPassword(email, password);
+        const user = res.user;
+        currentUser = user;
+        await db.collection("users").add({
+            uid: user.uid,
+            name: name,
+            authProvider: "local",
+            email: email,
+        });
     } catch (err) {
         console.error(err);
         alert(err.message);
     }
-};
-export const registerWithEmailAndPassword = async (name, email, password) => {
+
     try {
         const res = await auth.createUserWithEmailAndPassword(email, password);
         const user = res.user;
@@ -76,18 +130,27 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
         console.error(err);
         alert(err.message);
     }
+
 };
+
 export const sendPasswordResetEmail = async (email) => {
-    try {
-        await auth.sendPasswordResetEmail(email);
-        alert("Password reset link sent!");
-    } catch (err) {
-        console.error(err);
-        alert(err.message);
-    }
+  try {
+    await auth.sendPasswordResetEmail(email);
+    alert("Password reset link sent!");
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
 };
-export const logout = () => {
-    auth.signOut();
+
+export const handleLogout = async (email) => {
+  try {
+    await auth.signOut();
+    alert("Signed Out!");
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
 };
 
 export const deleteCurrentUser = async () => {
