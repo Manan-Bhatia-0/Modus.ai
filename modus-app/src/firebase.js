@@ -344,7 +344,7 @@ function getMoodAnalysis(jid, text) {
     $.post({
         url: "http://127.0.0.1:5000/moodanalysis?jid=" + jid + "&text=" + text,
       }).done(function(response) {
-        //m = response;
+        console.log(response);
         moodDict.t2eEntry = response.data.t2e_entry_analysis;
         moodDict.t2eSent = response.data.t2e_sent_analysis;
         moodDict.polarEntry = response.data.polarity_entry_analysis;

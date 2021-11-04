@@ -7,9 +7,7 @@ from nltk.tokenize import sent_tokenize
 import string
 from textblob import TextBlob
 from nltk.sentiment import SentimentIntensityAnalyzer
-
-from viz.plot_scores import PlotScores
-
+from plot_scores import PlotScores
 nltk.download('vader_lexicon')
 from flask import Flask
 from flask_cors import CORS, cross_origin
@@ -73,7 +71,8 @@ class MoodAnalysis(Resource):
                               'polarity_entry_analysis': MoodAnalysis.polarity_entry_analysis(text),
                               'polarity_sent_analysis': MoodAnalysis.polarity_sent_analysis(text)}
 
-        PlotScores.pie_chart_from_dict(jid, mood_analysis_dict['t2e_entry_analysis'])
+        # PlotScores.pie_chart_from_dict(jid, mood_analysis_dict['t2e_entry_analysis'])
+        # print(mood_analysis_dict['t2e_entry_analysis'])
         return {'data': mood_analysis_dict}, 200
 
 
