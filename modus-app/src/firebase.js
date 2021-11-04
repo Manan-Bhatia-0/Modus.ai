@@ -8,6 +8,7 @@ import {doc, getDoc, deleteDoc, updateDoc, deleteField, query, where} from "fire
 import { getAuth, deleteUser } from "firebase/auth";
 import { SignOut } from './App';
 import $ from 'jquery';
+import * as Plotly from 'plotly.js';
 import { useHistory } from "react-router-dom";
 
 
@@ -180,22 +181,24 @@ const deleteUserData = async () => {
 // the caller must check if entry already exists (check by title?)
 export const submitJournalEntry = async (title, text) => {
     const jid = getJID();
-    const moodAnalysis = getMoodAnalysis(jid, text);
+    const moodAnalysis = getMoodAnalysis(text);
+    plotPieChart(moodAnalysis.t2eEntry);
     await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
         jid: jid,
         text: text,
         title: title,
         createdAt: Date.now(),
         status: 'submitted',
-        // t2eEntryMoodAnalysis: moodAnalysis.t2eEntry,
-        // t2eSentMoodAnalysis: moodAnalysis.t2eSent,
-        // polarityEntryMoodAnalysis: moodAnalysis.polarEntry,
-        // polaritySentMoodAnalysis: moodAnalysis.polarSent
-        t2eEntryMoodAnalysis: '',
-        t2eSentMoodAnalysis: '',
-        polarityEntryMoodAnalysis: '',
-        polaritySentMoodAnalysis: ''
+        t2eEntryMoodAnalysis: moodAnalysis.t2eEntry,
+        t2eSentMoodAnalysis: moodAnalysis.t2eSent,
+        polarityEntryMoodAnalysis: moodAnalysis.polarEntry,
+        polaritySentMoodAnalysis: moodAnalysis.polarSent
+        //t2eEntryMoodAnalysis: '',
+        //t2eSentMoodAnalysis: '',
+        //polarityEntryMoodAnalysis: '',
+        //polaritySentMoodAnalysis: ''
     })
+
 }
 
 export const saveJournalEntry = async (title, text) => {
@@ -342,17 +345,30 @@ function getJID() {
     return uuidv4()
 }
 
-function getMoodAnalysis(jid, text) {
+function getMoodAnalysis(text) {
     var moodDict = {t2eEntry: '', t2eSent:'', polarEntry:'', polarSent:''};
-    //var m = {};
     $.post({
-        url: "http://127.0.0.1:5000/moodanalysis?jid=" + jid + "&text=" + text,
+        url: "http://127.0.0.1:5000/moodanalysis?text=" + text,
       }).done(function(response) {
-        //m = response;
+        console.log(response);
         moodDict.t2eEntry = response.data.t2e_entry_analysis;
         moodDict.t2eSent = response.data.t2e_sent_analysis;
         moodDict.polarEntry = response.data.polarity_entry_analysis;
         moodDict.polarSent = response.data.polarity_sent_analysis;
       });
       return moodDict;
+}
+
+// submit passes moodDict t2e to this func
+function plotPieChart(dict_t2e) {
+    var data = [{
+        values: Object.values(dict_t2e),
+        labels: Object.keys(dict_t2e),
+        type: 'pie'
+    }];
+    var layout = {
+        height: 400,
+        width: 500
+    };
+    Plotly.newPlot('myDiv', data, layout);
 }

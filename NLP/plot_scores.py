@@ -31,7 +31,7 @@ class PlotScores:
         plt.ylabel('Mood Scores (%)')
         plt.ylim(0, 100)
         plt.savefig('test_plot1.png')
-        plt.show()
+        # plt.show()
 
     # per journal entry pie chart distribution of the
     # qualitative variables (moods)
@@ -48,7 +48,7 @@ class PlotScores:
 
         # plt.axis('equal')
         plt.savefig(jid + ".png")
-        plt.show()
+        # plt.show()
 
     @staticmethod
     def to_list(list_dict_scores: list[dict], key: str):
@@ -72,4 +72,4 @@ class PlotScores:
         plt.ylim(0, 100)
         plt.xlabel('Moods')
         plt.ylabel('Mood Scores (%)')
-        plt.show()
+        # plt.show()
