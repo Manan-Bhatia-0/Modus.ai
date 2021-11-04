@@ -5,35 +5,40 @@ import "../components/LibraryCard.css"
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateAdapter from '@mui/lab/AdapterDateFns';
-import {getJournalEntries} from "../firebase";
+import {getJournalEntries, searchByTitle, searchByDate} from "../firebase";
 
 function Library() {
-  const [sort, setSort] = React.useState('dateSaved');
+  // const [sort, setSort] = React.useState('dateSaved');
   var [entries, setEntries] = React.useState(null);
-  // const [deleteClick, setDeleteClick] = React.useState(false);
-
+  const [date, setDate] = React.useState(new Date());
+  const [searchField, setSearch] = React.useState('');
 
   useEffect(() => {
     const promise = getJournalEntries();
     promise.then(function(result) {
       setEntries(result);
+      console.log(result);
     })
   }, 
-  []);
-  
-  const handleChange = (event) => {
-    setSort(event.target.value);
-  }
-  const [date, setDate] = React.useState(new Date());
+  [entries]);
+
+  /* handles 'sort' field */
+  // const handleChange = (event) => {
+  //   setSort(event.target.value);
+  // }
 
   const handleDateChange = (newValue) => {
     setDate(newValue);
+    searchByDate(date);
   };
 
-  // const handleDeleteChange = () => {
-  //   console.log("HANDLE DELETE CHANGE")
-  //   setDeleteClick(true);
-  // }
+  const onSearchChange = (event) => {setSearch(event.value.target)}
+
+  const handleSearchSubmit = () => {
+    const searchResult = searchByTitle(searchField);
+    setEntries(searchResult);
+  }
+
   return (
     <div
       style={{margin: "5rem"}}
@@ -48,7 +53,7 @@ function Library() {
           </h1>
         </Grid>
         <Grid item xs={3} style={{
-          marginTop: "5rem"
+            marginTop: "5rem"
           }}
         >
           <LocalizationProvider dateAdapter={DateAdapter}>
@@ -67,9 +72,18 @@ function Library() {
             <input
                 type="text"
                 id="header-search"
+                value={searchField}
                 placeholder="Search journal entries"
+                onChange={onSearchChange}
             />
-            <Button type ="submit" variant="outlined" style={{marginBottom: "5px"}}>Search</Button>
+            <Button 
+              type ="submit" 
+              variant="outlined"
+              onClick={handleSearchSubmit}
+              style={{marginBottom: "5px"}}
+            >
+              Search
+            </Button>
           </form>
         </Grid>
         <Grid item xs={2} style={{
