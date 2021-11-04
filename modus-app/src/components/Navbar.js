@@ -2,9 +2,8 @@ import React from "react";
 import { useEffect, useState, useRef } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import "./navbar.css";
+//import "./navbar.css";
 import "bootstrap/dist/css/bootstrap.css";
-import { Link, useHistory } from "react-router-dom";
 import { handleLogout } from "../firebase";
 import { useHistory, useLocation } from "react-router";
 import {
@@ -116,7 +115,7 @@ function NavBar() {
           ))}
           <ListItem
             button
-            onClick={() => {history.push('/'); handlelogout}}
+            onClick={() => {history.push('/'); handleLogout()}}
             className={classes.linkText}
           >
             <ListItemIcon className={classes.linkText}><LogoutIcon color='#FFFFFF'/></ListItemIcon>
