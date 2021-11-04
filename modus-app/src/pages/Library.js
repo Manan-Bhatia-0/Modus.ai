@@ -17,9 +17,10 @@ function Library() {
     const promise = getJournalEntries();
     promise.then(function(result) {
       setEntries(result);
+      console.log(result);
     })
   }, 
-  []);
+  [entries]);
 
   /* handles 'sort' field */
   // const handleChange = (event) => {
@@ -50,7 +51,7 @@ function Library() {
           </h1>
         </Grid>
         <Grid item xs={3} style={{
-          marginTop: "5rem"
+            marginTop: "5rem"
           }}
         >
           <LocalizationProvider dateAdapter={DateAdapter}>

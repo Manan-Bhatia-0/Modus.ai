@@ -79,7 +79,7 @@ function Welcome() {
               <Route path='/analysis' component={Analysis} />
               <Route path='/faq' component={Faq} />
               <Route path='/individual_analysis' component={AnalysisIndividual} />
-              <Route path='/single_journal' component={SingleJournal} />
+              <Route path='/journal/:title' component={SingleJournal} />
           </Switch>
         </Grid>
       </Grid>

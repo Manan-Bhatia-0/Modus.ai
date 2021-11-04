@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Grid, IconButton } from "@mui/material";
 import { makeStyles } from '@mui/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {deleteJournalEntry, getMHResources} from "../firebase";
-import { useHistory } from "react-router";
+import {deleteJournalEntry, searchByTitle, getMHResources} from "../firebase";
+import { useHistory, useParams } from "react-router";
 
 const useStyles = makeStyles({
   card: {
@@ -16,23 +16,36 @@ const useStyles = makeStyles({
 });
 
 function SingleJournal() {
-  // const history = useHistory();
-//   const handleDeleteEntry = () => {
-//     deleteJournalEntry(entry.jid)
-//     .then(() => {
-//       console.log("DELETE JOURNAL ENTRY")
-//       // window.location.href='/library';
-//     }) 
-//   }
+  const history = useHistory();
 
+  const { title } = useParams();
+  const [entry, setEntry] = useState('');
+  
+  useEffect(() => {
+    const promise = searchByTitle(title);
+    promise.then(function(result) {
+      setEntry(result);
+    })
+  }, 
+  []);
+
+  const handleDeleteEntry = () => {
+    deleteJournalEntry(entry[0].jid)
+    .then(() => {
+      history.push('/library');
+      alert("Journal entry deleted");
+    }) 
+  }
+  
+  
   const classes = useStyles();
     return (
       <div>
           <Card className={classes.card}>
           <Grid container direction="column">
             <Grid container style={{marginBottom: 5}} justifyContent='end'>
-              {/* <IconButton onClick={() => handleDeleteEntry()}> */}
-              <IconButton>
+              <IconButton onClick={() => handleDeleteEntry()}>
+              {/* <IconButton> */}
                 <DeleteIcon/>
               </IconButton>
             </Grid>
@@ -41,35 +54,37 @@ function SingleJournal() {
                 <Grid item xs 
                   style={{
                     fontSize: 24,
-                    marginBottom: 10
+                    margin: 20
                   }}
                 >
-                    TITLE
-                  {/* {entry.title} */}
+                  {entry && entry[0].title}
                 </Grid>
                 <Grid item 
                   style={{
                     fontSize: 18,
-                    marginTop: 6,
-                    marginBottom: 10
+                    margin:20
                   }}
                 >
-                  {/* {entry.createdAt} */}
+                  {/* {entry[0].createdAt} */}
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs>
-                Content
-              {/* {entry.text} */}
+            <Grid item xs
+                  style={{
+                    margin:20
+                  }}
+            >
+                {/* Content */}
+              {entry && entry[0].text}
             </Grid>
             <Grid item xs 
                   style={{
                     fontSize: 16,
-                    marginTop: 20
+                    margin: 20
                   }}
             >
-                STATUS
-              {/* {entry.status} */}
+                {/* STATUS */}
+              {entry && entry[0].status}
             </Grid>  
           </Grid>
       </Card>
