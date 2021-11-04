@@ -32,9 +32,11 @@ function Library() {
     searchByDate(date);
   };
 
-  const handleSearchChange = (searchEntry) => {
-    setSearch(searchEntry);
-    searchByTitle(searchField);
+  const onSearchChange = (event) => {setSearch(event.value.target)}
+
+  const handleSearchSubmit = () => {
+    const searchResult = searchByTitle(searchField);
+    setEntries(searchResult);
   }
 
   return (
@@ -70,12 +72,14 @@ function Library() {
             <input
                 type="text"
                 id="header-search"
+                value={searchField}
                 placeholder="Search journal entries"
+                onChange={onSearchChange}
             />
             <Button 
               type ="submit" 
               variant="outlined"
-              onClick={handleSearchChange}
+              onClick={handleSearchSubmit}
               style={{marginBottom: "5px"}}
             >
               Search

@@ -1,13 +1,9 @@
 import React from "react";
-import { Card, CardActionArea, Grid, IconButton } from "@mui/material";
+import { Card, Grid } from "@mui/material";
 import { makeStyles } from '@mui/styles';
-import DeleteIcon from '@mui/icons-material/Delete';
 import "./LibraryCard.css";
-import {deleteJournalEntry, getMHResources} from "../firebase";
-import { useHistory } from "react-router";
+import { getMHResources} from "../firebase";
 import { Link } from 'react-router-dom';
-import SingleJournal from "../pages/SingleJournal";
-import { color } from "@mui/system";
 
 const useStyles = makeStyles({
   card: {
@@ -18,27 +14,12 @@ const useStyles = makeStyles({
 });
 
 function LibraryCard( {entry} ) {
-  // const history = useHistory();
-  const handleDeleteEntry = () => {
-    deleteJournalEntry(entry.jid)
-    .then(() => {
-      console.log("DELETE JOURNAL ENTRY")
-      // window.location.href='/library';
-    }) 
-  }
-
-
   const classes = useStyles();
     return (
       <div>
         <div>
           <Card hoverable className={classes.card}>
             <Grid container direction="column">
-              {/* <Grid container style={{marginBottom: 5}} justifyContent='end'>
-                <IconButton onClick={() => handleDeleteEntry()}>
-                  <DeleteIcon/>
-                </IconButton>
-              </Grid> */}
               <Grid container>
                 <Grid container item>
                   <Link to={`/journal/${entry.title}`} style={{ textDecoration: 'none', color: '#474747' }}>
@@ -55,10 +36,11 @@ function LibraryCard( {entry} ) {
                     style={{
                       fontSize: 18,
                       marginTop: 6,
-                      marginBottom: 10
+                      marginBottom: 10,
+                      marginLeft: 50
                     }}
                   >
-                    {/* {entry.createdAt} */}
+                    {entry.createdAt}
                   </Grid>
                 </Grid>
               </Grid>

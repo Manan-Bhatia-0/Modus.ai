@@ -6,7 +6,7 @@ import {collection, getDocs} from "firebase/firestore";
 import {doc, getDoc, deleteDoc, updateDoc, deleteField, query, where} from "firebase/firestore";
 import { getAuth, deleteUser } from "firebase/auth";
 import { SignOut } from './App';
-import $ from 'jquery';
+// import $ from 'jquery';
 
 
 const firebaseConfig = {
@@ -117,17 +117,21 @@ const deleteUserData = async () => {
 // the caller must check if entry already exists (check by title?)
 export const submitJournalEntry = async (title, text) => {
     const jid = getJID();
-    const moodAnalysis = getMoodAnalysis(text);
+    // const moodAnalysis = getMoodAnalysis(text);
     await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
         jid: jid,
         text: text,
         title: title,
         createdAt: Date.now(),
         status: 'submitted',
-        t2eEntryMoodAnalysis: moodAnalysis.t2eEntry,
-        t2eSentMoodAnalysis: moodAnalysis.t2eSent,
-        polarityEntryMoodAnalysis: moodAnalysis.polarEntry,
-        polaritySentMoodAnalysis: moodAnalysis.polarSent
+        // t2eEntryMoodAnalysis: moodAnalysis.t2eEntry,
+        // t2eSentMoodAnalysis: moodAnalysis.t2eSent,
+        // polarityEntryMoodAnalysis: moodAnalysis.polarEntry,
+        // polaritySentMoodAnalysis: moodAnalysis.polarSent
+        t2eEntryMoodAnalysis: '',
+        t2eSentMoodAnalysis: '',
+        polarityEntryMoodAnalysis: '',
+        polaritySentMoodAnalysis: ''
     })
 }
 
@@ -277,21 +281,21 @@ function getJID() {
     return uuidv4()
 }
 
-function getMoodAnalysis(text) {
-    var moodDict = {t2eEntry: '', t2eSent:'', polarEntry:'', polarSent:''};
-    $.ajax({
-        type: "GET",
-        url: "~/Desktop/CS307_project/NLP/mood_analysis.py",
-        data: text
-      }).done(function(response) {
-          console.log(response);
-      });
-    /*fetch(`/getdata/${text}`)
-      .then(function (response) {
-          return response.text();
-      }).then(function (text) {
-          console.log('GET response text:');
-          console.log(text); 
-      });*/
-      return moodDict;
-}
+// function getMoodAnalysis(text) {
+//     var moodDict = {t2eEntry: '', t2eSent:'', polarEntry:'', polarSent:''};
+//     $.ajax({
+//         type: "GET",
+//         url: "~/Desktop/CS307_project/NLP/mood_analysis.py",
+//         data: text
+//       }).done(function(response) {
+//           console.log(response);
+//       });
+//     /*fetch(`/getdata/${text}`)
+//       .then(function (response) {
+//           return response.text();
+//       }).then(function (text) {
+//           console.log('GET response text:');
+//           console.log(text); 
+//       });*/
+//       return moodDict;
+// }

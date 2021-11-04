@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Grid, IconButton } from "@mui/material";
+import { Button, Card, Grid, IconButton } from "@mui/material";
 import { makeStyles } from '@mui/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {deleteJournalEntry, searchByTitle, getMHResources} from "../firebase";
@@ -45,7 +45,6 @@ function SingleJournal() {
           <Grid container direction="column">
             <Grid container style={{marginBottom: 5}} justifyContent='end'>
               <IconButton onClick={() => handleDeleteEntry()}>
-              {/* <IconButton> */}
                 <DeleteIcon/>
               </IconButton>
             </Grid>
@@ -74,7 +73,6 @@ function SingleJournal() {
                     margin:20
                   }}
             >
-                {/* Content */}
               {entry && entry[0].text}
             </Grid>
             <Grid item xs 
@@ -83,11 +81,15 @@ function SingleJournal() {
                     margin: 20
                   }}
             >
-                {/* STATUS */}
               {entry && entry[0].status}
             </Grid>  
           </Grid>
       </Card>
+      <Grid style={{marginLeft: 20}}>
+        <Button variant="contained">
+          Export Mood Analysis
+        </Button>
+      </Grid>
       </div>
     );
   }
