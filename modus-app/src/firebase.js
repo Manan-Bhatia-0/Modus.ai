@@ -40,41 +40,6 @@ export const signInWithGoogle = async () => {
   }
 };
 
-const isPasswordConfirmed = (password, confimPassword) => {
-  if (password && confimPassword && password === confimPassword) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-export const staySignedIn = async () => {
-  firebase
-    .auth()
-    .setPersistence(firebase.auth.Auth.Persistence.SESSION)
-    .then(() => {
-      return firebase.auth().signInWithEmailAndPassword(email, password);
-    })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-    });
-};
-
-export const staySignedInGoogle = async () => {
-  firebase
-    .auth()
-    .setPersistence(firebase.auth.Auth.Persistence.NONE)
-    .then(() => {
-      var provider = new firebase.auth.GoogleAuthProvider();
-      return firebase.auth().signInWithRedirect(provider);
-    })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-    });
-};
-
 export const signInWithFacebook = async () => {
   try {
     const res = await auth.signInWithPopup(facebookProvider);
@@ -87,7 +52,7 @@ export const signInWithFacebook = async () => {
       await db.collection("users").add({
         uid: user.uid,
         name: user.displayName,
-        authProvider: "google",
+        authProvider: "facebook",
         email: user.email,
       });
     }
@@ -106,10 +71,24 @@ export const signInWithEmailAndPassword = async (email, password) => {
   }
 };
 
+const isPasswordConfirmed = (password, confirmPassword) => {
+  if (password && confirmPassword && password === confirmPassword) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 //add passwordconfirm to the state
-export const registerWithEmailAndPassword = async (name, email, password) => {
+export const registerWithEmailAndPassword = async (
+  firstName,
+  lastName,
+  email,
+  password,
+  confirmPassword
+) => {
   try {
-    if (!isPasswordConfirmed(user.password, user.passwordConfirm)) {
+    if (!isPasswordConfirmed(password, confirmPassword)) {
       //error message
       return;
     }
@@ -140,4 +119,5 @@ export const sendPasswordResetEmail = async (email) => {
 
 export const logout = () => {
   auth.signOut();
+  window.open("/");
 };

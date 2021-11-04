@@ -7,13 +7,14 @@ import "./CreateAccount.css";
 function CreateAccount() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirm] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const history = useHistory();
   const register = () => {
-    if (!name) alert("Please enter name");
-    registerWithEmailAndPassword(name, email, password);
+    if (!firstName || !lastName) alert("Please enter name");
+    registerWithEmailAndPassword(firstName, lastName, email, password);
   };
   useEffect(() => {
     if (loading) return;
@@ -54,8 +55,10 @@ function CreateAccount() {
         type="passwordConfirm"
         placeholder="Confirm Password "
         className="confirmPassword"
+        value={confirmPassword}
+        onChange={(e) => setConfirm(e.target.value)}
       />
-      <button className="registerButton" onClick={register}>
+      <button className="registerButton" onClick={registerWithEmailAndPassword}>
         Sign Up
       </button>
     </div>
