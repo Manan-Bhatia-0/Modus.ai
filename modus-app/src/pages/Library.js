@@ -5,13 +5,13 @@ import "../components/LibraryCard.css"
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateAdapter from '@mui/lab/AdapterDateFns';
-import {getJournalEntries} from "../firebase";
+import {getJournalEntries, searchByTitle, searchByDate} from "../firebase";
 
 function Library() {
-  const [sort, setSort] = React.useState('dateSaved');
+  // const [sort, setSort] = React.useState('dateSaved');
   var [entries, setEntries] = React.useState(null);
-  // const [deleteClick, setDeleteClick] = React.useState(false);
-
+  const [date, setDate] = React.useState(new Date());
+  const [searchField, setSearch] = React.useState('');
 
   useEffect(() => {
     const promise = getJournalEntries();
@@ -20,20 +20,22 @@ function Library() {
     })
   }, 
   []);
-  
-  const handleChange = (event) => {
-    setSort(event.target.value);
-  }
-  const [date, setDate] = React.useState(new Date());
+
+  /* handles 'sort' field */
+  // const handleChange = (event) => {
+  //   setSort(event.target.value);
+  // }
 
   const handleDateChange = (newValue) => {
     setDate(newValue);
+    searchByDate(date);
   };
 
-  // const handleDeleteChange = () => {
-  //   console.log("HANDLE DELETE CHANGE")
-  //   setDeleteClick(true);
-  // }
+  const handleSearchChange = (searchEntry) => {
+    setSearch(searchEntry);
+    searchByTitle(searchField);
+  }
+
   return (
     <div
       style={{margin: "5rem"}}
@@ -69,7 +71,14 @@ function Library() {
                 id="header-search"
                 placeholder="Search journal entries"
             />
-            <Button type ="submit" variant="outlined" style={{marginBottom: "5px"}}>Search</Button>
+            <Button 
+              type ="submit" 
+              variant="outlined"
+              onClick={handleSearchChange}
+              style={{marginBottom: "5px"}}
+            >
+              Search
+            </Button>
           </form>
         </Grid>
         <Grid item xs={2} style={{

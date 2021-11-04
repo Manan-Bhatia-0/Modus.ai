@@ -10,6 +10,7 @@ import Library from './pages/Library.js';
 import Analysis from './pages/Analysis.js';
 import Faq from './pages/Faq.js';
 import AnalysisIndividual from './pages/AnalysisIndividual.js';
+import SingleJournal from './pages/SingleJournal.js';
 import Logout from './pages/Logout';
 
 import firebase from 'firebase/compat/app';
@@ -77,7 +78,8 @@ function Welcome() {
               <Route path='/library' component={Library} />
               <Route path='/analysis' component={Analysis} />
               <Route path='/faq' component={Faq} />
-              <Route path='/individual' component={AnalysisIndividual} />
+              <Route path='/individual_analysis' component={AnalysisIndividual} />
+              <Route path='/single_journal' component={SingleJournal} />
           </Switch>
         </Grid>
       </Grid>
