@@ -152,7 +152,7 @@ export const saveJournalEntry = async (title, text) => {
 export const deleteJournalEntry = async (jid) => {
     const querySnapshot = db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).get()
     .then(function(result) {
-        // console.log(result);
+        //console.log(result);
         result.ref.delete();
      })
     //  .then(() => {
@@ -268,8 +268,6 @@ function getMillisFromDate(date) {
   date.setHours(0,0,0,0)
   const millis = Date.parse(date)
   return millis
-//   console.log(millis)
-//   console.log(date);
 }
 
 function getJID() {
@@ -279,17 +277,15 @@ function getJID() {
 
 function getMoodAnalysis(text) {
     var moodDict = {t2eEntry: '', t2eSent:'', polarEntry:'', polarSent:''};
-    var m = {};
+    //var m = {};
     $.post({
         url: "http://127.0.0.1:5000/moodanalysis?text=" + text,
       }).done(function(response) {
-        m = response;
+        //m = response;
+        moodDict.t2eEntry = response.data.t2e_entry_analysis;
+        moodDict.t2eSent = response.data.t2e_sent_analysis;
+        moodDict.polarEntry = response.data.polarity_entry_analysis;
+        moodDict.polarSent = response.data.polarity_sent_analysis;
       });
-      if (m!={}) {
-        moodDict.t2eEntry = m.data.t2e_entry_analysis;
-        moodDict.t2eSent = m.data.t2e_sent_analysis;
-        moodDict.polarEntry = m.data.polarity_entry_analysis;
-        moodDict.polarSent = m.data.polarity_sent_analysis;
-      }
       return moodDict;
 }
