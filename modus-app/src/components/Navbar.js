@@ -1,4 +1,11 @@
 import React from "react";
+import { useEffect, useState, useRef } from "react";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import "./navbar.css";
+import "bootstrap/dist/css/bootstrap.css";
+import { Link } from "react-router-dom";
+import { handleLogout } from "../firebase";
 import { useHistory, useLocation } from "react-router";
 import {
         Typography, Drawer, 
@@ -14,8 +21,6 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-
-import {SignOut} from "../App";
 
 const drawerWidth = '12rem';
 
@@ -111,7 +116,7 @@ function NavBar() {
           ))}
           <ListItem
             button
-            onClick={() => {history.push('/'); SignOut()}}
+            onClick={() => {history.push('/'); handlelogout}}
             className={classes.linkText}
           >
             <ListItemIcon className={classes.linkText}><LogoutIcon color='#FFFFFF'/></ListItemIcon>
