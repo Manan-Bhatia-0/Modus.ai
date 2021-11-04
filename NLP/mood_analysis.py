@@ -10,10 +10,13 @@ from textblob import TextBlob
 from nltk.sentiment import SentimentIntensityAnalyzer
 nltk.download('vader_lexicon')
 from flask import Flask
+from flask_cors import CORS, cross_origin
 from flask_restful import Resource, Api, reqparse
 import ast
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 api = Api(app)
 
 
@@ -51,7 +54,7 @@ class MoodAnalysis(Resource):
             mood['cummulative'] = TextBlob(sentence).sentiment.polarity
             mood_list.append(mood)
         return mood_list
-    
+    @cross_origin()
     def post(self):
         parser = reqparse.RequestParser()  # initialize
         
