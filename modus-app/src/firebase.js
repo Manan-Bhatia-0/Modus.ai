@@ -1,6 +1,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
+import { useHistory } from "react-router-dom";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDXtGR1FNQz9zxOk79Ikkqzg9j8IYi2mh0",
@@ -62,62 +63,57 @@ export const signInWithFacebook = async () => {
   }
 };
 
-export const signInWithEmailAndPassword = async (email, password) => {
-  try {
-    await auth.signInWithEmailAndPassword(email, password);
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
-};
+// export const signInWithEmailAndPassword = async (email, password) => {
+//   try {
+//     await auth.signInWithEmailAndPassword(email, password);
+//   } catch (err) {
+//     console.error(err);
+//     alert(err.message);
+//   }
+// };
 
-const isPasswordConfirmed = (password, confirmPassword) => {
-  if (password && confirmPassword && password === confirmPassword) {
-    return true;
-  } else {
-    return false;
-  }
-};
+// const isPasswordConfirmed = (password, confirmPassword) => {
+//   if (password && confirmPassword && password === confirmPassword) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// };
 
-//add passwordconfirm to the state
-export const registerWithEmailAndPassword = async (
-  firstName,
-  lastName,
-  email,
-  password,
-  confirmPassword
-) => {
-  try {
-    if (!isPasswordConfirmed(password, confirmPassword)) {
-      //error message
-      return;
-    }
-    const res = await auth.createUserWithEmailAndPassword(email, password);
-    const user = res.user;
-    await db.collection("users").add({
-      uid: user.uid,
-      firstName,
-      lastName,
-      authProvider: "local",
-      email,
-    });
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
-};
+// //add passwordconfirm to the state
+// export const registerWithEmailAndPassword = async (
+//   firstName,
+//   lastName,
+//   email,
+//   password,
+//   confirmPassword
+// ) => {
+//   try {
+//     if (!isPasswordConfirmed(password, confirmPassword)) {
+//       //error message
+//       return;
+//     }
+//     const res = await auth.createUserWithEmailAndPassword(email, password);
+//     const user = res.user;
+//     await db.collection("users").add({
+//       uid: user.uid,
+//       firstName,
+//       lastName,
+//       authProvider: "local",
+//       email,
+//     });
+//   } catch (err) {
+//     console.error(err);
+//     alert(err.message);
+//   }
+// };
 
-export const sendPasswordResetEmail = async (email) => {
-  try {
-    await auth.sendPasswordResetEmail(email);
-    alert("Password reset link sent!");
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
-};
-
-export const logout = () => {
-  auth.signOut();
-  window.open("/");
-};
+// export const sendPasswordResetEmail = async (email) => {
+//   try {
+//     await auth.sendPasswordResetEmail(email);
+//     alert("Password reset link sent!");
+//   } catch (err) {
+//     console.error(err);
+//     alert(err.message);
+//   }
+// };
