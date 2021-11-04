@@ -11,6 +11,14 @@ const firebaseConfig = {
   messagingSenderId: "738850813503",
   appId: "1:738850813503:web:e7e97619a1eaa6510daa8a",
   measurementId: "G-84F8J1Y1VY",
+  // apiKey: "AIzaSyCzMuDRDmQMFsvabbAuOzi_ca8wz-fdjcY",
+  // authDomain: "modusai.firebaseapp.com",
+  // databaseURL: "https://modusai-default-rtdb.firebaseio.com",
+  // projectId: "modusai",
+  // storageBucket: "modusai.appspot.com",
+  // messagingSenderId: "986175331521",
+  // appId: "1:986175331521:web:1da20cf1eab28207060840",
+  // measurementId: "G-JCXJ2W0FTL",
 };
 
 export const app = firebase.initializeApp(firebaseConfig);
@@ -63,57 +71,48 @@ export const signInWithFacebook = async () => {
   }
 };
 
-// export const signInWithEmailAndPassword = async (email, password) => {
-//   try {
-//     await auth.signInWithEmailAndPassword(email, password);
-//   } catch (err) {
-//     console.error(err);
-//     alert(err.message);
-//   }
-// };
+export const signInWithEmailAndPassword = async (email, password) => {
+  try {
+    await auth.signInWithEmailAndPassword(email, password);
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
 
-// const isPasswordConfirmed = (password, confirmPassword) => {
-//   if (password && confirmPassword && password === confirmPassword) {
-//     return true;
-//   } else {
-//     return false;
-//   }
-// };
+//add passwordconfirm to the state
+export const registerWithEmailAndPassword = async (name, email, password) => {
+  try {
+    const res = await auth.createUserWithEmailAndPassword(email, password);
+    const user = res.user;
+    await db.collection("users").add({
+      uid: user.uid,
+      name,
+      authProvider: "local",
+      email,
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
 
-// //add passwordconfirm to the state
-// export const registerWithEmailAndPassword = async (
-//   firstName,
-//   lastName,
-//   email,
-//   password,
-//   confirmPassword
-// ) => {
-//   try {
-//     if (!isPasswordConfirmed(password, confirmPassword)) {
-//       //error message
-//       return;
-//     }
-//     const res = await auth.createUserWithEmailAndPassword(email, password);
-//     const user = res.user;
-//     await db.collection("users").add({
-//       uid: user.uid,
-//       firstName,
-//       lastName,
-//       authProvider: "local",
-//       email,
-//     });
-//   } catch (err) {
-//     console.error(err);
-//     alert(err.message);
-//   }
-// };
+export const sendPasswordResetEmail = async (email) => {
+  try {
+    await auth.sendPasswordResetEmail(email);
+    alert("Password reset link sent!");
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
 
-// export const sendPasswordResetEmail = async (email) => {
-//   try {
-//     await auth.sendPasswordResetEmail(email);
-//     alert("Password reset link sent!");
-//   } catch (err) {
-//     console.error(err);
-//     alert(err.message);
-//   }
-// };
+export const handleLogout = async (email) => {
+  try {
+    await auth.signOut();
+    alert("Signed Out!");
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};

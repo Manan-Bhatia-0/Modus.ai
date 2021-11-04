@@ -4,26 +4,10 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "./navbar.css";
 import "bootstrap/dist/css/bootstrap.css";
-import { useAuth } from "../pages/AuthContext";
 import { Link, useHistory } from "react-router-dom";
-import app from "../firebase";
+import { handleLogout } from "../firebase";
 
 function NavBar() {
-  const [error, setError] = useState("");
-  const currentUser = useAuth();
-  const logout = useAuth();
-  const history = useHistory();
-
-  async function pressLogout() {
-    setError("");
-
-    try {
-      await logout();
-      history.push("/");
-    } catch {
-      setError("Failed to log out");
-    }
-  }
   return (
     <Navbar defaultActiveKey="/" className="flex-column">
       <div>
@@ -33,7 +17,7 @@ function NavBar() {
         <Nav.Link href="/library">Library</Nav.Link>
         <Nav.Link href="/analysis">Analysis</Nav.Link>
         <Nav.Link href="/faq">FAQ</Nav.Link>
-        <Nav.Link href="/" onClick={this.pressLogout}>
+        <Nav.Link href="/" onClick={handleLogout}>
           Logout
         </Nav.Link>
       </div>

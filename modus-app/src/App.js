@@ -20,19 +20,19 @@ import "firebase/compat/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
-firebase.initializeApp({
-  apiKey: "AIzaSyDXtGR1FNQz9zxOk79Ikkqzg9j8IYi2mh0",
-  authDomain: "modusdb-4d7ed.firebaseapp.com",
-  projectId: "modusdb-4d7ed",
-  storageBucket: "modusdb-4d7ed.appspot.com",
-  messagingSenderId: "738850813503",
-  appId: "1:738850813503:web:e7e97619a1eaa6510daa8a",
-  measurementId: "G-84F8J1Y1VY",
-});
+// firebase.initializeApp({
+//   apiKey: "AIzaSyDXtGR1FNQz9zxOk79Ikkqzg9j8IYi2mh0",
+//   authDomain: "modusdb-4d7ed.firebaseapp.com",
+//   projectId: "modusdb-4d7ed",
+//   storageBucket: "modusdb-4d7ed.appspot.com",
+//   messagingSenderId: "738850813503",
+//   appId: "1:738850813503:web:e7e97619a1eaa6510daa8a",
+//   measurementId: "G-84F8J1Y1VY",
+// });
 
-const auth = firebase.auth();
-const firestore = firebase.firestore();
-const analytics = firebase.analytics;
+// const auth = firebase.auth();
+// const firestore = firebase.firestore();
+// const analytics = firebase.analytics;
 
 // How is the first page displayed?
 // can we check user auth first and then
