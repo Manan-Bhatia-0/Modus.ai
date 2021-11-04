@@ -1,4 +1,6 @@
+/* eslint-disable */ 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import Grid from "@mui/material/Grid";
 
 import JournalDashboard from "./pages/JournalDashboard.js";
@@ -11,6 +13,7 @@ import Faq from "./pages/Faq.js";
 import Login from "./pages/Login.js";
 import CreateAccount from "./pages/CreateAccount.js";
 import Reset from "./pages/ResetPassword.js";
+import AnalysisIndividual from './pages/AnalysisIndividual.js';
 import Logout from "./pages/Logout";
 
 import firebase from "firebase/compat/app";
@@ -34,12 +37,17 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 // const firestore = firebase.firestore();
 // const analytics = firebase.analytics;
 
+var admin = require("firebase-admin");
+var serviceAccount = require("./modusdb-4d7ed-firebase-adminsdk-nkovy-a64f42c83d.json");
+
+
 // How is the first page displayed?
 // can we check user auth first and then
 // either display login page or display
 // welcome dashboard.
 
 // Please edit the buttons accordingly.
+
 
 const LoginContainer = () => (
   <div className="container">
@@ -77,6 +85,7 @@ const DefaultContainer = () => (
       <Route path="/library" component={Library} />
       <Route path="/anaylsis" component={Analysis} />
       <Route path="/faq" component={Faq}></Route>
+      <Route path='/individual' component={AnalysisIndividual} />
     </Grid>
   </Grid>
 );
@@ -94,4 +103,18 @@ function Welcome() {
   );
 }
 
+
 export default Welcome;
+
+function save_journal() {
+  //var func = JournalEdit
+  //str func.entryContent
+  //str.db
+}
+
+// // connect this to logout page.
+// export function SignOut() {
+//   return auth.currentUser && (auth.signOut())
+//     // <button className="sign-out" onClick={() => auth.signOut()}>Sign Out</button>
+// }
+// export default App;

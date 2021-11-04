@@ -1,38 +1,50 @@
 {
-    "library": [
+    "users": [
         {
-            "user": "Megan",
-            "entries": [
+            "uid": [
                 {
-                    "title": "Day 1",
-                    "date": "10/1",
-                    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum nulla eu dapibus aliquam...",
-                    "status": "saved"
-                },
-                {
-                    "title": "Day 2",
-                    "date": "10/2",
-                    "content": "ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum nulla eu dapibus aliquam...",
-                    "status": "analyzed"
-                },
-                {
-                    "title": "Day 3",
-                    "date": "10/3",
-                    "content": "dolor sit amet, consectetur adipiscing elit. Sed vestibulum nulla eu dapibus aliquam...",
-                    "status": "saved"
-                },
-                {
-                    "title": "Day 4",
-                    "date": "10/4",
-                    "content": "ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum nulla eu dapibus aliquam...",
-                    "status": "saved"
-                },
-                {
-                    "title": "Day 10",
-                    "date": "10/15",
-                    "content": "sit amet, consectetur adipiscing elit. Sed vestibulum nulla eu dapibus aliquam...",
-                    "status": "saved"
+                    "name": "Megan",
+                    "journalEntries": [
+                        {
+                            "jid1": [
+                                {
+                                    "createdAt": "10/1/21",
+                                    "status": "Analyzed",
+                                    "text": "Today was a good day and I was very happy to get ice cream with my family."
+                                }
+                            ]
+                        },
+                        {    
+                            "jid2": [
+                                {
+                                    "createdAt": "10/2/21",
+                                    "status": "Saved",
+                                    "text": "I went to the carnival today and I rode a lot of roller coasters and it was very exciting! I can't wait to go there again."
+                                }
+                            ]
+                        },
+                        {
+                            "jid3": [
+                                {
+                                    "createdAt": "10/3/21",
+                                    "status": "Saved",
+                                    "text": "I watched a scary movie today and it freaked me out! The movie was called 'The Shining' and it was very spooky."
+                                }
+                            ]
+                        },
+                        {   
+                            "jid4": [
+                                {
+                                    "createdAt": "10/4/21",
+                                    "status": "Saved",
+                                    "text": "Today was pretty rough and I struggled a lot on a midterm. Now I am very sad."
+                                }
+                            ]
+                        }
+                        
+                    ]
                 }
+
             ]
         }
     ]
