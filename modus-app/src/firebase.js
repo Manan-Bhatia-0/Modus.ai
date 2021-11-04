@@ -281,21 +281,19 @@ function getJID() {
     return uuidv4()
 }
 
-// function getMoodAnalysis(text) {
-//     var moodDict = {t2eEntry: '', t2eSent:'', polarEntry:'', polarSent:''};
-//     $.ajax({
-//         type: "GET",
-//         url: "~/Desktop/CS307_project/NLP/mood_analysis.py",
-//         data: text
-//       }).done(function(response) {
-//           console.log(response);
-//       });
-//     /*fetch(`/getdata/${text}`)
-//       .then(function (response) {
-//           return response.text();
-//       }).then(function (text) {
-//           console.log('GET response text:');
-//           console.log(text); 
-//       });*/
-//       return moodDict;
-// }
+function getMoodAnalysis(text) {
+    var moodDict = {t2eEntry: '', t2eSent:'', polarEntry:'', polarSent:''};
+    var m = {};
+    $.post({
+        url: "http://127.0.0.1:5000/moodanalysis?text=" + text,
+      }).done(function(response) {
+        m = response;
+      });
+      if (m!={}) {
+        moodDict.t2eEntry = m.data.t2e_entry_analysis;
+        moodDict.t2eSent = m.data.t2e_sent_analysis;
+        moodDict.polarEntry = m.data.polarity_entry_analysis;
+        moodDict.polarSent = m.data.polarity_sent_analysis;
+      }
+      return moodDict;
+}
