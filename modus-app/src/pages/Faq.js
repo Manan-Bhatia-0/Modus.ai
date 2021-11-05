@@ -3,11 +3,13 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
+import faqimage from "./FAQ.png";
 import "./Faq.css";
 
 function Faq() {
   return (
     <div>
+      <img src={faqimage} alt="Logo" width="60%" height="60%" />
       <Accordion>
         <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
           <Typography>What is Modus.ai?</Typography>

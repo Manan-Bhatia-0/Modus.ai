@@ -36,6 +36,18 @@ function Profile() {
         onClick={() => {
           onClick(optionsWithLabelChange);
         }}
+        right="100px"
+      >
+        {" "}
+        Delete Profile{" "}
+      </button>
+      <button
+        right="100px"
+        justifyContent="center"
+        alignItems="center"
+        onClick={() => {
+          deleteCurrentUser();
+        }}
       >
         {" "}
         Delete Profile{" "}
