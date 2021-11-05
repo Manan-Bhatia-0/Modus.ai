@@ -233,46 +233,50 @@ export const deleteJournalEntry = async (jid) => {
     //     window.location.reload(false);
     //  })
      
-    //  console.log("deleted journal entry!!")
+     console.log("deleted journal entry!!")
 }
 
 // TODO: post results onto MHR component
 export const getrecommendedMHResources = async (resourceType) => {
     console.log("in mhr");
     const score = -1;
+    var resources = [];
     const querySnapshot = db.collection('users').doc(auth.currentUser.email).collection('journalEntries').orderByChild('createdAt')
     .limitToLast(1).get()
     .then(function(result) {
         console.log(result);
         score = parseInt(result['polarityEntryMoodAnalysis']);
      })
-
      if (score > 0.90) {
         const querySnapshot = db.collection('mentalHealthResources').doc('Mindfulness').get()
         .then(function(result) {
-            console.log(result);
-         }) 
+         console.log(result); 
+         resources.push(result);
+        })
+  
+
     } else if(score > 0.65) {
         const querySnapshot = db.collection('Anxiety').doc('Mindfulness').get()
         .then(function(result) {
             console.log(result);
+            resources.push(result);
          })
 
     }else if (score > 0.35) {
         const querySnapshot = db.collection('Depression').doc('Mindfulness').get()
         .then(function(result) {
             console.log(result);
+            resources.push(result);
          })
 
     } else {
         const querySnapshot = db.collection('Suicide').doc('Mindfulness').get()
         .then(function(result) {
             console.log(result);
+            resources.push(result);
          })
     }
-
-
-
+    return resources;
 }
 
 // receives mental health resources given a specific mental health type (from mood score)
