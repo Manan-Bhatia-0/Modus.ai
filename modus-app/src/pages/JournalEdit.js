@@ -15,6 +15,7 @@ import {
 } from "../firebase";
 import { Link, useHistory } from "react-router-dom";
 import { confirm } from "react-confirm-box";
+import piechart from "./piechart";
 
 const optionsWithLabelChange = {
   closeOnOverlayClick: false,
