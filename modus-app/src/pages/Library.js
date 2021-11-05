@@ -36,7 +36,12 @@ function Library() {
   const handleSearchSubmit = () => {
     const searchResult = searchByTitle(searchField);
     searchResult.then(function(result) {
-      setEntries(result);
+      console.log(result);
+      if (result.length == 0) {
+        alert("No results found! Please try another journal entry.");
+      } else {
+        setEntries(result);
+      }
     })
   }
 
