@@ -10,34 +10,56 @@ function Faq() {
     <div>
       <Accordion>
         <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
-          <Typography>Accordion 1</Typography>
+          <Typography>What is Modus.ai?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
+            Modus.ai uses journal entries instead of a set of static questions to analyze the
+            user’s mood. This sets us apart from pre-existing apps by enhancing user autonomy
+            and ensuring additional personalization. It analyzes the user's current journal entry
+            and displays a thorough interpretation of their current mood.
           </Typography>
         </AccordionDetails>
       </Accordion>
       <Accordion>
         <AccordionSummary aria-controls="panel2a-content" id="panel2a-header">
-          <Typography>Accordion 2</Typography>
+          <Typography>How do I create a journal entry?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
+            To create a journal entry, go to the New entry tab, enter a title for your entry,
+            and start typing. You can make use of our toolbar to personalize your entries.
+            You can either save them or submit them for analysis.
           </Typography>
         </AccordionDetails>
       </Accordion>
       <Accordion>
         <AccordionSummary aria-controls="panel2a-content" id="panel2a-header">
-          <Typography>Accordion 2</Typography>
+          <Typography>How do I see my mood analysis?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
+            Once you click submit on the New Entry page, your entry is analyzed by our
+            Machine Learning Model that uses Natural Language Processing algorithms
+            and your mood scores are shown to you in the form of a pie chart.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary aria-controls="panel2a-content" id="panel2a-header">
+          <Typography>What do my mood scores mean?</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            It will use a scoring system to identify the proportion of specific emotions
+            conveyed in each journal entry. It should be able to detect the following emotions:
+            ‘Happy', 'Angry', 'Surprise', 'Sad',  'Fear'.
+            Hence, an example analysis could look like
+            'Happy': 0.07, 'Angry': 0.09, 'Surprise': 0.16, 'Sad': 0.18, 'Fear': 0.5.
+            It is important to note that the sum of the individual proportions will
+            never exceed 1 but it may be less than 1. This is because it is possible that at any
+            given time, less than 100% of the journal entry may be properly analyzed and/or
+            some of the more complex emotions may not be considered by our NLP model for the analysis.
           </Typography>
         </AccordionDetails>
       </Accordion>
