@@ -124,7 +124,7 @@ function Library() {
       <Grid container direction="column" style={{marginTop: "2rem", marginLeft: "5rem"}}>
         <Grid item>
           {entries && entries.map((entry) => {
-            return (<LibraryCard entry={entry}/>)
+            return (<LibraryCard key={entry.title} entry={entry}/>)
           })}
         </Grid>
         <Grid container item justifyContent="center">
