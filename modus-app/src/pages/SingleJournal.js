@@ -5,6 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import {deleteJournalEntry, searchByTitle, getMHResources} from "../firebase";
 import { useHistory, useParams } from "react-router";
 import ReactPDF from '@react-pdf/renderer';
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
 import MyDocument from '../components/MyDocument.js'
 
@@ -72,7 +73,7 @@ function SingleJournal() {
                     margin:20
                   }}
                 >
-                  {/* {entry[0].createdAt} */}
+                  {entry && entry[0].createdAt}
                 </Grid>
               </Grid>
             </Grid>
@@ -93,10 +94,19 @@ function SingleJournal() {
             </Grid>  
           </Grid>
       </Card>
-      <Grid style={{marginLeft: 20}}>
-        <Button variant="contained" onClick={() => submitExport(entry)}>
+      <Grid style={{marginLeft: 200}}>
+        {/* <Button variant="contained" onClick={() => submitExport(entry)}>
           Export Mood Analysis
-        </Button>
+        </Button> */}
+        {entry && 
+           <PDFDownloadLink
+           document={<MyDocument data={entry[0]} />}
+           // document={<MyDocument />}
+           fileName="journal.pdf"
+         > 
+           Export journal entry 
+         </PDFDownloadLink>
+        }
       </Grid>
       </div>
     );

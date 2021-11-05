@@ -28,7 +28,15 @@ function Library() {
 
   const handleDateChange = (newValue) => {
     setDate(newValue);
-    searchByDate(date);
+    const searchResult = searchByDate(newValue);
+    searchResult.then(function(result) {
+      console.log(result);
+      if (result.length == 0) {
+        alert("No results found! Please try another journal entry.");
+      } else {
+        setEntries(result);
+      }
+    })
   };
 
   const onSearchChange = (event) => {setSearch(event.target.value)}

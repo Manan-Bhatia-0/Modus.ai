@@ -366,7 +366,10 @@ export const searchByTitle = async (title) => {
 export const searchByDate = async (date) => {
     var millis = getMillisFromDate(date)
     var upperLimit = 86400000 + millis // adding 24 hours
-
+    console.log("upperLimit");
+    console.log(upperLimit);
+    console.log('MILLIS');
+    console.log(millis);
     var result = []
     const q = query(collection(db.collection('users').
     doc(auth.currentUser.email), 'journalEntries'), where("createdAt", '<', upperLimit), where("createdAt", '>=', millis));
