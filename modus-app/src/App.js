@@ -76,19 +76,19 @@ const CreateContainer = () => (
 
 const DefaultContainer = () => (
   <Grid container spacing={2}>
-    <Grid item>
       <Grid item>
         <NavBar />
       </Grid>
-      <Route path="/home" exact component={JournalDashboard} />
-      <Route path="/profile" component={Profile} />
-      <Route path="/write" component={JournalEdit} />
-      <Route path="/library" component={Library} />
-      <Route path="/analysis" component={Analysis} />
-      <Route path="/faq" component={Faq}></Route>
-      <Route path='/individual' component={AnalysisIndividual} />
-      <Route path="/journal/:title"> <SingleJournal /> </Route>
-    </Grid>
+      <Grid item style={{display: "flex"}}>
+        <Route path="/home" exact component={JournalDashboard} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/write" component={JournalEdit} />
+        <Route path="/library" component={Library} />
+        <Route path="/analysis" component={Analysis} />
+        <Route path="/faq" component={Faq}></Route>
+        <Route path='/individual' component={AnalysisIndividual} />
+        <Route path="/journal/:title"> <SingleJournal /> </Route>
+      </Grid>
   </Grid>
 );
 

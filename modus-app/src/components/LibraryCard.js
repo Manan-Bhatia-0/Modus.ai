@@ -18,7 +18,7 @@ function LibraryCard( {entry} ) {
     return (
       <div>
         <div>
-          <Card hoverable className={classes.card}>
+          <Card className={classes.card}>
             <Grid container direction="column">
               <Grid container>
                 <Grid container item>
