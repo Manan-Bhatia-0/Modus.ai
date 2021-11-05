@@ -2,14 +2,8 @@ import React from "react";
 import { useEffect, useState, useRef } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-<<<<<<< HEAD
-// import "./navbar.css";
-import "bootstrap/dist/css/bootstrap.css";
-import { Link } from "react-router-dom";
-=======
 //import "./navbar.css";
 import "bootstrap/dist/css/bootstrap.css";
->>>>>>> f66dc5c8b89dcac5f96913f092a4888aea9593cd
 import { handleLogout } from "../firebase";
 import { useHistory, useLocation } from "react-router";
 import {
