@@ -22,6 +22,7 @@ import "firebase/compat/auth";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import SingleJournal from "./pages/SingleJournal.js";
 
 // firebase.initializeApp({
 //   apiKey: "AIzaSyDXtGR1FNQz9zxOk79Ikkqzg9j8IYi2mh0",
@@ -83,9 +84,10 @@ const DefaultContainer = () => (
       <Route path="/profile" component={Profile} />
       <Route path="/write" component={JournalEdit} />
       <Route path="/library" component={Library} />
-      <Route path="/anaylsis" component={Analysis} />
+      <Route path="/analysis" component={Analysis} />
       <Route path="/faq" component={Faq}></Route>
       <Route path='/individual' component={AnalysisIndividual} />
+      <Route path="/journal/:title"> <SingleJournal /> </Route>
     </Grid>
   </Grid>
 );

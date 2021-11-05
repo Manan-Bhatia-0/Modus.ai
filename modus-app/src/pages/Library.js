@@ -17,10 +17,9 @@ function Library() {
     const promise = getJournalEntries();
     promise.then(function(result) {
       setEntries(result);
-      console.log(result);
     })
   }, 
-  [entries]);
+  []);
 
   /* handles 'sort' field */
   // const handleChange = (event) => {
@@ -32,11 +31,13 @@ function Library() {
     searchByDate(date);
   };
 
-  const onSearchChange = (event) => {setSearch(event.value.target)}
+  const onSearchChange = (event) => {setSearch(event.target.value)}
 
   const handleSearchSubmit = () => {
     const searchResult = searchByTitle(searchField);
-    setEntries(searchResult);
+    searchResult.then(function(result) {
+      setEntries(result);
+    })
   }
 
   return (
@@ -68,11 +69,11 @@ function Library() {
         </Grid>
         <Grid item xs={4} style={{marginTop:"5rem"}}>
           {/* <form action="/" method="get"> */}
-          <form>
+          {/* <form> */}
             <input
                 type="text"
                 id="header-search"
-                value={searchField}
+                // value={searchField}
                 placeholder="Search journal entries"
                 onChange={onSearchChange}
             />
@@ -84,7 +85,7 @@ function Library() {
             >
               Search
             </Button>
-          </form>
+          {/* </form> */}
         </Grid>
         <Grid item xs={2} style={{
               marginTop: "3rem"
@@ -107,7 +108,7 @@ function Library() {
       </Grid>
       
       <Divider style={{width: "65rem"}}/>
-      <Grid container direction="column" style={{marginTop: "2rem"}}>
+      <Grid container direction="column" style={{marginTop: "2rem", marginLeft: "5rem"}}>
         <Grid item>
           {entries && entries.map((entry) => {
             return (<LibraryCard entry={entry}/>)

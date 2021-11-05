@@ -8,7 +8,7 @@ import {doc, getDoc, deleteDoc, updateDoc, deleteField, query, where} from "fire
 import { getAuth, deleteUser } from "firebase/auth";
 import { SignOut } from './App';
 import $ from 'jquery';
-import * as Plotly from 'plotly.js';
+// import * as Plotly from 'plotly.js';
 import { useHistory } from "react-router-dom";
 
 
@@ -370,5 +370,5 @@ function plotPieChart(dict_t2e) {
         height: 400,
         width: 500
     };
-    Plotly.newPlot('myDiv', data, layout);
+    // Plotly.newPlot('myDiv', data, layout);
 }

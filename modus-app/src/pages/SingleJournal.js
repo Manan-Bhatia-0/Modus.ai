@@ -28,6 +28,7 @@ function SingleJournal() {
     const promise = searchByTitle(title);
     promise.then(function(result) {
       setEntry(result);
+      console.log(result);
     })
   }, 
   []);
