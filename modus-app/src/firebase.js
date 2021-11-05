@@ -8,26 +8,26 @@ import {doc, getDoc, deleteDoc, updateDoc, deleteField, query, where} from "fire
 import { getAuth, deleteUser } from "firebase/auth";
 import { SignOut } from './App';
 import $ from 'jquery';
-import * as Plotly from 'plotly.js';
+// import * as Plotly from 'plotly.js';
 import { useHistory } from "react-router-dom";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDXtGR1FNQz9zxOk79Ikkqzg9j8IYi2mh0",
-  authDomain: "modusdb-4d7ed.firebaseapp.com",
-  projectId: "modusdb-4d7ed",
-  storageBucket: "modusdb-4d7ed.appspot.com",
-  messagingSenderId: "738850813503",
-  appId: "1:738850813503:web:e7e97619a1eaa6510daa8a",
-  measurementId: "G-84F8J1Y1VY",
-  // apiKey: "AIzaSyCzMuDRDmQMFsvabbAuOzi_ca8wz-fdjcY",
-  // authDomain: "modusai.firebaseapp.com",
-  // databaseURL: "https://modusai-default-rtdb.firebaseio.com",
-  // projectId: "modusai",
-  // storageBucket: "modusai.appspot.com",
-  // messagingSenderId: "986175331521",
-  // appId: "1:986175331521:web:1da20cf1eab28207060840",
-  // measurementId: "G-JCXJ2W0FTL",
+  // apiKey: "AIzaSyDXtGR1FNQz9zxOk79Ikkqzg9j8IYi2mh0",
+  // authDomain: "modusdb-4d7ed.firebaseapp.com",
+  // projectId: "modusdb-4d7ed",
+  // storageBucket: "modusdb-4d7ed.appspot.com",
+  // messagingSenderId: "738850813503",
+  // appId: "1:738850813503:web:e7e97619a1eaa6510daa8a",
+  // measurementId: "G-84F8J1Y1VY",
+  apiKey: "AIzaSyCzMuDRDmQMFsvabbAuOzi_ca8wz-fdjcY",
+  authDomain: "modusai.firebaseapp.com",
+  databaseURL: "https://modusai-default-rtdb.firebaseio.com",
+  projectId: "modusai",
+  storageBucket: "modusai.appspot.com",
+  messagingSenderId: "986175331521",
+  appId: "1:986175331521:web:1da20cf1eab28207060840",
+  measurementId: "G-JCXJ2W0FTL",
 };
 
 
@@ -370,5 +370,5 @@ function plotPieChart(dict_t2e) {
         height: 400,
         width: 500
     };
-    Plotly.newPlot('myDiv', data, layout);
+    // Plotly.newPlot('myDiv', data, layout);
 }
