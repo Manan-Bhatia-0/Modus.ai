@@ -81,12 +81,9 @@ function Library() {
           </LocalizationProvider>
         </Grid>
         <Grid item xs={4} style={{marginTop:"5rem"}}>
-          {/* <form action="/" method="get"> */}
-          {/* <form> */}
             <input
                 type="text"
                 id="header-search"
-                // value={searchField}
                 placeholder="Search journal entries"
                 onChange={onSearchChange}
             />
@@ -121,7 +118,7 @@ function Library() {
       </Grid>
       
       <Divider style={{width: "65rem"}}/>
-      <Grid container direction="column" style={{marginTop: "2rem", marginLeft: "5rem"}}>
+      <Grid container direction="column" style={{marginTop: "2rem"}}>
         <Grid item>
           {entries && entries.map((entry) => {
             return (<LibraryCard key={entry.title} entry={entry}/>)
