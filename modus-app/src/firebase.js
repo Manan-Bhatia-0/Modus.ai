@@ -435,6 +435,7 @@ function getMoodAnalysis(text, callback) {
       });
       //console.log(moodArray);
       //return moodArray;
+      // push pls
 }
 
 // submit passes moodDict t2e to this func
