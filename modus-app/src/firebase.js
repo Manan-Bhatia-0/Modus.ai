@@ -181,26 +181,31 @@ const deleteUserData = async () => {
 // the caller must check if entry already exists (check by title?)
 export const submitJournalEntry = async (title, text) => {
     const jid = getJID();
-    const moodAnalysis = getMoodAnalysis(text);
     console.log(title);
-    console.log(text);
-    //plotPieChart(moodAnalysis.t2eEntry);
-    await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
+    //code that depends on mood analysis result
+    await getMoodAnalysis (text, function(moodArray) {
+      //code that depends on result
+      console.log(moodArray);
+      db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
         jid: jid,
         text: text,
         title: title,
         createdAt: Date.now(),
         status: 'submitted',
-        t2eEntryMoodAnalysis: moodAnalysis.t2eEntry,
-        t2eSentMoodAnalysis: moodAnalysis.t2eSent,
-        polarityEntryMoodAnalysis: 0.7,
+        t2eEntryMoodAnalysis: moodArray[0],
+        t2eSentMoodAnalysis: moodArray[1],
+        polarityEntryMoodAnalysis:moodArray[2],
         //moodAnalysis.polarEntry,
-        polaritySentMoodAnalysis: moodAnalysis.polarSent
+        polaritySentMoodAnalysis:moodArray[3]
         //t2eEntryMoodAnalysis: '',
         //t2eSentMoodAnalysis: '',
         //polarityEntryMoodAnalysis: '',
         //polaritySentMoodAnalysis: ''
-    })
+      })
+    });
+      //console.log(moodAnalysis['t2eEntry']);
+      //plotPieChart(moodAnalysis.t2eEntry);
+      
     console.log('done')
 
 }
@@ -394,19 +399,43 @@ function getJID() {
     const {v4: uuidv4} = require('uuid')
     return uuidv4()
 }
+// Using 'superagent' which will return a promise.
+/*var superagent = require('superagent')
 
-function getMoodAnalysis(text) {
-    var moodDict = {t2eEntry: '', t2eSent:'', polarEntry:'', polarSent:''};
+// This is isn't declared as `async` because it already returns a promise
+function delay() {
+  // `delay` returns a promise
+  return new Promise(function(resolve, reject) {
+    // Only `delay` is able to resolve or reject the promise
+    setTimeout(function() {
+      resolve(42); // After 3 seconds, resolve the promise with value 42
+    }, 3000);
+  });
+}*/
+
+function getMoodAnalysis(text, callback) {
+    //var moodDict = {t2eEntry: '', t2eSent:'', polarEntry:'', polarSent:''};
+    let t2eEntry;
+    let t2eSent;
+    let polarEntry;
+    let polarSent;
     $.post({
         url: "http://127.0.0.1:5000/moodanalysis?text=" + text,
       }).done(function(response) {
         console.log(response);
-        moodDict.t2eEntry = response.data.t2e_entry_analysis;
-        moodDict.t2eSent = response.data.t2e_sent_analysis;
-        moodDict.polarEntry = response.data.polarity_entry_analysis;
-        moodDict.polarSent = response.data.polarity_sent_analysis;
+        //console.log(response.data.t2e_entry_analysis);
+        t2eEntry = response.data.t2e_entry_analysis;
+        t2eSent = response.data.t2e_sent_analysis;
+        polarEntry = response.data.polarity_entry_analysis;
+        polarSent = response.data.polarity_sent_analysis;
+        const moodArray = [JSON.stringify(t2eEntry), JSON.stringify(t2eSent), 
+          JSON.stringify(polarEntry), JSON.stringify(polarSent)];
+        callback(moodArray);
+        //console.log(moodDict);
       });
-      return moodDict;
+      //console.log(moodArray);
+      //return moodArray;
+      // push pls
 }
 
 // submit passes moodDict t2e to this func
