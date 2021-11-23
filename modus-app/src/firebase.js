@@ -183,24 +183,19 @@ export const submitJournalEntry = async (title, text) => {
     const jid = getJID();
     console.log(title);
     //code that depends on mood analysis result
-    await getMoodAnalysis (text, function(moodArray) {
+    await getMoodAnalysis (text, function(moodAnalysis) {
       //code that depends on result
-      console.log(moodArray);
+      console.log(moodAnalysis);
       db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
         jid: jid,
         text: text,
         title: title,
         createdAt: Date.now(),
         status: 'submitted',
-        t2eEntryMoodAnalysis: moodArray[0],
-        t2eSentMoodAnalysis: moodArray[1],
-        polarityEntryMoodAnalysis:moodArray[2],
-        //moodAnalysis.polarEntry,
-        polaritySentMoodAnalysis:moodArray[3]
-        //t2eEntryMoodAnalysis: '',
-        //t2eSentMoodAnalysis: '',
-        //polarityEntryMoodAnalysis: '',
-        //polaritySentMoodAnalysis: ''
+        t2eEntryMoodAnalysis: moodAnalysis['t2eEntry'],
+        t2eSentMoodAnalysis: moodAnalysis['t2eSent'],
+        polarityEntryMoodAnalysis:moodAnalysis['polarEntry'],
+        polaritySentMoodAnalysis:moodAnalysis['polarSent']
       })
     });
       //console.log(moodAnalysis['t2eEntry']);
@@ -415,22 +410,20 @@ function delay() {
 
 function getMoodAnalysis(text, callback) {
     //var moodDict = {t2eEntry: '', t2eSent:'', polarEntry:'', polarSent:''};
-    let t2eEntry;
-    let t2eSent;
-    let polarEntry;
-    let polarSent;
     $.post({
         url: "http://127.0.0.1:5000/moodanalysis?text=" + text,
       }).done(function(response) {
         console.log(response);
         //console.log(response.data.t2e_entry_analysis);
-        t2eEntry = response.data.t2e_entry_analysis;
-        t2eSent = response.data.t2e_sent_analysis;
-        polarEntry = response.data.polarity_entry_analysis;
-        polarSent = response.data.polarity_sent_analysis;
-        const moodArray = [JSON.stringify(t2eEntry), JSON.stringify(t2eSent), 
+        var tentry = response.data.t2e_entry_analysis;
+        var tsent = response.data.t2e_sent_analysis;
+        var pentry = response.data.polarity_entry_analysis;
+        var psent = response.data.polarity_sent_analysis;
+        /* const moodArray = [JSON.stringify(t2eEntry), JSON.stringify(t2eSent), 
           JSON.stringify(polarEntry), JSON.stringify(polarSent)];
-        callback(moodArray);
+        callback(moodArray); */
+        var moodDict = {t2eEntry: tentry, t2eSent: tsent, polarEntry: pentry, polarSent: psent};
+        callback(moodDict);
         //console.log(moodDict);
       });
       //console.log(moodArray);
