@@ -5,8 +5,10 @@ import 'firebase/compat/auth'
 import {firestore} from "firebase-admin";
 import {collection, getDocs} from "firebase/firestore";
 import {doc, getDoc, deleteDoc, updateDoc, deleteField, query, where} from "firebase/firestore";
+import {orderBy, limit } from "firebase/firestore";  
 import { getAuth, deleteUser } from "firebase/auth";
 import { SignOut } from './App';
+import Plotly from 'plotly.js-dist'
 import $ from 'jquery';
 // import * as Plotly from 'plotly.js';
 import { useHistory } from "react-router-dom";
@@ -431,8 +433,22 @@ function getMoodAnalysis(text, callback) {
       // push pls
 }
 
+export const getLatestEntryMoodScores = async () => {
+  var result = [];
+  const q = query(collection(db.collection('users').
+  doc(auth.currentUser.email), 'journalEntries'), orderBy("createdAt", "desc"), limit(1));
+
+  const querySnapshot = await getDocs(q.withConverter(entryConverter))
+  querySnapshot.forEach((doc) => {
+    const entry = doc.data()
+    result.push(entry)
+  //   console.log("search by title: ", title, entry)
+  });
+  return result[0].t2eEntryMoodAnalysis;
+}
+
 // submit passes moodDict t2e to this func
-function plotPieChart(dict_t2e) {
+export const plotPieChart = (dict_t2e) => {
     var data = [{
         values: Object.values(dict_t2e),
         labels: Object.keys(dict_t2e),
@@ -442,5 +458,5 @@ function plotPieChart(dict_t2e) {
         height: 400,
         width: 500
     };
-    // Plotly.newPlot('myDiv', data, layout);
+    Plotly.newPlot('myDiv', data, layout);
 }
