@@ -5,9 +5,18 @@ import "../components/LibraryCard.css"
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateAdapter from '@mui/lab/AdapterDateFns';
+import { makeStyles } from "@mui/styles/";
 import {getJournalEntries, searchByTitle, searchByDate} from "../firebase";
 
+const useStyles = makeStyles({
+  root: {
+    maxWidth: '60rem'
+  },
+})
+
 function Library() {
+  const classes = useStyles();
+
   // const [sort, setSort] = React.useState('dateSaved');
   var [entries, setEntries] = React.useState(null);
   const [date, setDate] = React.useState(new Date());
@@ -55,6 +64,7 @@ function Library() {
 
   return (
     <div
+      className={classes.root}
       style={{margin: "5rem"}}
     >
       <Grid container>
@@ -119,13 +129,13 @@ function Library() {
       
       <Divider style={{width: "65rem"}}/>
       <Grid container direction="column" style={{marginTop: "2rem"}}>
-        <Grid item>
+        <Grid container item>
           {entries && entries.map((entry) => {
-            return (<LibraryCard key={entry.title} entry={entry}/>)
+              return (<LibraryCard key={entry.title} entry={entry}/>)
           })}
         </Grid>
         <Grid container item justifyContent="center">
-          <Pagination count={2} />
+          <Pagination count={1} />
         </Grid>
       </Grid>
     </div>

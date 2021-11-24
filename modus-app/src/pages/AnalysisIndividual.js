@@ -1,8 +1,10 @@
 import React from "react";
 import {Grid, Divider} from '@mui/material'
 import graph_3 from '../imgs/graph_3.png';
+import { useParams } from "react-router";
 
 function AnalysisIndividual() {
+  const { title } = useParams();
     return (
         <div>
           <Grid container style={{margin: '5rem'}}>
@@ -11,7 +13,7 @@ function AnalysisIndividual() {
                   style={{
                     marginTop: "5rem"
                   }}>
-                    Journal Title Analysis
+                    {/* {title} Analysis */}
                 </h1>
                 Date submitted
                 <Divider style={{width: "50rem"}}/>
