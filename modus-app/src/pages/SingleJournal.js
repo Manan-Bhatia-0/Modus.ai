@@ -17,6 +17,13 @@ const useStyles = makeStyles({
   },
 });
 
+function getDate(timestamp) {
+  var date = new Date(timestamp)
+  return ("Created on: "+date.getDate()+
+  "/"+(date.getMonth()+1)+
+  "/"+date.getFullYear())
+}
+
 function SingleJournal() {
   
   const { title } = useParams();
@@ -52,7 +59,7 @@ function SingleJournal() {
                     margin:20
                   }}
                 >
-                  {entry && entry[0].createdAt}
+                  {entry && getDate(entry[0].createdAt)}
                 </Grid>
               </Grid>
             </Grid>

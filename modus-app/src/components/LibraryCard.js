@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 });
 function getDate(timestamp) {
   var date = new Date(timestamp)
-  return ("Created at: "+date.getDate()+
+  return ("Created on: "+date.getDate()+
   "/"+(date.getMonth()+1)+
   "/"+date.getFullYear())
 }
