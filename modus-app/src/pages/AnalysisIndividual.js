@@ -40,10 +40,11 @@ function AnalysisIndividual() {
   const { title } = useParams();
     return (
         <div id='myDiv'>
+          hello
         <body>
-          <script type = "text/javascript">
-          plotPieChartJs();
-          </script>
+          {/* <script type = "text/javascript"> */}
+            {plotPieChartJs()}
+          {/* </script> */}
           </body>
         </div>
       );
