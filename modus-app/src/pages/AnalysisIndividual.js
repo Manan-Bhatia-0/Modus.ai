@@ -19,7 +19,8 @@ import Plotly from 'plotly.js-dist'
 // }
 
 function plotPieChartJs() {
-  var moodScores = getLatestEntryMoodScores();
+  //var moodScores = getLatestEntryMoodScores();
+  var moodScores = {'happy': 0.2, 'sad': 0.5, 'fear': 0.3}
   pieChart(moodScores);
 }
 
