@@ -18,13 +18,33 @@ import Plotly from 'plotly.js-dist'
 //   </div>);
 // }
 
-function plotPieChartJs() {
-  //var moodScores = getLatestEntryMoodScores();
-  var moodScores = {'happy': 0.2, 'sad': 0.5, 'fear': 0.3}
-  pieChart(moodScores);
-}
+function AnalysisIndividual() {
+  const { title } = useParams();
+    return (
+        <div>
+          <head>
+            <script src='./AnalysisIndividualCharts.js'></script>
+            </head>
+          hello
+          {console.log('pie chart created')}
+        <body>
+          <div id='pieChart'>
+            {plotPieChartJs()}
+            <script>
+
+            </script>
+            </div>
+          </body>
+        </div>
+      );
+
+} export default AnalysisIndividual;
 
 function pieChart(dict_t2e) {
+  // var  = document.getElementById("graphDiv");
+  console.log(dict_t2e)
+  console.log(Object.keys(dict_t2e))
+  console.log(Object.values(dict_t2e))
   var data = [{
       values: Object.values(dict_t2e),
       labels: Object.keys(dict_t2e),
@@ -34,23 +54,19 @@ function pieChart(dict_t2e) {
       height: 400,
       width: 500
   };
-  Plotly.newPlot('myDiv', data, layout);
+  Plotly.newPlot('pieChart', data, layout);
 }
 
-function AnalysisIndividual() {
-  const { title } = useParams();
-    return (
-        <div id='myDiv'>
-          hello
-        <body>
-          {/* <script type = "text/javascript"> */}
-            {plotPieChartJs()}
-          {/* </script> */}
-          </body>
-        </div>
-      );
-
-} export default AnalysisIndividual;
+function plotPieChartJs() {
+  var moodScores = getLatestEntryMoodScores();
+  console.log(moodScores)
+  moodScores.then(function(result) {
+    console.log(result)
+    pieChart(result)
+  })
+  // var moodScores = {'happy': 0.2, 'sad': 0.5, 'fear': 0.3}
+  // pieChart(moodScores);
+}
 
 
 {/* <Grid container style={{margin: '5rem'}}>

@@ -444,6 +444,7 @@ export const getLatestEntryMoodScores = async () => {
     result.push(entry)
   //   console.log("search by title: ", title, entry)
   });
+  console.log(result[0].t2eEntryMoodAnalysis)
   return result[0].t2eEntryMoodAnalysis;
 }
 
