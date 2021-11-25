@@ -15,6 +15,12 @@ const useStyles = makeStyles({
     margin: 10
   },
 });
+function getDate(timestamp) {
+  var date = new Date(timestamp)
+  return ("Created at: "+date.getDate()+
+  "/"+(date.getMonth()+1)+
+  "/"+date.getFullYear())
+}
 
 function LibraryCard( {entry} ) {
   const classes = useStyles();
@@ -56,7 +62,7 @@ function LibraryCard( {entry} ) {
                       marginLeft: 50
                     }}
                   >
-                    {entry.createdAt}
+                    {getDate(entry.createdAt)}
                   </Grid>
                 </Grid>
               </Grid>
