@@ -14,7 +14,6 @@ import Login from "./pages/Login.js";
 import CreateAccount from "./pages/CreateAccount.js";
 import Reset from "./pages/ResetPassword.js";
 import AnalysisIndividual from './pages/AnalysisIndividual.js';
-import Logout from "./pages/Logout";
 
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
@@ -84,6 +83,7 @@ const DefaultContainer = () => (
         <Route path="/profile" component={Profile} />
         <Route path="/write" component={JournalEdit} />
         <Route path="/library" component={Library} />
+        <Route path="/individualAnalysis/:title"> <AnalysisIndividual/> </Route>
         <Route path="/analysis" component={Analysis} />
         <Route path="/faq" component={Faq}></Route>
         <Route path='/individual' component={AnalysisIndividual} />
@@ -120,3 +120,4 @@ function save_journal() {
 //     // <button className="sign-out" onClick={() => auth.signOut()}>Sign Out</button>
 // }
 // export default App;
+

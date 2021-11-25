@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from 'react-router-dom'
 import {Grid, Divider} from '@mui/material'
 import graph_3 from '../imgs/graph_3.png';
 import {getLatestEntryMoodScores } from "../firebase";
@@ -36,6 +37,7 @@ function pieChart(dict_t2e) {
 }
 
 function AnalysisIndividual() {
+  const { title } = useParams();
     return (
         <div id='myDiv'>
         <body>

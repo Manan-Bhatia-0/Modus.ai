@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Grid, IconButton } from "@mui/material";
+import { Card, Grid } from "@mui/material";
 import { makeStyles } from '@mui/styles';
-import DeleteIcon from '@mui/icons-material/Delete';
-import {deleteJournalEntry, searchByTitle, getMHResources} from "../firebase";
-import { useHistory, useParams } from "react-router";
+import {searchByTitle} from "../firebase";
+import { useParams } from "react-router";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 
 import MyDocument from '../components/MyDocument.js'
@@ -19,8 +18,7 @@ const useStyles = makeStyles({
 });
 
 function SingleJournal() {
-  const history = useHistory();
-
+  
   const { title } = useParams();
   const [entry, setEntry] = useState('');
   
@@ -33,24 +31,11 @@ function SingleJournal() {
   }, 
   []);
 
-  const handleDeleteEntry = () => {
-    deleteJournalEntry(entry[0].jid)
-    .then(() => {
-      history.push('/library');
-      alert("Journal entry deleted");
-    }) 
-  }
-
   const classes = useStyles();
     return (
       <div>
           <Card className={classes.card}>
           <Grid container direction="column">
-            <Grid container style={{marginBottom: 5}} justifyContent='end'>
-              <IconButton onClick={() => handleDeleteEntry()}>
-                <DeleteIcon/>
-              </IconButton>
-            </Grid>
             <Grid container>
               <Grid container item>
                 <Grid item xs 
@@ -76,7 +61,7 @@ function SingleJournal() {
                     margin:20
                   }}
             >
-              {entry && entry[0].text}
+              {entry && <div  dangerouslySetInnerHTML={{__html: entry[0].text}} />}
             </Grid>
             <Grid item xs 
                   style={{
