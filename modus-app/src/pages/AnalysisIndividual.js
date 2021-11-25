@@ -25,7 +25,7 @@ function AnalysisIndividual() {
           <head>
             <script src='./AnalysisIndividualCharts.js'></script>
             </head>
-          hello
+          Mood Scores
           {console.log('pie chart created')}
         <body>
           <div id='pieChart'>
@@ -51,8 +51,8 @@ function pieChart(dict_t2e) {
       type: 'pie'
   }];
   var layout = {
-      height: 400,
-      width: 500
+      height: 800,
+      width: 1000
   };
   Plotly.newPlot('pieChart', data, layout);
 }
