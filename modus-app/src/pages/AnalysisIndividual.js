@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from 'react-router-dom'
 import {Grid, Divider} from '@mui/material'
 import graph_3 from '../imgs/graph_3.png';
-import {getLatestEntryMoodScores } from "../firebase";
+import {getCurrentEntryMoodScores } from "../firebase";
 import Plotly from 'plotly.js-dist'
 
 // function plotPieChart() {
@@ -29,7 +29,7 @@ function AnalysisIndividual() {
           {console.log('pie chart created')}
         <body>
           <div id='pieChart'>
-            {plotPieChartJs()}
+            {plotPieChartJs(title)}
             <script>
 
             </script>
@@ -57,8 +57,8 @@ function pieChart(dict_t2e) {
   Plotly.newPlot('pieChart', data, layout);
 }
 
-function plotPieChartJs() {
-  var moodScores = getLatestEntryMoodScores();
+function plotPieChartJs(title) {
+  var moodScores = getCurrentEntryMoodScores(title);
   console.log(moodScores)
   moodScores.then(function(result) {
     console.log(result)

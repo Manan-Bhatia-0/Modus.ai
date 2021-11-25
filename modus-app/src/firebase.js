@@ -433,10 +433,10 @@ function getMoodAnalysis(text, callback) {
       // push pls
 }
 
-export const getLatestEntryMoodScores = async () => {
+export const getCurrentEntryMoodScores = async (title) => {
   var result = [];
   const q = query(collection(db.collection('users').
-  doc(auth.currentUser.email), 'journalEntries'), orderBy("createdAt", "desc"), limit(1));
+  doc(auth.currentUser.email), 'journalEntries'), where("title", "==", title), limit(1));
 
   const querySnapshot = await getDocs(q.withConverter(entryConverter))
   querySnapshot.forEach((doc) => {
