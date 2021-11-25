@@ -36,7 +36,7 @@ function Faq() {
         </AccordionDetails>
       </Accordion>
       <Accordion>
-        <AccordionSummary aria-controls="panel2a-content" id="panel2a-header">
+        <AccordionSummary aria-controls="panel3a-content" id="panel3a-header">
           <Typography>How do I see my mood analysis?</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -48,7 +48,7 @@ function Faq() {
         </AccordionDetails>
       </Accordion>
       <Accordion>
-        <AccordionSummary aria-controls="panel2a-content" id="panel2a-header">
+        <AccordionSummary aria-controls="panel4a-content" id="panel4a-header">
           <Typography>What do my mood scores mean?</Typography>
         </AccordionSummary>
         <AccordionDetails>
