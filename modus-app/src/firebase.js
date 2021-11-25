@@ -5,12 +5,13 @@ import 'firebase/compat/auth'
 import {firestore} from "firebase-admin";
 import {collection, getDocs} from "firebase/firestore";
 import {doc, getDoc, deleteDoc, updateDoc, deleteField, query, where} from "firebase/firestore";
+import {orderBy, limit } from "firebase/firestore";  
 import { getAuth, deleteUser } from "firebase/auth";
 import { SignOut } from './App';
+import Plotly from 'plotly.js-dist'
 import $ from 'jquery';
 // import * as Plotly from 'plotly.js';
 import { useHistory } from "react-router-dom";
-import {orderBy} from "firebase/firebase-firestore";
 
 
 const firebaseConfig = {
@@ -182,27 +183,26 @@ const deleteUserData = async () => {
 // the caller must check if entry already exists (check by title?)
 export const submitJournalEntry = async (title, text) => {
     const jid = getJID();
-    //const moodAnalysis = getMoodAnalysis(text);
-    //console.log(title);
-    //console.log(text);
-    //console.log(moodAnalysis['t2eEntry']);
-    //plotPieChart(moodAnalysis.t2eEntry);
-    /* await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
+    console.log(title);
+    //code that depends on mood analysis result
+    await getMoodAnalysis (text, function(moodAnalysis) {
+      //code that depends on result
+      console.log(moodAnalysis);
+      db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
         jid: jid,
         text: text,
         title: title,
         createdAt: Date.now(),
         status: 'submitted',
-        t2eEntryMoodAnalysis: moodAnalysis.t2eEntry,
-        t2eSentMoodAnalysis: moodAnalysis.t2eSent,
-        polarityEntryMoodAnalysis: moodAnalysis.polarEntry,
-        //moodAnalysis.polarEntry,
-        polaritySentMoodAnalysis: moodAnalysis.polarSent
-        //t2eEntryMoodAnalysis: '',
-        //t2eSentMoodAnalysis: '',
-        //polarityEntryMoodAnalysis: '',
-        //polaritySentMoodAnalysis: ''
-    })*/
+        t2eEntryMoodAnalysis: moodAnalysis['t2eEntry'],
+        t2eSentMoodAnalysis: moodAnalysis['t2eSent'],
+        polarityEntryMoodAnalysis:moodAnalysis['polarEntry'],
+        polaritySentMoodAnalysis:moodAnalysis['polarSent']
+      })
+    });
+      //console.log(moodAnalysis['t2eEntry']);
+      //plotPieChart(moodAnalysis.t2eEntry);
+      
     console.log('done')
 
 }
@@ -365,62 +365,6 @@ export const searchByTitle = async (title) => {
     return result
 }
 
-export const sortByTitleAsc = async () => {
-    var result = []
-    const q = query(collection(db.collection('users').
-    doc(auth.currentUser.email), 'journalEntries'), orderBy('title', 'asc'));
-
-    const querySnapshot = await getDocs(q.withConverter(entryConverter))
-    querySnapshot.forEach((doc) => {
-      const entry = doc.data()
-      result.push(entry)
-    //   console.log("search by title: ", title, entry)
-    });
-    return result
-}
-
-export const sortByTitleDesc = async () => {
-    var result = []
-    const q = query(collection(db.collection('users').
-    doc(auth.currentUser.email), 'journalEntries'), orderBy('title', 'desc'));
-
-    const querySnapshot = await getDocs(q.withConverter(entryConverter))
-    querySnapshot.forEach((doc) => {
-      const entry = doc.data()
-      result.push(entry)
-    //   console.log("search by title: ", title, entry)
-    });
-    return result
-}
-
-export const sortByDateAsc = async () => {
-    var result = []
-    const q = query(collection(db.collection('users').
-    doc(auth.currentUser.email), 'journalEntries'), orderBy('createdAt', 'asc'));
-
-    const querySnapshot = await getDocs(q.withConverter(entryConverter))
-    querySnapshot.forEach((doc) => {
-      const entry = doc.data()
-      result.push(entry)
-    //   console.log("search by title: ", title, entry)
-    });
-    return result
-}
-
-export const sortByDateDesc = async () => {
-    var result = []
-    const q = query(collection(db.collection('users').
-    doc(auth.currentUser.email), 'journalEntries'), orderBy('createdAt', 'desc'));
-
-    const querySnapshot = await getDocs(q.withConverter(entryConverter))
-    querySnapshot.forEach((doc) => {
-      const entry = doc.data()
-      result.push(entry)
-    //   console.log("search by title: ", title, entry)
-    });
-    return result
-}
-
 export const searchByDate = async (date) => {
     var millis = getMillisFromDate(date)
     var upperLimit = 86400000 + millis // adding 24 hours
@@ -452,35 +396,59 @@ function getJID() {
     const {v4: uuidv4} = require('uuid')
     return uuidv4()
 }
+// Using 'superagent' which will return a promise.
+/*var superagent = require('superagent')
 
-export const getMoodAnalysis = async (jid, text, title) =>  {
-    var moodDict = {'t2eEntry': {}, 't2eSent': {}, 'polarEntry': {}, 'polarSent': {}}
+// This is isn't declared as `async` because it already returns a promise
+function delay() {
+  // `delay` returns a promise
+  return new Promise(function(resolve, reject) {
+    // Only `delay` is able to resolve or reject the promise
+    setTimeout(function() {
+      resolve(42); // After 3 seconds, resolve the promise with value 42
+    }, 3000);
+  });
+}*/
+
+function getMoodAnalysis(text, callback) {
+    //var moodDict = {t2eEntry: '', t2eSent:'', polarEntry:'', polarSent:''};
     $.post({
         url: "http://127.0.0.1:5000/moodanalysis?text=" + text,
       }).done(function(response) {
         console.log(response);
         //console.log(response.data.t2e_entry_analysis);
-        moodDict['t2eEntry'] = response.data.t2e_entry_analysis;
-        //console.log(moodDict['t2eEntry']);
-        moodDict['t2eSent'] = response.data.t2e_sent_analysis;
-        moodDict['polarEntry'] = response.data.polarity_entry_analysis;
-        moodDict['polarSent'] = response.data.polarity_sent_analysis;
+        var tentry = response.data.t2e_entry_analysis;
+        var tsent = response.data.t2e_sent_analysis;
+        var pentry = response.data.polarity_entry_analysis;
+        var psent = response.data.polarity_sent_analysis;
+        /* const moodArray = [JSON.stringify(t2eEntry), JSON.stringify(t2eSent), 
+          JSON.stringify(polarEntry), JSON.stringify(polarSent)];
+        callback(moodArray); */
+        var moodDict = {t2eEntry: tentry, t2eSent: tsent, polarEntry: pentry, polarSent: psent};
+        callback(moodDict);
+        //console.log(moodDict);
       });
-      await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
-        jid: jid,
-        text: text,
-        title: title,
-        createdAt: Date.now(),
-        status: 'submitted',
-        t2eEntryMoodAnalysis: moodDict['t2eEntry'],
-        t2eSentMoodAnalysis: moodDict['t2eSent'],
-        polarityEntryMoodAnalysis: moodDict['polarEntry'],
-        polaritySentMoodAnalysis: moodDict['polarSent']
-    });
+      //console.log(moodArray);
+      //return moodArray;
+      // push pls
+}
+
+export const getLatestEntryMoodScores = async () => {
+  var result = [];
+  const q = query(collection(db.collection('users').
+  doc(auth.currentUser.email), 'journalEntries'), orderBy("createdAt", "desc"), limit(1));
+
+  const querySnapshot = await getDocs(q.withConverter(entryConverter))
+  querySnapshot.forEach((doc) => {
+    const entry = doc.data()
+    result.push(entry)
+  //   console.log("search by title: ", title, entry)
+  });
+  return result[0].t2eEntryMoodAnalysis;
 }
 
 // submit passes moodDict t2e to this func
-// function plotPieChart(dict_t2e) {
+// export const plotPieChart = (dict_t2e) => {
 //     var data = [{
 //         values: Object.values(dict_t2e),
 //         labels: Object.keys(dict_t2e),
