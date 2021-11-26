@@ -80,7 +80,7 @@ function LibraryCard( {entry} ) {
               <Grid container justifyContent="space-between">
                 <Grid item xs 
                       style={{
-                        fontSize: 16,
+                        fontSize: 18,
                         marginTop: 20
                       }}
                       className={entry.status === "saved" ? classes.savedCard : classes.analysisCard}
@@ -91,10 +91,10 @@ function LibraryCard( {entry} ) {
                 <Grid item xs 
                   style={{
                     marginTop: 20,
-                    marginLeft: 120
+                    marginLeft: 100
                   }}
                 >
-                  <Link to={`/individualAnalysis/${entry.title}`} style={{ textDecoration: 'none', color: '#474747' }}>
+                  <Link to={`/individualAnalysis/${entry.title}`} style={{ color: '#474747' }}>
                     Analysis
                   </Link>
                 </Grid> 
