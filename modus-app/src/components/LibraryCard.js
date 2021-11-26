@@ -91,7 +91,7 @@ function LibraryCard( {entry} ) {
                 <Grid item xs 
                   style={{
                     marginTop: 20,
-                    marginLeft: 120
+                    marginLeft: 100
                   }}
                 >
                   <Link to={`/individualAnalysis/${entry.title}`} style={{ textDecoration: 'none', color: '#474747' }}>
