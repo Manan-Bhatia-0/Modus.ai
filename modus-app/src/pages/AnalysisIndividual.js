@@ -24,7 +24,12 @@ function AnalysisIndividual() {
           <head>
             <script src='./AnalysisIndividualCharts.js'></script>
             </head>
-          Mood Scores
+            <h1
+            style={{
+              marginTop: "0.5px"
+            }}>
+            Mood Analysis for <b>{title}</b>
+          </h1>
           {console.log('pie chart created')}
         <body>
           <div id='pieChart'>
