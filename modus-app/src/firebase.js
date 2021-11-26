@@ -445,6 +445,7 @@ export const getCurrentEntryMoodScores = async (title) => {
     return result[0].t2eEntryMoodAnalysis;
 }
 
+// aggregated mood scores
 export const getAllMoodScores = async () => {
     var result = []
     var sumAngry = 0.0
@@ -474,4 +475,98 @@ export const getAllMoodScores = async () => {
     console.log(result)
     console.log("aggregated scores: " + JSON.stringify(aggregatedScores))
     return aggregatedScores
+}
+
+// aggregated mood scores over the last 7 days
+export const getOverallMoodScores7 = async () => {
+    var result = []
+    var sumAngry = 0.0
+    var sumFear = 0.0
+    var sumHappy = 0.0
+    var sumSad = 0.0
+    var sumSurprise = 0.0
+    const q = query(collection(db.collection('users').
+        doc(auth.currentUser.email), 'journalEntries'), orderBy("createdAt", "desc"), where('status', '==', 'submitted'), limit(7));
+
+    const querySnapshot = await getDocs(q.withConverter(entryConverter))
+    querySnapshot.forEach((doc) => {
+        const entry = doc.data()
+        result.push(entry.t2eEntryMoodAnalysis)
+        sumAngry += entry.t2eEntryMoodAnalysis['Angry']
+        sumFear += entry.t2eEntryMoodAnalysis['Fear']
+        sumHappy += entry.t2eEntryMoodAnalysis['Happy']
+        sumSad += entry.t2eEntryMoodAnalysis['Sad']
+        sumSurprise += entry.t2eEntryMoodAnalysis['Surprise']
+    });
+    var aggregatedScores = {}
+    aggregatedScores["Angry"] = sumAngry / result.length
+    aggregatedScores["Fear"] = sumSad / result.length
+    aggregatedScores["Happy"] = sumHappy / result.length
+    aggregatedScores["Sad"] = sumSad / result.length
+    aggregatedScores["Surprise"] = sumSurprise / result.length
+    console.log(result)
+    console.log("aggregated scores: " + JSON.stringify(aggregatedScores))
+    return aggregatedScores
+}
+
+// aggregated mood scores over the last 30 days
+export const getOverallMoodScores30 = async () => {
+    var result = []
+    var sumAngry = 0.0
+    var sumFear = 0.0
+    var sumHappy = 0.0
+    var sumSad = 0.0
+    var sumSurprise = 0.0
+    const q = query(collection(db.collection('users').
+        doc(auth.currentUser.email), 'journalEntries'), orderBy("createdAt", "desc"), where('status', '==', 'submitted'), limit(30));
+
+    const querySnapshot = await getDocs(q.withConverter(entryConverter))
+    querySnapshot.forEach((doc) => {
+        const entry = doc.data()
+        result.push(entry.t2eEntryMoodAnalysis)
+        sumAngry += entry.t2eEntryMoodAnalysis['Angry']
+        sumFear += entry.t2eEntryMoodAnalysis['Fear']
+        sumHappy += entry.t2eEntryMoodAnalysis['Happy']
+        sumSad += entry.t2eEntryMoodAnalysis['Sad']
+        sumSurprise += entry.t2eEntryMoodAnalysis['Surprise']
+    });
+    var aggregatedScores = {}
+    aggregatedScores["Angry"] = sumAngry / result.length
+    aggregatedScores["Fear"] = sumSad / result.length
+    aggregatedScores["Happy"] = sumHappy / result.length
+    aggregatedScores["Sad"] = sumSad / result.length
+    aggregatedScores["Surprise"] = sumSurprise / result.length
+    console.log(result)
+    console.log("aggregated scores: " + JSON.stringify(aggregatedScores))
+    return aggregatedScores
+}
+
+// all raw scores over the last 7 days
+export const getAllMoodScores7 = async () => {
+    var result = []
+    const q = query(collection(db.collection('users').
+        doc(auth.currentUser.email), 'journalEntries'), orderBy("createdAt", "desc"), where('status', '==', 'submitted'), limit(7));
+
+    const querySnapshot = await getDocs(q.withConverter(entryConverter))
+    querySnapshot.forEach((doc) => {
+        const entry = doc.data()
+        result.push(entry.t2eEntryMoodAnalysis)
+    });
+    console.log(result)
+    return result
+}
+
+// All raw scores over the last 30 days
+export const getAllMoodScores30 = async () => {
+    var result = []
+    const q = query(collection(db.collection('users').
+        doc(auth.currentUser.email), 'journalEntries'), orderBy("createdAt", "desc"), where('status', '==', 'submitted'), limit(30));
+
+    const querySnapshot = await getDocs(q.withConverter(entryConverter))
+    querySnapshot.forEach((doc) => {
+        const entry = doc.data()
+        result.push(entry.t2eEntryMoodAnalysis)
+    });
+    console.log(result)
+    return result
 }
