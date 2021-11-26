@@ -11,6 +11,7 @@ import {
 } from "../firebase";
 import { Link, useHistory } from "react-router-dom";
 import { confirm } from "react-confirm-box";
+import { StyledEngineProvider } from "@mui/styled-engine";
 
 const optionsWithLabelChange = {
   closeOnOverlayClick: false,
@@ -42,8 +43,6 @@ function JournalEdit() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    submitJournalEntry(myValue, textfield);
-    history.push('/individualAnalysis/${entry.title}');
   };
 
   return (
@@ -85,7 +84,7 @@ function JournalEdit() {
             </button>
             <button
               className="submit"
-              onClick={() => handleSubmit()}
+              onClick={() => submitJournalEntry(myValue, textfield)}
             >
               Submit
             </button>
