@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import LibraryCard from "../components/LibraryCard";
-import {Button, Grid, Divider, Pagination, Select, MenuItem, InputLabel, TextField} from '@mui/material'
+// import {Button, Grid, Divider, Pagination, Select, MenuItem, InputLabel, TextField} from '@mui/material'
+import {Button, Grid, Divider, Pagination, TextField} from '@mui/material'
 import "../components/LibraryCard.css"
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -40,7 +41,7 @@ function Library() {
     const searchResult = searchByDate(newValue);
     searchResult.then(function(result) {
       console.log(result);
-      if (result.length == 0) {
+      if (result.length === 0) {
         alert("No results found! Please try another journal entry.");
       } else {
         setEntries(result);
@@ -54,7 +55,7 @@ function Library() {
     const searchResult = searchByTitle(searchField);
     searchResult.then(function(result) {
       console.log(result);
-      if (result.length == 0) {
+      if (result.length === 0) {
         alert("No results found! Please try another journal entry.");
       } else {
         setEntries(result);
@@ -67,7 +68,7 @@ function Library() {
       className={classes.root}
       style={{margin: "5rem"}}
     >
-      <Grid container>
+      <Grid container justifyContent="space-between">
         <Grid item xs={5}>
           <h1 
             style={{
@@ -76,7 +77,7 @@ function Library() {
               Library
           </h1>
         </Grid>
-        <Grid item xs={3} style={{
+        <Grid item xs={2} style={{
             marginTop: "5rem"
           }}
         >
@@ -90,7 +91,7 @@ function Library() {
             />
           </LocalizationProvider>
         </Grid>
-        <Grid item xs={4} style={{marginTop:"5rem"}}>
+        <Grid item xs={4} style={{marginTop:"4rem"}}>
             <input
                 type="text"
                 id="header-search"
@@ -101,7 +102,6 @@ function Library() {
               type ="submit" 
               variant="outlined"
               onClick={handleSearchSubmit}
-              style={{marginBottom: "5px"}}
             >
               Search
             </Button>
