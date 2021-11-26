@@ -8,26 +8,6 @@ import Plotly from 'plotly.js-dist'
 import { useParams } from 'react-router-dom'
 
 function Analysis() {
-  // const { title } = useParams();
-  // return (
-  //     <div>
-  //       <head>
-  //         <script src='./AnalysisIndividualCharts.js'></script>
-  //         </head>
-  //       Overall Mood Score
-  //       {console.log('pie chart created')}
-  //     <body>
-  //       <div id='pieChartAvg'>
-  //         {plotPieChartJs()}
-  //         <script>
-
-  //         </script>
-  //         </div>
-  //       </body>
-  //     </div>
-  //   );
-
-
   return (
     <div>
       <Grid container style={{ margin: '5rem' }}>
@@ -70,7 +50,7 @@ function pieChart(dict_t2e) {
     type: 'bar'
   }];
   var layout = {
-    height: 800,
+    height: 700,
     width: 1000
   };
   Plotly.newPlot('pieChartAvg', data, layout);
