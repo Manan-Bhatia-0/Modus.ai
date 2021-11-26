@@ -48,6 +48,8 @@ function pieChart(dict_t2e) {
   var data = [{
       values: Object.values(dict_t2e),
       labels: Object.keys(dict_t2e),
+      marker: {colors: ['rgba(222,45,38,0.8)', 'rgb(26, 118, 255)', 
+                     'rgb(82,212,82)', 'rgb(254,222,0)', 'rgb(154,70,61)']},
       type: 'pie'
   }];
   var layout = {
@@ -64,8 +66,6 @@ function plotPieChartJs(title) {
     console.log(result)
     pieChart(result)
   })
-  // var moodScores = {'happy': 0.2, 'sad': 0.5, 'fear': 0.3}
-  // pieChart(moodScores);
 }
 
 

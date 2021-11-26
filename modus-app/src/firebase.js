@@ -8,9 +8,7 @@ import { doc, getDoc, deleteDoc, updateDoc, deleteField, query, where } from "fi
 import { orderBy, limit } from "firebase/firestore";
 import { getAuth, deleteUser } from "firebase/auth";
 import { SignOut } from './App';
-import Plotly from 'plotly.js-dist'
 import $ from 'jquery';
-// import * as Plotly from 'plotly.js';
 import { useHistory } from "react-router-dom";
 
 
