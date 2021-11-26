@@ -42,8 +42,8 @@ values.forEach(function(value) {
 var data = [{
     x: Object.keys(dict_t2e),
     y: y1,
-    marker: {color: ['rgba(222,45,38,0.8)', 'rgb(26, 118, 255)', 
-                     'rgb(82,212,82)', 'rgb(254,222,0)', 'rgb(154,70,61)']},
+    marker: {color: ['rgb(93, 87, 107)', 'rgb(183, 195, 243)', 
+                     'rgb(180,248,200)', 'rgb(255,244,189)', 'rgb(255,174,188)']},
     type: 'bar'
 }];
 var layout = {
