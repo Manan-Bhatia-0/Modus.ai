@@ -1,7 +1,6 @@
 import React from "react";
 import { useParams } from 'react-router-dom'
-import {Grid, Divider} from '@mui/material'
-import graph_3 from '../imgs/graph_3.png';
+import {Grid} from '@mui/material'
 import {getCurrentEntryMoodScores } from "../firebase";
 import Plotly from 'plotly.js-dist'
 
@@ -67,22 +66,3 @@ function plotPieChartJs(title) {
     pieChart(result)
   })
 }
-
-
-{/* <Grid container style={{margin: '5rem'}}>
-<Grid item xs={10}>
-    <h1 
-      style={{
-        marginTop: "5rem"
-      }}>
-        Journal Title Analysis
-    </h1>
-    Date submitted
-    <Divider style={{width: "50rem"}}/>
-    <Grid container item justifyContent="center">
-      <Grid item>
-        <img style={{width: 400, marginTop: 40}} src={graph_3} alt="graph_3" />
-      </Grid>
-    </Grid>
-  </Grid>
-</Grid> */}

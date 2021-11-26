@@ -3,22 +3,31 @@ import { Card, Grid, IconButton } from "@mui/material";
 import { makeStyles } from '@mui/styles';
 import "./LibraryCard.css";
 import DeleteIcon from '@mui/icons-material/Delete';
-import {deleteJournalEntry, searchByTitle, getMHResources} from "../firebase";
-import { useHistory, useParams } from "react-router";
+import {deleteJournalEntry} from "../firebase";
+import { useHistory } from "react-router";
 import { Link } from 'react-router-dom';
-import Button from "@restart/ui/esm/Button";
+import CircleIcon from '@mui/icons-material/Circle';
 
 const useStyles = makeStyles({
   card: {
-    width: 275,
+    width: 300,
     padding: 20,
     margin: 10
   },
+  analysisCard: {
+    color: '#85A5DA'
+  },
+  savedCard: {
+    color: '#C4C4C4'
+  },
+  circle: {
+    fontSize: "5px"
+  }
 });
 function getDate(timestamp) {
   var date = new Date(timestamp)
-  return ("Created on: "+date.getDate()+
-  "/"+(date.getMonth()+1)+
+  return ((date.getMonth()+1) +
+  "/"+date.getDate()+
   "/"+date.getFullYear())
 }
 
@@ -37,13 +46,14 @@ function LibraryCard( {entry} ) {
         <div>
           <Card className={classes.card}>
             <Grid container direction="column">
-              <Grid container>
-                <Grid item container justifyContent='end'>
-                  <IconButton onClick={() => handleDeleteEntry()}>
-                    <DeleteIcon/>
-                  </IconButton>
+                <Grid container justifyContent="flex-end">
+                  <Grid item>
+                    <IconButton onClick={() => handleDeleteEntry()}>
+                      <DeleteIcon/>
+                    </IconButton>
+                  </Grid>
                 </Grid>
-                <Grid container item>
+                <Grid container item justifyContent="space-between"> 
                   <Link to={`/journal/${entry.title}`} style={{ textDecoration: 'none', color: '#474747' }}>
                     <Grid item xs 
                       style={{
@@ -56,29 +66,34 @@ function LibraryCard( {entry} ) {
                   </Link>
                   <Grid item 
                     style={{
-                      fontSize: 18,
+                      fontSize: 14,
                       marginTop: 6,
                       marginBottom: 10,
-                      marginLeft: 50
                     }}
                   >
                     {getDate(entry.createdAt)}
                   </Grid>
                 </Grid>
-              </Grid>
               <Grid item xs>
                 <div  dangerouslySetInnerHTML={{__html: entry.text}} />
               </Grid>
-              <Grid container>
+              <Grid container justifyContent="space-between">
                 <Grid item xs 
                       style={{
                         fontSize: 16,
                         marginTop: 20
                       }}
+                      className={entry.status === "saved" ? classes.savedCard : classes.analysisCard}
                 >
+                  {/* <CircleIcon style={{ fontSize: 8 }} /> */}
                   {entry.status}
                 </Grid>
-                <Grid item xs style={{width: 50, height:5}}>
+                <Grid item xs 
+                  style={{
+                    marginTop: 20,
+                    marginLeft: 120
+                  }}
+                >
                   <Link to={`/individualAnalysis/${entry.title}`} style={{ textDecoration: 'none', color: '#474747' }}>
                     Analysis
                   </Link>
