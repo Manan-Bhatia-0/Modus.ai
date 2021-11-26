@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import {deleteJournalEntry} from "../firebase";
 import { useHistory } from "react-router";
 import { Link } from 'react-router-dom';
+import CircleIcon from '@mui/icons-material/Circle';
 
 const useStyles = makeStyles({
   card: {
@@ -13,11 +14,20 @@ const useStyles = makeStyles({
     padding: 20,
     margin: 10
   },
+  analysisCard: {
+    color: '#85A5DA'
+  },
+  savedCard: {
+    color: '#C4C4C4'
+  },
+  circle: {
+    fontSize: "5px"
+  }
 });
 function getDate(timestamp) {
   var date = new Date(timestamp)
-  return ("Created on: "+date.getDate()+
-  "/"+(date.getMonth()+1)+
+  return ((date.getMonth()+1) +
+  "/"+date.getDate()+
   "/"+date.getFullYear())
 }
 
@@ -73,7 +83,9 @@ function LibraryCard( {entry} ) {
                         fontSize: 16,
                         marginTop: 20
                       }}
+                      className={entry.status === "saved" ? classes.savedCard : classes.analysisCard}
                 >
+                  {/* <CircleIcon style={{ fontSize: 8 }} /> */}
                   {entry.status}
                 </Grid>
                 <Grid item xs 
