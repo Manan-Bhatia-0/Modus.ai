@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   card: {
-    width: 275,
+    width: 300,
     padding: 20,
     margin: 10
   },
@@ -36,13 +36,14 @@ function LibraryCard( {entry} ) {
         <div>
           <Card className={classes.card}>
             <Grid container direction="column">
-              <Grid container>
-                <Grid item container justifyContent='end'>
-                  <IconButton onClick={() => handleDeleteEntry()}>
-                    <DeleteIcon/>
-                  </IconButton>
+                <Grid container justifyContent="flex-end">
+                  <Grid item>
+                    <IconButton onClick={() => handleDeleteEntry()}>
+                      <DeleteIcon/>
+                    </IconButton>
+                  </Grid>
                 </Grid>
-                <Grid container item>
+                <Grid container item justifyContent="space-between"> 
                   <Link to={`/journal/${entry.title}`} style={{ textDecoration: 'none', color: '#474747' }}>
                     <Grid item xs 
                       style={{
@@ -55,20 +56,18 @@ function LibraryCard( {entry} ) {
                   </Link>
                   <Grid item 
                     style={{
-                      fontSize: 18,
+                      fontSize: 14,
                       marginTop: 6,
                       marginBottom: 10,
-                      marginLeft: 50
                     }}
                   >
                     {getDate(entry.createdAt)}
                   </Grid>
                 </Grid>
-              </Grid>
               <Grid item xs>
                 <div  dangerouslySetInnerHTML={{__html: entry.text}} />
               </Grid>
-              <Grid container>
+              <Grid container justifyContent="space-between">
                 <Grid item xs 
                       style={{
                         fontSize: 16,
@@ -77,7 +76,12 @@ function LibraryCard( {entry} ) {
                 >
                   {entry.status}
                 </Grid>
-                <Grid item xs style={{width: 50, height:5}}>
+                <Grid item xs 
+                  style={{
+                    marginTop: 20,
+                    marginLeft: 120
+                  }}
+                >
                   <Link to={`/individualAnalysis/${entry.title}`} style={{ textDecoration: 'none', color: '#474747' }}>
                     Analysis
                   </Link>
