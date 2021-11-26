@@ -1,7 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { Form, Button, Card, Alert } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { auth, sendPasswordResetEmail } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./ResetPassword.css";

@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { Form, Button, Card, Alert } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import {
   auth,
   signInWithEmailAndPassword,

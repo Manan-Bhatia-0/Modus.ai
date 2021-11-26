@@ -3,10 +3,9 @@ import { Card, Grid, IconButton } from "@mui/material";
 import { makeStyles } from '@mui/styles';
 import "./LibraryCard.css";
 import DeleteIcon from '@mui/icons-material/Delete';
-import {deleteJournalEntry, searchByTitle, getMHResources} from "../firebase";
-import { useHistory, useParams } from "react-router";
+import {deleteJournalEntry} from "../firebase";
+import { useHistory } from "react-router";
 import { Link } from 'react-router-dom';
-import Button from "@restart/ui/esm/Button";
 
 const useStyles = makeStyles({
   card: {

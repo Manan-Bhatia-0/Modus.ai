@@ -1,8 +1,4 @@
 import React from "react";
-import { useEffect, useState, useRef } from "react";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-//import "./navbar.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { handleLogout } from "../firebase";
 import { useHistory, useLocation } from "react-router";
@@ -107,7 +103,7 @@ function NavBar() {
               key={item.text}
               button
               onClick={() => history.push(item.path)}
-              className={location.pathname == item.path ? classes.active : classes.linkText}
+              className={location.pathname === item.path ? classes.active : classes.linkText}
             >
                 <ListItemIcon className={classes.linkText}>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
