@@ -445,7 +445,7 @@ export const getCurrentEntryMoodScores = async (title) => {
     return result[0].t2eEntryMoodAnalysis;
 }
 
-// aggregated mood scores
+// get aggregated mood scores and set overall score in firebase
 export const getAllMoodScores = async () => {
     var result = []
     var sumAngry = 0.0
@@ -474,6 +474,11 @@ export const getAllMoodScores = async () => {
     aggregatedScores["Surprise"] = sumSurprise / result.length
     console.log(result)
     console.log("aggregated scores: " + JSON.stringify(aggregatedScores))
+
+    db.collection('users').doc(auth.currentUser.email).set({
+        overallAnalysis: aggregatedScores,
+        happiness: aggregatedScores['Happy']
+    })
     return aggregatedScores
 }
 

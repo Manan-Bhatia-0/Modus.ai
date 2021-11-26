@@ -51,7 +51,27 @@ function pieChart(dict_t2e) {
   }];
   var layout = {
     height: 700,
-    width: 1000
+    width: 1000,
+    xaxis: {
+      title: {
+        text: 'Moods',
+        font: {
+          family: 'Courier New, monospace',
+          size: 22,
+          color: '#7f7f7f'
+        }
+      },
+    },
+    yaxis: {
+      title: {
+        text: 'Score (%)',
+        font: {
+          family: 'Courier New, monospace',
+          size: 22,
+          color: '#7f7f7f'
+        }
+      }
+    }
   };
   Plotly.newPlot('pieChartAvg', data, layout);
 }
