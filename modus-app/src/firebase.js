@@ -2,10 +2,10 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore'
 import 'firebase/compat/auth'
-import {firestore} from "firebase-admin";
-import {collection, getDocs} from "firebase/firestore";
-import {doc, getDoc, deleteDoc, updateDoc, deleteField, query, where} from "firebase/firestore";
-import {orderBy, limit } from "firebase/firestore";  
+import { firestore } from "firebase-admin";
+import { collection, getDocs } from "firebase/firestore";
+import { doc, getDoc, deleteDoc, updateDoc, deleteField, query, where } from "firebase/firestore";
+import { orderBy, limit } from "firebase/firestore";
 import { getAuth, deleteUser } from "firebase/auth";
 import { SignOut } from './App';
 import Plotly from 'plotly.js-dist'
@@ -15,29 +15,29 @@ import { useHistory } from "react-router-dom";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDXtGR1FNQz9zxOk79Ikkqzg9j8IYi2mh0",
-  authDomain: "modusdb-4d7ed.firebaseapp.com",
-  projectId: "modusdb-4d7ed",
-  storageBucket: "modusdb-4d7ed.appspot.com",
-  messagingSenderId: "738850813503",
-  appId: "1:738850813503:web:e7e97619a1eaa6510daa8a",
-  measurementId: "G-84F8J1Y1VY",
-  // apiKey: "AIzaSyCzMuDRDmQMFsvabbAuOzi_ca8wz-fdjcY",
-  // authDomain: "modusai.firebaseapp.com",
-  // databaseURL: "https://modusai-default-rtdb.firebaseio.com",
-  // projectId: "modusai",
-  // storageBucket: "modusai.appspot.com",
-  // messagingSenderId: "986175331521",
-  // appId: "1:986175331521:web:1da20cf1eab28207060840",
-  // measurementId: "G-JCXJ2W0FTL",
+    apiKey: "AIzaSyDXtGR1FNQz9zxOk79Ikkqzg9j8IYi2mh0",
+    authDomain: "modusdb-4d7ed.firebaseapp.com",
+    projectId: "modusdb-4d7ed",
+    storageBucket: "modusdb-4d7ed.appspot.com",
+    messagingSenderId: "738850813503",
+    appId: "1:738850813503:web:e7e97619a1eaa6510daa8a",
+    measurementId: "G-84F8J1Y1VY",
+    // apiKey: "AIzaSyCzMuDRDmQMFsvabbAuOzi_ca8wz-fdjcY",
+    // authDomain: "modusai.firebaseapp.com",
+    // databaseURL: "https://modusai-default-rtdb.firebaseio.com",
+    // projectId: "modusai",
+    // storageBucket: "modusai.appspot.com",
+    // messagingSenderId: "986175331521",
+    // appId: "1:986175331521:web:1da20cf1eab28207060840",
+    // measurementId: "G-JCXJ2W0FTL",
 };
 
 
 let app;
 if (!firebase.apps.length) {
     app = firebase.initializeApp(firebaseConfig);
-}else {
-   app = firebase.app(); // if already initialized, use that one
+} else {
+    app = firebase.app(); // if already initialized, use that one
 }
 // const app = firebase.initializeApp(firebaseConfig);
 let currentUser;
@@ -71,40 +71,40 @@ export const signInWithGoogle = async () => {
 };
 
 export const signInWithFacebook = async () => {
-  try {
-    const res = await auth.signInWithPopup(facebookProvider);
-    const user = res.user;
-    const query = await db
-      .collection("users")
-      .where("uid", "==", user.uid)
-      .get();
-    if (query.docs.length === 0) {
-      await db.collection("users").add({
-        uid: user.uid,
-        name: user.displayName,
-        authProvider: "facebook",
-        email: user.email,
-      });
+    try {
+        const res = await auth.signInWithPopup(facebookProvider);
+        const user = res.user;
+        const query = await db
+            .collection("users")
+            .where("uid", "==", user.uid)
+            .get();
+        if (query.docs.length === 0) {
+            await db.collection("users").add({
+                uid: user.uid,
+                name: user.displayName,
+                authProvider: "facebook",
+                email: user.email,
+            });
+        }
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
     }
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
 };
 
 export const signInWithEmailAndPassword = async (email, password) => {
-  try {
-    const res = await auth.signInWithEmailAndPassword(email, password);
-       currentUser = res.user;
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
+    try {
+        const res = await auth.signInWithEmailAndPassword(email, password);
+        currentUser = res.user;
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
 };
 
 //add passwordconfirm to the state
 export const registerWithEmailAndPassword = async (name, email, password) => {
-  try {
+    try {
         const res = await auth.createUserWithEmailAndPassword(email, password);
         const user = res.user;
         currentUser = user;
@@ -137,46 +137,46 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
 };
 
 export const sendPasswordResetEmail = async (email) => {
-  try {
-    await auth.sendPasswordResetEmail(email);
-    alert("Password reset link sent!");
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
+    try {
+        await auth.sendPasswordResetEmail(email);
+        alert("Password reset link sent!");
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
 };
 
 export const handleLogout = async (email) => {
-  try {
-    await auth.signOut();
-    alert("Signed Out!");
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
+    try {
+        await auth.signOut();
+        alert("Signed Out!");
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
 };
 
 export const deleteCurrentUser = async () => {
     deleteUserData()
     deleteUser(auth.currentUser).then(() => {
-       console.log('deleted user')
-      }).catch((error) => {
+        console.log('deleted user')
+    }).catch((error) => {
         console.log(error)
-      });  
+    });
 }
 
 // This function must be called to avoid OOM errors
 const deleteUserData = async () => {
-        // deleting files in batch
-        // var batch = firebase.firestore().batch()
-    
-        // await firebase.firestore().collection('users').doc(auth.currentUser.email).collection('journalEntries').getDocs().then(val => {
-        //     val.map((val) => {
-        //         batch.delete(val)
-        //     })
-        //     batch.commit()
-        // })
-        await deleteDoc(doc(db, 'users', auth.currentUser.email));  
+    // deleting files in batch
+    // var batch = firebase.firestore().batch()
+
+    // await firebase.firestore().collection('users').doc(auth.currentUser.email).collection('journalEntries').getDocs().then(val => {
+    //     val.map((val) => {
+    //         batch.delete(val)
+    //     })
+    //     batch.commit()
+    // })
+    await deleteDoc(doc(db, 'users', auth.currentUser.email));
 }
 
 // This is a generic function.
@@ -185,32 +185,31 @@ export const submitJournalEntry = async (title, text) => {
     const jid = getJID();
     console.log(title);
     //code that depends on mood analysis result
-    await getMoodAnalysis (text, function(moodAnalysis) {
-      //code that depends on result
-      console.log(moodAnalysis);
-      db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
-        jid: jid,
-        text: text,
-        title: title,
-        createdAt: Date.now(),
-        status: 'submitted',
-        t2eEntryMoodAnalysis: moodAnalysis['t2eEntry'],
-        t2eSentMoodAnalysis: moodAnalysis['t2eSent'],
-        polarityEntryMoodAnalysis:moodAnalysis['polarEntry'],
-        polaritySentMoodAnalysis:moodAnalysis['polarSent']
-      })
+    await getMoodAnalysis(text, function (moodAnalysis) {
+        //code that depends on result
+        console.log(moodAnalysis);
+        db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
+            jid: jid,
+            text: text,
+            title: title,
+            createdAt: Date.now(),
+            status: 'submitted',
+            t2eEntryMoodAnalysis: moodAnalysis['t2eEntry'],
+            t2eSentMoodAnalysis: moodAnalysis['t2eSent'],
+            polarityEntryMoodAnalysis: moodAnalysis['polarEntry'],
+            polaritySentMoodAnalysis: moodAnalysis['polarSent']
+        })
     });
-      //console.log(moodAnalysis['t2eEntry']);
-      //plotPieChart(moodAnalysis.t2eEntry);
-      
+    //console.log(moodAnalysis['t2eEntry']);
+    //plotPieChart(moodAnalysis.t2eEntry);
+    // getAllMoodScores()
     console.log('done')
-
 }
 
 export const saveJournalEntry = async (title, text) => {
     const jid = getJID();
     await db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).set({
-        jid: jid, 
+        jid: jid,
         text: text,
         title: title,
         createdAt: Date.now(),
@@ -227,15 +226,15 @@ export const saveJournalEntry = async (title, text) => {
 // TODO: Add journal id as argument
 export const deleteJournalEntry = async (jid) => {
     const querySnapshot = db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).get()
-    .then(function(result) {
-        //console.log(result);
-        result.ref.delete();
-     })
+        .then(function (result) {
+            //console.log(result);
+            result.ref.delete();
+        })
     //  .then(() => {
     //     window.location.reload(false);
     //  })
-     
-     console.log("deleted journal entry!!")
+
+    console.log("deleted journal entry!!")
 }
 
 // TODO: post results onto MHR component
@@ -244,39 +243,39 @@ export const getrecommendedMHResources = async (resourceType) => {
     const score = -1;
     var resources = [];
     const querySnapshot = db.collection('users').doc(auth.currentUser.email).collection('journalEntries').orderByChild('createdAt')
-    .limitToLast(1).get()
-    .then(function(result) {
-        console.log(result);
-        score = parseInt(result['polarityEntryMoodAnalysis']);
-     })
-     if (score > 0.90) {
-        const querySnapshot = db.collection('mentalHealthResources').doc('Mindfulness').get()
-        .then(function(result) {
-         console.log(result); 
-         resources.push(result);
+        .limitToLast(1).get()
+        .then(function (result) {
+            console.log(result);
+            score = parseInt(result['polarityEntryMoodAnalysis']);
         })
-  
+    if (score > 0.90) {
+        const querySnapshot = db.collection('mentalHealthResources').doc('Mindfulness').get()
+            .then(function (result) {
+                console.log(result);
+                resources.push(result);
+            })
 
-    } else if(score > 0.65) {
+
+    } else if (score > 0.65) {
         const querySnapshot = db.collection('Anxiety').doc('Mindfulness').get()
-        .then(function(result) {
-            console.log(result);
-            resources.push(result);
-         })
+            .then(function (result) {
+                console.log(result);
+                resources.push(result);
+            })
 
-    }else if (score > 0.35) {
+    } else if (score > 0.35) {
         const querySnapshot = db.collection('Depression').doc('Mindfulness').get()
-        .then(function(result) {
-            console.log(result);
-            resources.push(result);
-         })
+            .then(function (result) {
+                console.log(result);
+                resources.push(result);
+            })
 
     } else {
         const querySnapshot = db.collection('Suicide').doc('Mindfulness').get()
-        .then(function(result) {
-            console.log(result);
-            resources.push(result);
-         })
+            .then(function (result) {
+                console.log(result);
+                resources.push(result);
+            })
     }
     return resources;
 }
@@ -285,30 +284,30 @@ export const getrecommendedMHResources = async (resourceType) => {
 // TODO:  connect title and links to display on UI
 // TODO: determine what type of mental health resource needed based on mood score
 export const getMHResources = async (resourceType) => {
-    const querySnapshot = db.collection('mentalHealthResources').doc(resourceType).get().then(function(result) {
+    const querySnapshot = db.collection('mentalHealthResources').doc(resourceType).get().then(function (result) {
         const data = result.data();
         const title = data['Title'];
         const link = data['Link'];
-        console.log(title + ": " + link);    
-     })
-     console.log("received resources")
+        console.log(title + ": " + link);
+    })
+    console.log("received resources")
 }
 
 export const getJournalEntries = async () => {
     var journalEntries = [];
     const querySnapshot = await getDocs(collection(db.collection('users').
         doc(auth.currentUser.email), 'journalEntries').withConverter(entryConverter));
-    
-    querySnapshot.forEach((doc) => { 
-    const entry = doc.data();
-    journalEntries.push(entry)
-});
+
+    querySnapshot.forEach((doc) => {
+        const entry = doc.data();
+        journalEntries.push(entry)
+    });
     return journalEntries;
 }
 
 class JournalEntry {
-    constructor (jid, text, title, createdAt, status, t2eEntryMoodAnalysis,
-         t2eSentMoodAnalysis, polarityEntryMoodAnalysis, polaritySentMoodAnalysis) {
+    constructor(jid, text, title, createdAt, status, t2eEntryMoodAnalysis,
+        t2eSentMoodAnalysis, polarityEntryMoodAnalysis, polaritySentMoodAnalysis) {
         this.jid = jid;
         this.text = text;
         this.title = title;
@@ -320,10 +319,10 @@ class JournalEntry {
         this.polaritySentMoodAnalysis = polaritySentMoodAnalysis;
     }
     toString() {
-        return this.jid + ', ' + this.text + ', ' + this.title+ ', ' + 
-        this.createdAt + ', ' + this.status + ', ' + this.t2eEntryMoodAnalysis + 
-        ', ' + this.t2eSentMoodAnalysis + ', ' + this.polarityEntryMoodAnalysis + 
-        ', ' + this.polaritySentMoodAnalysis;
+        return this.jid + ', ' + this.text + ', ' + this.title + ', ' +
+            this.createdAt + ', ' + this.status + ', ' + this.t2eEntryMoodAnalysis +
+            ', ' + this.t2eSentMoodAnalysis + ', ' + this.polarityEntryMoodAnalysis +
+            ', ' + this.polaritySentMoodAnalysis;
     }
 }
 
@@ -335,7 +334,7 @@ const entryConverter = {
             text: jid.text,
             title: jid.title,
             createdAt: jid.createdAt,
-            status:  jid.status, 
+            status: jid.status,
             t2eEntryMoodAnalysis: jid.t2eEntryMoodAnalysis,
             t2eSentMoodAnalysis: jid.t2eSentMoodAnalysis,
             polarityEntryMoodAnalysis: jid.polarityEntryMoodAnalysis,
@@ -344,23 +343,23 @@ const entryConverter = {
     },
     fromFirestore: (snapshot, options) => {
         const data = snapshot.data(options);
-        return new JournalEntry(data.jid, data.text, data.title, 
+        return new JournalEntry(data.jid, data.text, data.title,
             data.createdAt, data.status, data.t2eEntryMoodAnalysis,
-             data.t2eSentMoodAnalysis, data.polarityEntryMoodAnalysis,
-              data.polaritySentMoodAnalysis);
+            data.t2eSentMoodAnalysis, data.polarityEntryMoodAnalysis,
+            data.polaritySentMoodAnalysis);
     }
 };
 
 export const searchByTitle = async (title) => {
     var result = []
     const q = query(collection(db.collection('users').
-    doc(auth.currentUser.email), 'journalEntries'), where("title", "==", title));
+        doc(auth.currentUser.email), 'journalEntries'), where("title", "==", title));
 
     const querySnapshot = await getDocs(q.withConverter(entryConverter))
     querySnapshot.forEach((doc) => {
-      const entry = doc.data()
-      result.push(entry)
-    //   console.log("search by title: ", title, entry)
+        const entry = doc.data()
+        result.push(entry)
+        //   console.log("search by title: ", title, entry)
     });
     return result
 }
@@ -374,47 +373,47 @@ export const searchByDate = async (date) => {
     console.log(millis);
     var result = []
     const q = query(collection(db.collection('users').
-    doc(auth.currentUser.email), 'journalEntries'), where("createdAt", '<', upperLimit), where("createdAt", '>=', millis));
+        doc(auth.currentUser.email), 'journalEntries'), where("createdAt", '<', upperLimit), where("createdAt", '>=', millis));
 
     const querySnapshot = await getDocs(q.withConverter(entryConverter))
     querySnapshot.forEach((doc) => {
-      const entry = doc.data()
-      result.push(entry)
-      console.log("search by date: ", date, entry)
+        const entry = doc.data()
+        result.push(entry)
+        console.log("search by date: ", date, entry)
     });
     return result
 
 }
 
 function getMillisFromDate(date) {
-  date.setHours(0,0,0,0)
-  const millis = Date.parse(date)
-  return millis
+    date.setHours(0, 0, 0, 0)
+    const millis = Date.parse(date)
+    return millis
 }
 
 function getJID() {
-    const {v4: uuidv4} = require('uuid')
+    const { v4: uuidv4 } = require('uuid')
     return uuidv4()
 }
 // Using 'superagent' which will return a promise.
 /*var superagent = require('superagent')
-
+ 
 // This is isn't declared as `async` because it already returns a promise
 function delay() {
-  // `delay` returns a promise
-  return new Promise(function(resolve, reject) {
-    // Only `delay` is able to resolve or reject the promise
-    setTimeout(function() {
-      resolve(42); // After 3 seconds, resolve the promise with value 42
-    }, 3000);
-  });
+    // `delay` returns a promise
+    return new Promise(function(resolve, reject) {
+        // Only `delay` is able to resolve or reject the promise
+        setTimeout(function() {
+            resolve(42); // After 3 seconds, resolve the promise with value 42
+        }, 3000);
+    });
 }*/
 
 function getMoodAnalysis(text, callback) {
     //var moodDict = {t2eEntry: '', t2eSent:'', polarEntry:'', polarSent:''};
     $.post({
         url: "http://127.0.0.1:5000/moodanalysis?text=" + text,
-      }).done(function(response) {
+    }).done(function (response) {
         console.log(response);
         //console.log(response.data.t2e_entry_analysis);
         var tentry = response.data.t2e_entry_analysis;
@@ -422,42 +421,59 @@ function getMoodAnalysis(text, callback) {
         var pentry = response.data.polarity_entry_analysis;
         var psent = response.data.polarity_sent_analysis;
         /* const moodArray = [JSON.stringify(t2eEntry), JSON.stringify(t2eSent), 
-          JSON.stringify(polarEntry), JSON.stringify(polarSent)];
-        callback(moodArray); */
-        var moodDict = {t2eEntry: tentry, t2eSent: tsent, polarEntry: pentry, polarSent: psent};
+            JSON.stringify(polarEntry), JSON.stringify(polarSent)];
+            callback(moodArray); */
+        var moodDict = { t2eEntry: tentry, t2eSent: tsent, polarEntry: pentry, polarSent: psent };
         callback(moodDict);
         //console.log(moodDict);
-      });
-      //console.log(moodArray);
-      //return moodArray;
-      // push pls
+    });
+    //console.log(moodArray);
+    //return moodArray;
+    // push pls
 }
 
 export const getCurrentEntryMoodScores = async (title) => {
-  var result = [];
-  const q = query(collection(db.collection('users').
-  doc(auth.currentUser.email), 'journalEntries'), where("title", "==", title), limit(1));
+    var result = [];
+    const q = query(collection(db.collection('users').
+        doc(auth.currentUser.email), 'journalEntries'), where("title", "==", title), limit(1));
 
-  const querySnapshot = await getDocs(q.withConverter(entryConverter))
-  querySnapshot.forEach((doc) => {
-    const entry = doc.data()
-    result.push(entry)
-  //   console.log("search by title: ", title, entry)
-  });
-  console.log(result[0].t2eEntryMoodAnalysis)
-  return result[0].t2eEntryMoodAnalysis;
+    const querySnapshot = await getDocs(q.withConverter(entryConverter))
+    querySnapshot.forEach((doc) => {
+        const entry = doc.data()
+        result.push(entry)
+        //   console.log("search by title: ", title, entry)
+    });
+    console.log(result[0].t2eEntryMoodAnalysis)
+    return result[0].t2eEntryMoodAnalysis;
 }
 
-// submit passes moodDict t2e to this func
-// export const plotPieChart = (dict_t2e) => {
-//     var data = [{
-//         values: Object.values(dict_t2e),
-//         labels: Object.keys(dict_t2e),
-//         type: 'pie'
-//     }];
-//     var layout = {
-//         height: 400,
-//         width: 500
-//     };
-//     Plotly.newPlot('myDiv', data, layout);
-// }
+export const getAllMoodScores = async () => {
+    var result = []
+    var sumAngry = 0.0
+    var sumFear = 0.0
+    var sumHappy = 0.0
+    var sumSad = 0.0
+    var sumSurprise = 0.0
+    const q = query(collection(db.collection('users').
+        doc(auth.currentUser.email), 'journalEntries'), where('status', '==', 'submitted'));
+
+    const querySnapshot = await getDocs(q.withConverter(entryConverter))
+    querySnapshot.forEach((doc) => {
+        const entry = doc.data()
+        result.push(entry.t2eEntryMoodAnalysis)
+        sumAngry += entry.t2eEntryMoodAnalysis['Angry']
+        sumFear += entry.t2eEntryMoodAnalysis['Fear']
+        sumHappy += entry.t2eEntryMoodAnalysis['Happy']
+        sumSad += entry.t2eEntryMoodAnalysis['Sad']
+        sumSurprise += entry.t2eEntryMoodAnalysis['Surprise']
+    });
+    var aggregatedScores = {}
+    aggregatedScores["Angry"] = sumAngry / result.length
+    aggregatedScores["Fear"] = sumSad / result.length
+    aggregatedScores["Happy"] = sumHappy / result.length
+    aggregatedScores["Sad"] = sumSad / result.length
+    aggregatedScores["Surprise"] = sumSurprise / result.length
+    console.log(result)
+    console.log("aggregated scores: " + JSON.stringify(aggregatedScores))
+    return aggregatedScores
+}
