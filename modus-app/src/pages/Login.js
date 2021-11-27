@@ -24,7 +24,7 @@ function Login() {
 
   return (
     <div className="loginPage">
-      <h2>Log in </h2>
+      <h1>Log in </h1>
       <div className="loginContainer">
         <input
           type="text"
