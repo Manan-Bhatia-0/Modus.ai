@@ -2,7 +2,6 @@
 import React from "react";
 import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
-import TextField from "@mui/material/TextField";
 import "./modus.css";
 import { useState, useEffect } from "react";
 import {
@@ -10,10 +9,10 @@ import {
   searchByTitle,
   submitJournalEntry,
 } from "../firebase";
-import { Link, useHistory } from "react-router-dom";
 import { confirm } from "react-confirm-box";
 import { useParams } from "react-router";
-import { StyledEngineProvider } from "@mui/styled-engine";
+import { makeStyles } from "@mui/styles/";
+import {Grid, TextField} from '@mui/material'
 
 const optionsWithLabelChange = {
   closeOnOverlayClick: false,
@@ -37,11 +36,34 @@ const onClick = async (options) => {
   console.log("Submitting Cancelled");
 };
 
+const useStyles = makeStyles({
+  root: {
+    margin: "5rem"
+  },
+  entryTextField: {
+    marginTop: "1rem"
+  },
+  subtitle: {
+    marginTop: "1rem",
+    fontSize: 25
+  },
+  saveButton: {
+    width: 200,
+    margin: "1rem",
+  },
+  submitButton: {
+    width: 200,
+    margin: "1rem",
+    backgroundColor: "#6384BD"
+  }
+})
+
 function JournalEdit() {
   const [myValue, setValue] = useState("");
   const [textfield, setValue2] = useState("");
   const [value, setValue3] = useState("");
   const { title } = useParams();
+  const classes = useStyles();
   useEffect(() => {
     if (title !== undefined ){
       const promise = searchByTitle(title);
@@ -62,51 +84,61 @@ function JournalEdit() {
   };
 
   return (
-    <div className="dashboard">
-      <section className="journalEdit" id="journalEdit">
-        <h2>Journal Entry Name #342</h2>
-        <h4>Date</h4>
+    <div className={classes.root}>
+      <Grid container direction="column">
         <form onSubmit={handleSubmit}>
-          <div className="title">
-            <h3>Title</h3>
-            <TextField
-              value={myValue}
-              onChange={(e) => setValue(e.target.value)}
-            />
-          </div>
-          <div className="entryContent">
-            <h3>Entry Content</h3>
+          <Grid item container justifyContent="space-between">
+            <Grid item>
+              <TextField
+                value={myValue}
+                label="Title"
+                onChange={(e) => setValue(e.target.value)}
+              />
+            </Grid>
+            <Grid item>
+              <h4>Date</h4>
+            </Grid>
+          </Grid>
+          <Grid item className={classes.subtitle}>
+            Entry Content
+          </Grid>
+          <Grid item className={classes.entryTextField}>
             <SunEditor
               value={textfield}
               onChange={setValue2}
               // onChange={(e) => setValue2(e.target.value)}
               setOptions={{ height: "500px", width: "1000px" }}
             />
-          </div>
-          <div className="buttons">
-            <button
-              className="save"
-              onClick={() => saveJournalEntry(myValue, textfield)}
-            >
-              Save
-            </button>
-            <button
-              onClick={() => {
-                onClick(optionsWithLabelChange);
-              }}
-            >
-              {" "}
-              Submit{" "}
-            </button>
-            <button
-              className="submit"
-              onClick={() => submitJournalEntry(myValue, textfield)}
-            >
-              Submit
-            </button>
-          </div>
+          </Grid>
+          <Grid container item direction="column" alignItems="flex-end">
+            <Grid item>
+              <button
+                className={classes.saveButton}
+                onClick={() => saveJournalEntry(myValue, textfield)}
+              >
+                Save
+              </button>
+              <button
+                className={classes.submitButton}
+                onClick={() => {
+                  onClick(optionsWithLabelChange);
+                }}
+              >
+                Submit with message
+              </button>
+              <button
+                className={classes.submitButton}
+                onClick={() => submitJournalEntry(myValue, textfield)}
+              >
+                Submit
+              </button>
+            </Grid>
+            <Grid item>
+              
+            </Grid>
+          </Grid>
         </form>
-      </section>
+      </Grid>  
     </div>
   );
 }

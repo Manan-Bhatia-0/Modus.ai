@@ -1,8 +1,8 @@
 section {
     position: absolute;
-    width: 100rem;
-    height: 100rem;
-    background: #f5f8ff;
+    width: 100%;
+    height: 100%;
+    background: #F5F8FF;
   }
   
   .dashboard {
@@ -28,7 +28,6 @@ section {
     transform: translate(-50%, -50%);
   }
 
-
 .writeButton {
     position: absolute;
     width: 180px;
@@ -53,25 +52,18 @@ h1 {
   }
 
 h2 {
-position: absolute;
-width: 718px;
-height: 162px;
-left: 361px;
-top: 122px;
-font-family: Spectral;
-font-style: normal;
-font-weight: 500;
-font-size: 48px;
-line-height: 73px;
-color: #578ff1;
+    position: absolute;
+    font-family: Spectral;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 73px;
+    color: #578ff1;
 }
 
 h3 {
     position: absolute;
-    width: 371px;
-    height: 53px;
-    left: 112px;
-    top: 588px;
+    /* height: 53px; */
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
@@ -82,11 +74,6 @@ h3 {
 
 h4 {
     position: absolute;
-    width: 55px;
-    height: 32px;
-    left: 1071px;
-    top: 98px;
-  
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
@@ -95,6 +82,22 @@ h4 {
   
     color: #474747;
   } 
+
+   /* Set a style for all buttons */
+  button {
+    background-color: #9AC0FF;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  /* Add a hover effect for buttons */
+  button:hover {
+    opacity: 0.8;
+  }
 
 /* The Modal (background) */
 /*
@@ -138,21 +141,7 @@ h4 {
     box-sizing: border-box;
   } */
   
-  /* Set a style for all buttons */
-  /* button {
-    background-color: #04aa6d;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-  } */
-  
-  /* Add a hover effect for buttons */
-  /* button:hover {
-    opacity: 0.8;
-  } */
+ 
   
   /* Add padding to containers */
   /* .container {
@@ -226,16 +215,8 @@ h4 {
     color: #474747;
   } */
   
-  /* save {
-    position: absolute;
-    width: 169px;
-    height: 35px;
-    left: 753px;
-    top: 885px;
   
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.1));
-  }
-  
+  /*
   submit {
     position: absolute;
     width: 169px;
