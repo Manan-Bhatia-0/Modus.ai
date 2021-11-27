@@ -3,7 +3,7 @@ import { Grid, Divider } from '@mui/material'
 import MoodResources from "../components/MoodResources";
 import graph_1 from '../imgs/graph_1.png';
 import graph_2 from '../imgs/graph_2.png';
-import { getAllMoodScores } from '../firebase'
+import {getHappinessScore, getAllMoodScores } from '../firebase'
 import Plotly from 'plotly.js-dist'
 import { useParams } from 'react-router-dom'
 
@@ -21,7 +21,13 @@ function Analysis() {
           <div id='pieChartAvg'>
             {plotPieChartJs()}
           </div>
-          <Divider style={{ width: "50rem" }} />
+          <Divider style={{ width: "60rem" }} />
+          <Grid item xs={10}>
+          <div id='gaugeChart'>
+            {getScore()}
+          </div>
+          <Divider style={{ width: "60rem" }} />
+        </Grid>
         </Grid>
       </Grid>
       <MoodResources />
@@ -50,6 +56,13 @@ function pieChart(dict_t2e) {
     type: 'bar'
   }];
   var layout = {
+    title: {
+      text:'Overall Mood Scores',
+      font: {
+        family: 'Arial',
+        size: 24,
+        color: 'darkblue'
+      }},
     height: 700,
     width: 1000,
     xaxis: {
@@ -83,4 +96,52 @@ function plotPieChartJs() {
     console.log(result)
     pieChart(result)
   })
+}
+
+function getScore() {
+  var score = getHappinessScore()
+  score.then(function (result) {
+    console.log(result)
+    plotGaugeChart(result * 100)
+  })
+}
+
+function plotGaugeChart(result) {
+  
+  var data = [
+    {
+      type: "indicator",
+      mode: "gauge+number+delta",
+      value: result,
+      title: { text: "Mental Health Progress Score (out of 100)", font: { size: 24 } },
+      text: ['Poor', 'OK', 'Excellent'],
+      gauge: {
+        axis: { range: [null, 100], tickwidth: 1, tickcolor: "#5A7D9F" },
+        bar: { color: "#5A7D9F" },
+        bgcolor: "white",
+        borderwidth: 2,
+        bordercolor: "gray",
+        steps: [
+          {range: [0, 20], color: 'rgb(255,105,97)'},
+          { range: [20, 60], color: "rgb(255,244,189)" },
+          { range: [60, 100], color: "rgb(180,248,200)" }
+        ],
+        threshold: {
+          line: { color: "red", width: 4 },
+          thickness: 0.75,
+          value: 100
+        }
+      }
+    }
+  ];
+  
+  var layout = {
+    width: 950,
+    height: 800,
+    margin: { t: 25, r: 25, l: 25, b: 25 },
+    paper_bgcolor: "white",
+    font: { color: "darkblue", family: "Arial" }
+  };
+  
+  Plotly.react('gaugeChart', data, layout); 
 }

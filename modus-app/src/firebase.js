@@ -482,6 +482,14 @@ export const getAllMoodScores = async () => {
     return aggregatedScores
 }
 
+export const getHappinessScore = async() => {
+    const docRef = doc(db, 'users', auth.currentUser.email)
+    const docSnap = await getDoc(docRef)
+    var score = docSnap.get('happiness')
+    console.log(score)
+    return score
+}
+
 // aggregated mood scores over the last 7 days
 export const getOverallMoodScores7 = async () => {
     var result = []
