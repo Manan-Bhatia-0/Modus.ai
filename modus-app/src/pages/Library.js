@@ -13,6 +13,16 @@ const useStyles = makeStyles({
   root: {
     maxWidth: '60rem'
   },
+  searchButton: {
+    width: 100
+  },
+  searchTextField: {
+    height: 55,
+    marginRight: 10
+  },
+  searchDateField: {
+    width: 100
+  }
 })
 
 function Library() {
@@ -62,7 +72,6 @@ function Library() {
       }
     })
   }
-
   return (
     <div
       className={classes.root}
@@ -77,8 +86,10 @@ function Library() {
               Library
           </h1>
         </Grid>
-        <Grid item xs={2} style={{
-            marginTop: "5rem"
+        <Grid item xs={2} 
+        className={classes.searchDateField}
+        style={{
+            marginTop: 69
           }}
         >
           <LocalizationProvider dateAdapter={DateAdapter}>
@@ -97,14 +108,15 @@ function Library() {
                 id="header-search"
                 placeholder="Search journal entries"
                 onChange={onSearchChange}
+                className={classes.searchTextField}
             />
-            <Button 
+            <button 
               type ="submit" 
-              variant="outlined"
               onClick={handleSearchSubmit}
+              className={classes.searchButton}
             >
               Search
-            </Button>
+            </button>
           {/* </form> */}
         </Grid>
         <Grid item xs={2} style={{
