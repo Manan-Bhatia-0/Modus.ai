@@ -3,7 +3,7 @@ import React from "react";
 import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
 import TextField from "@mui/material/TextField";
-import "./journalEdit.css";
+import "./modus.css";
 import { useState, useEffect } from "react";
 import {
   saveJournalEntry,

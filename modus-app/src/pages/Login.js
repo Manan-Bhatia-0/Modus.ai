@@ -7,7 +7,7 @@ import {
   signInWithFacebook,
 } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import "./Login.css";
+import "./modus.css";
 
 function Login() {
   const [email, setEmail] = useState("");
