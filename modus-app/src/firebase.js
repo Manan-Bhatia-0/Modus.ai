@@ -445,7 +445,7 @@ export const getCurrentEntryMoodScores = async (title) => {
     return result[0].t2eEntryMoodAnalysis;
 }
 
-// aggregated mood scores
+// get aggregated mood scores and set overall score in firebase
 export const getAllMoodScores = async () => {
     var result = []
     var sumAngry = 0.0
@@ -474,7 +474,20 @@ export const getAllMoodScores = async () => {
     aggregatedScores["Surprise"] = sumSurprise / result.length
     console.log(result)
     console.log("aggregated scores: " + JSON.stringify(aggregatedScores))
+
+    db.collection('users').doc(auth.currentUser.email).set({
+        overallAnalysis: aggregatedScores,
+        happiness: aggregatedScores['Happy']
+    })
     return aggregatedScores
+}
+
+export const getHappinessScore = async() => {
+    const docRef = doc(db, 'users', auth.currentUser.email)
+    const docSnap = await getDoc(docRef)
+    var score = docSnap.get('happiness')
+    console.log(score)
+    return score
 }
 
 // aggregated mood scores over the last 7 days
@@ -566,6 +579,20 @@ export const getAllMoodScores30 = async () => {
     querySnapshot.forEach((doc) => {
         const entry = doc.data()
         result.push(entry.t2eEntryMoodAnalysis)
+    });
+    console.log(result)
+    return result
+}
+
+export const getTopThreeLatestEntries = async () => {
+    var result = []
+    const q = query(collection(db.collection('users').
+        doc(auth.currentUser.email), 'journalEntries'), orderBy("createdAt", "desc"), limit(3));
+
+    const querySnapshot = await getDocs(q.withConverter(entryConverter))
+    querySnapshot.forEach((doc) => {
+        const entry = doc.data()
+        result.push(entry)
     });
     console.log(result)
     return result

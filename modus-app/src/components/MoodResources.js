@@ -14,7 +14,7 @@ function MoodResources() {
                 }}>
                   Mental Health Resources
               </h1>
-              <Divider style={{width: "50rem"}}/>
+              <Divider style={{width: "60rem"}}/>
               <h5 
                 style={{
                   marginTop: "1rem"
