@@ -1,8 +1,6 @@
 import React from "react";
 import { Grid, Divider } from '@mui/material'
 import MoodResources from "../components/MoodResources";
-import graph_1 from '../imgs/graph_1.png';
-import graph_2 from '../imgs/graph_2.png';
 import {getHappinessScore, getAllMoodScores } from '../firebase'
 import Plotly from 'plotly.js-dist'
 import { useParams } from 'react-router-dom'

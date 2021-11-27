@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import { auth, registerWithEmailAndPassword } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import "./CreateAccount.css";
+import "./modus.css";
 
 function CreateAccount() {
   const [email, setEmail] = useState("");

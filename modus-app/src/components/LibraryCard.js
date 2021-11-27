@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Grid, IconButton } from "@mui/material";
 import { makeStyles } from '@mui/styles';
-import "./LibraryCard.css";
+import "../pages/modus.css";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { deleteJournalEntry } from "../firebase";
 import { useHistory } from "react-router";

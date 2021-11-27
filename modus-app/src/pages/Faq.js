@@ -4,7 +4,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import faqimage from "./FAQ.png";
-import "./Faq.css";
+import "./modus.css";
 
 function Faq() {
   return (

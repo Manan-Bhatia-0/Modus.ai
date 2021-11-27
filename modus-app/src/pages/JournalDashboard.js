@@ -1,7 +1,7 @@
 /* eslint-disable */ 
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
-import "./journalDashboard.css";
+import "./modus.css";
 import clouds from './dashboard-img.png'
 import { getUserName, getTopThreeLatestEntries } from "../firebase";
 import LibraryCard from "../components/LibraryCard";
