@@ -1,3 +1,27 @@
+section {
+    position: absolute;
+    width: 100rem;
+    height: 100rem;
+    background: #f5f8ff;
+  }
+  
+  .dashboard {
+    position: absolute;
+    width: 87%;
+    /* top: 0px; */
+    /* left: 0px; */
+    height: 100%;
+    /* opacity: 0.5; */
+  }
+  /* Centered text */
+  .centered {
+    position: absolute;
+    top: 15%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+  }
+
+
 .writeButton {
     position: absolute;
     width: 304px;
