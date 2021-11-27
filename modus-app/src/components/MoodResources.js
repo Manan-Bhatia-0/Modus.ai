@@ -15,12 +15,12 @@ function MoodResources() {
                   Mental Health Resources
               </h1>
               <Divider style={{width: "60rem"}}/>
-              <h5 
+              <h4 
                 style={{
                   marginTop: "1rem"
                 }}>
                   Here is what we recommend for you based on your latest entries:
-              </h5>
+              </h4>
             </Grid>
           </Grid>
          
