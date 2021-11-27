@@ -89,6 +89,22 @@ h4 {
     color: #474747;
   } 
 
+   /* Set a style for all buttons */
+  button {
+    background-color: #9AC0FF;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  /* Add a hover effect for buttons */
+  button:hover {
+    opacity: 0.8;
+  }
+
 /* The Modal (background) */
 /*
 .modal {
@@ -131,21 +147,7 @@ h4 {
     box-sizing: border-box;
   } */
   
-  /* Set a style for all buttons */
-  /* button {
-    background-color: #04aa6d;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-  } */
-  
-  /* Add a hover effect for buttons */
-  /* button:hover {
-    opacity: 0.8;
-  } */
+ 
   
   /* Add padding to containers */
   /* .container {
