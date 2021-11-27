@@ -81,7 +81,8 @@ const DefaultContainer = () => (
       <Grid item style={{display: "flex"}}>
         <Route path="/home" exact component={JournalDashboard} />
         <Route path="/profile" component={Profile} />
-        <Route path="/write" component={JournalEdit} />
+        <Route exact path="/write/" component={JournalEdit} />
+        <Route path="/write/:title" component={JournalEdit} />
         <Route path="/library" component={Library} />
         <Route path="/individualAnalysis/:title"> <AnalysisIndividual/> </Route>
         <Route path="/analysis" component={Analysis} />
