@@ -583,3 +583,17 @@ export const getAllMoodScores30 = async () => {
     console.log(result)
     return result
 }
+
+export const getTopThreeLatestEntries = async () => {
+    var result = []
+    const q = query(collection(db.collection('users').
+        doc(auth.currentUser.email), 'journalEntries'), orderBy("createdAt", "desc"), limit(3));
+
+    const querySnapshot = await getDocs(q.withConverter(entryConverter))
+    querySnapshot.forEach((doc) => {
+        const entry = doc.data()
+        result.push(entry)
+    });
+    console.log(result)
+    return result
+}
