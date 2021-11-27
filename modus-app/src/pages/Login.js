@@ -24,7 +24,7 @@ function Login() {
 
   return (
     <div className="loginPage">
-      <h1>Log in </h1>
+      <h1>Welcome to Modus.ai</h1>
       <div className="loginContainer">
         <input
           type="text"
@@ -44,15 +44,15 @@ function Login() {
           className="login"
           onClick={() => signInWithEmailAndPassword(email, password)}
         >
-          Log in
+          Log In
         </button>
         <button className="googleLogin" onClick={signInWithGoogle}>
           {" "}
-          Login with Google{" "}
+          Log In with Google{" "}
         </button>
         <button className="facebookLogin" onClick={signInWithFacebook}>
           {" "}
-          Login with Facebook{" "}
+          Log In with Facebook{" "}
         </button>
         <a href="/reset">Forget your password?</a>
         <a href="/register">Create account</a>

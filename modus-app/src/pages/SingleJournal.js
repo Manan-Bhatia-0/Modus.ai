@@ -15,6 +15,11 @@ const useStyles = makeStyles({
     marginLeft: 150,
     marginTop: 25
   },
+  exportButton: {
+    width: 200,
+    marginTop: "3rem",
+    marginBottom: "5rem"
+  }
 });
 
 function getDate(timestamp) {
@@ -41,6 +46,7 @@ function SingleJournal() {
   const classes = useStyles();
     return (
       <div>
+        <Grid container direction="column">
           <Card className={classes.card}>
           <Grid container direction="column">
             <Grid container>
@@ -72,25 +78,22 @@ function SingleJournal() {
             </Grid>
           </Grid>
       </Card>
-      <Grid item xs 
-                  style={{
-                    fontSize: 16,
-                    margin: 20
-                  }}
-            >
-              {entry && entry[0].status}
-      </Grid>  
-      <Grid style={{marginLeft: 200}}>
-        {entry && 
-           <PDFDownloadLink
-           document={<MyDocument data={entry[0]} />}
-           fileName="journal.pdf"
-         > 
-           Export journal entry 
-         </PDFDownloadLink>
-        }
+      <Grid container item justifyContent="flex-end">
+        <Grid item>
+          {entry && 
+            <PDFDownloadLink
+            document={<MyDocument data={entry[0]} />}
+            fileName="journal.pdf"
+          > 
+            <button className={classes.exportButton}>
+              Export journal entry
+            </button> 
+          </PDFDownloadLink>
+          }
+        </Grid>
+        </Grid>
       </Grid>
-      </div>
+    </div>
     );
   }
   export default SingleJournal;
