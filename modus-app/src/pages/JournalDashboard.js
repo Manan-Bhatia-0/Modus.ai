@@ -8,6 +8,7 @@ import LibraryCard from "../components/LibraryCard";
 import { Button, Grid, Divider, Pagination, TextField } from '@mui/material'
 import "./modus.css"
 import { makeStyles } from '@mui/styles';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -18,8 +19,6 @@ const useStyles = makeStyles({
 function JournalDashboard() {
   const classes = useStyles();
   var [entries, setEntries] = React.useState(null);
-  const [date, setDate] = React.useState(new Date());
-  const [searchField, setSearch] = React.useState('');
 
   useEffect(() => {
     const promise = getTopThreeLatestEntries();
@@ -33,7 +32,14 @@ function JournalDashboard() {
       direction="column">
       <Grid item>
         <div className="dashboard">
-          <div><img src={clouds} alt="Logo" width="100%" height="40%" /></div>
+          <div>
+            <img src={clouds} alt="Logo" width="100%" height="40%" />
+            <Link to='/write'>
+            <button class="writeButton">
+              Write New Entry
+            </button>
+            </Link>
+          </div>
           <div class="centered">
             <h1>
               Hello {getUserName()}, <br></br> &emsp; &emsp; how are you doing?

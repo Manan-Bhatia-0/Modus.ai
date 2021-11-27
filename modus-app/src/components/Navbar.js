@@ -15,6 +15,7 @@ import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { Link } from "react-router-dom";
 
 
 const drawerWidth = '12rem';
@@ -109,6 +110,7 @@ function NavBar() {
                 <ListItemText primary={item.text} />
             </ListItem>
           ))}
+          <Link to='/login'>
           <ListItem
             button
             onClick={() => {history.push('/'); handleLogout()}}
@@ -117,6 +119,7 @@ function NavBar() {
             <ListItemIcon className={classes.linkText}><LogoutIcon color='#FFFFFF'/></ListItemIcon>
             <ListItemText primary='Logout' />
           </ListItem>
+          </Link>
         </List>
       </Drawer>
     </div>
