@@ -19,8 +19,8 @@ const useStyles = makeStyles({
 
 function getDate(timestamp) {
   var date = new Date(timestamp)
-  return ("Created on: "+date.getDate()+
-  "/"+(date.getMonth()+1)+
+  return ((date.getMonth()+1)+
+  "/"+date.getDate()+
   "/"+date.getFullYear())
 }
 
@@ -70,16 +70,16 @@ function SingleJournal() {
             >
               {entry && <div  dangerouslySetInnerHTML={{__html: entry[0].text}} />}
             </Grid>
-            <Grid item xs 
+          </Grid>
+      </Card>
+      <Grid item xs 
                   style={{
                     fontSize: 16,
                     margin: 20
                   }}
             >
               {entry && entry[0].status}
-            </Grid>  
-          </Grid>
-      </Card>
+      </Grid>  
       <Grid style={{marginLeft: 200}}>
         {entry && 
            <PDFDownloadLink
