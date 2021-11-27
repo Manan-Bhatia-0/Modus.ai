@@ -12,8 +12,8 @@ function JournalDashboard() {
       <div class="centered">
         <h1>
           Hello {getUserName()}, <br></br> &emsp; &emsp; how are you doing?
-          </h1>
-          </div>
+        </h1>
+      </div>
     </div>
   );
 }

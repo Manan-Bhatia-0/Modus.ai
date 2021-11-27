@@ -1,15 +1,15 @@
 section {
     position: absolute;
-    width: 100rem;
-    height: 100rem;
-    background: #f5f8ff;
+    width: 100%;
+    height: 100%;
+    background: #F5F8FF;
   }
   
   .dashboard {
     position: absolute;
     width: 87%;
     /* top: 0px; */
-    /* left: 0px; */
+    left: 190px;
     height: 100%;
     /* opacity: 0.5; */
   }
