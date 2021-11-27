@@ -6,7 +6,6 @@ import clouds from './dashboard-img.png'
 import { getUserName, getTopThreeLatestEntries } from "../firebase";
 import LibraryCard from "../components/LibraryCard";
 import { Button, Grid, Divider, Pagination, TextField } from '@mui/material'
-import "./modus.css"
 import { makeStyles } from '@mui/styles';
 import { Link } from "react-router-dom";
 
