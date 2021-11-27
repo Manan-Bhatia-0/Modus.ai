@@ -7,17 +7,24 @@ section {
   
   .dashboard {
     position: absolute;
-    width: 87%;
+    width: 88%;
     /* top: 0px; */
-    left: 190px;
+    left: 180px;
     height: 100%;
     /* opacity: 0.5; */
   }
   /* Centered text */
   .centered {
     position: absolute;
-    top: 15%;
-    left: 40%;
+    top: 10%;
+    left: 30%;
+    /* transform: translate(-50%, -50%); */
+  }
+  .entries {
+    position: absolute;
+    top: 90%;
+    left: 55%;
+    width: 88%;
     transform: translate(-50%, -50%);
   }
 
