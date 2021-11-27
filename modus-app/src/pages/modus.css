@@ -35,7 +35,7 @@ section {
     left: 540px;
     top: 393px;
     background-color: #578FF1;
-    color: white
+    color: white;
   }
   
 root {
@@ -75,6 +75,19 @@ h3 {
 
 h4 {
     position: absolute;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+  
+    color: #474747;
+  } 
+
+  h5 {
+    position: absolute;
+    left: 83%;
+    top: 12%;
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
