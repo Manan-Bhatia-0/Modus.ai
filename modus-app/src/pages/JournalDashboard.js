@@ -54,7 +54,7 @@ function JournalDashboard() {
               }}>
               Most Recent Entries
             </h1>
-            <Grid container direction="row" style={{marginTop: "2rem"}}>
+            <Grid container direction="row" style={{marginTop: "2rem"}} spacing={0.1}>
         <Grid container item>
           {entries && entries.map((entry) => {
               return (<LibraryCard key={entry.title} entry={entry}/>)
