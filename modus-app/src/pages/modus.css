@@ -16,9 +16,9 @@ section {
   /* Centered text */
   .centered {
     position: absolute;
-    top: 15%;
-    left: 40%;
-    transform: translate(-50%, -50%);
+    top: 10%;
+    left: 30%;
+    /* transform: translate(-50%, -50%); */
   }
   .entries {
     position: absolute;
