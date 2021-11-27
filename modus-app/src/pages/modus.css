@@ -1,0 +1,256 @@
+.writeButton {
+    position: absolute;
+    width: 304px;
+    height: 70px;
+    left: 588px;
+    top: 393px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  }
+  
+root {
+    background-color: #c8d1e6;
+    margin-top: 30 rem;
+}
+
+h1 {
+    font-family: Spectral;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 73px;
+    color: #578ff1;
+  }
+
+h2 {
+position: absolute;
+width: 718px;
+height: 162px;
+left: 361px;
+top: 122px;
+font-family: Spectral;
+font-style: normal;
+font-weight: 500;
+font-size: 48px;
+line-height: 73px;
+color: #578ff1;
+}
+
+h3 {
+    position: absolute;
+    width: 371px;
+    height: 53px;
+    left: 112px;
+    top: 588px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 42px;
+    color: #474747;
+  }
+
+h4 {
+    position: absolute;
+    width: 55px;
+    height: 32px;
+    left: 1071px;
+    top: 98px;
+  
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+  
+    color: #474747;
+  } 
+
+/* The Modal (background) */
+/*
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0, 0, 0); 
+    background-color: rgba(0, 0, 0, 0.4); 
+    padding-top: 60px;
+  }
+  */
+  
+  /* Modal Content/Box */
+  /* .modal-content {
+    background-color: #fefefe;
+    margin: 5px auto; 
+    border: 1px solid #888;
+    width: 80%; 
+  } */
+
+  
+  /* Bordered form */
+  /* form {
+    border: 3px solid #f1f1f1;
+  } */
+  
+  /* Full-width inputs */
+  /* input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  } */
+  
+  /* Set a style for all buttons */
+  /* button {
+    background-color: #04aa6d;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  } */
+  
+  /* Add a hover effect for buttons */
+  /* button:hover {
+    opacity: 0.8;
+  } */
+  
+  /* Add padding to containers */
+  /* .container {
+    padding: 16px;
+  } */
+  
+
+  /* section {
+    position: absolute;
+    width: 100 rem;
+    height: 100 rem;
+    background: #f5f8ff;
+  } */
+  
+  /* .dashboard {
+    position: absolute;
+    width: 852px;
+    height: 899px;
+    /* left: 326px;
+    top: 52px; */
+  
+    /* background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  } */ 
+  
+  /* h2 {
+    position: absolute;
+    width: 687px;
+    height: 44px;
+    /* left: 358px;
+    top: 82px; */
+  
+    /* font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 42px;
+  
+    color: #474747;
+  } */ 
+  
+  /* entryContent {
+    position: absolute;
+    width: 783px;
+    height: 624px;
+    left: 358px;
+    top: 230px;
+  }
+  */
+  
+  
+  /* title {
+    position: absolute;
+    width: 783px;
+    height: 62px;
+    left: 358px;
+    top: 139px;
+  }
+   */
+  /* h3 {
+    position: absolute;
+    width: 371px;
+    height: 53px;
+    left: 112px;
+    top: 588px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 42px;
+    color: #474747;
+  } */
+  
+  /* save {
+    position: absolute;
+    width: 169px;
+    height: 35px;
+    left: 753px;
+    top: 885px;
+  
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.1));
+  }
+  
+  submit {
+    position: absolute;
+    width: 169px;
+    height: 35px;
+    left: 972px;
+    top: 884px;
+  
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.1));
+  }
+   */
+  /* .dashboard {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+  } */
+  
+  
+
+
+
+  /* title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 42px;
+    color: #474747;
+  } */
+
+
+  /* .dashboard {
+    position: absolute;
+    width: 100rem;
+    height: 100rem;
+    background: #f5f8ff;
+  } */
+  
+  /* Divider */
+  /* .divider {
+    position: absolute;
+    width: 1207px;
+    height: 0px;
+    left: 1355px;
+    top: 264px;
+    border: 1px solid #578ff1;
+    transform: rotate(-180deg);
+  } */
+  

@@ -1,7 +1,7 @@
 /* eslint-disable */ 
 import React from "react";
 import ReactDOM from "react-dom";
-import "./journalDashboard.css";
+import "./modus.css";
 
 function JournalDashboard() {
   return (
