@@ -1,21 +1,19 @@
 /* eslint-disable */
 import React from "react";
-import ReactDOM from "react-dom";
 import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
 import TextField from "@mui/material/TextField";
 import "./journalEdit.css";
-import { useRef } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
-  deleteCurrentUser,
-  getJournalEntries,
   saveJournalEntry,
+  searchByTitle,
   submitJournalEntry,
 } from "../firebase";
 import { Link, useHistory } from "react-router-dom";
 import { confirm } from "react-confirm-box";
-import piechart from "./piechart";
+import { useParams } from "react-router";
+import { StyledEngineProvider } from "@mui/styled-engine";
 
 const optionsWithLabelChange = {
   closeOnOverlayClick: false,
@@ -43,20 +41,25 @@ function JournalEdit() {
   const [myValue, setValue] = useState("");
   const [textfield, setValue2] = useState("");
   const [value, setValue3] = useState("");
+  const { title } = useParams();
+  useEffect(() => {
+    if (title !== undefined ){
+      const promise = searchByTitle(title);
+      promise.then(function(result) {
+        setValue(result[0].title);
+        setValue2(result[0].text);
+        console.log("I set the values!");
+      })
+    } else {
+      // setValue("");
+      // setValue2("");
+    }
+  }), [];
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const entry = { myValue, textfield };
-    console.log(entry);
-    console.log(document.activeElement.getAttribute("value"));
-    /*submitfn(myValue, textfield)*/
   };
-  // const onSave = handleSubmit(e => {
-  //   e.submitAction = 'decline'
-  //   console.log("save")
-  // })
-
-  // <form onSubmit={handleSubmit}>
 
   return (
     <div className="dashboard">
@@ -98,7 +101,6 @@ function JournalEdit() {
             <button
               className="submit"
               onClick={() => submitJournalEntry(myValue, textfield)}
-              //onClick={() => getMoodAnalysis(textfield)}
             >
               Submit
             </button>
@@ -107,16 +109,6 @@ function JournalEdit() {
       </section>
     </div>
   );
-}
-
-function submitfn(myValue, textfield) {
-  //console.log(myValue)
-  //console.log(textfield)
-  // var title = document.getElementsByClassName('title').value;
-  // var entry_content = document.getElementsByClassName('entryContent').useRef;
-  //console.log('Client-side code running');
-  // console.log(title)
-  // console.log(entry_content)
 }
 
 export default JournalEdit;

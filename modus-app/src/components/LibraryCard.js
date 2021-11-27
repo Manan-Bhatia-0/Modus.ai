@@ -31,6 +31,7 @@ function getDate(timestamp) {
     "/" + date.getFullYear())
 }
 
+
 function LibraryCard({ entry }) {
   const classes = useStyles();
   const history = useHistory();
@@ -41,6 +42,36 @@ function LibraryCard({ entry }) {
         alert("Journal entry deleted");
       })
   }
+
+  var analysis = "";
+  if (entry.status === "submitted") {
+    analysis = <Link to={`/individualAnalysis/${entry.title}`} style={{ color: '#474747' }}>Analyze</Link>;
+  }
+  var title = "";
+  if (entry.status === "submitted") {
+    title = <Link to={`/journal/${entry.title}`} style={{ textDecoration: 'none', color: '#474747' }}>
+              <Grid item xs
+                style={{
+                  fontSize: 24,
+                  marginBottom: 10
+                }}
+              >
+                {entry.title}
+              </Grid>
+            </Link>
+  } else {
+    title = <Link to={`/write/${entry.title}`} style={{ textDecoration: 'none', color: '#474747' }}>
+              <Grid item xs
+                style={{
+                  fontSize: 24,
+                  marginBottom: 10
+                }}
+              >
+                {entry.title}
+              </Grid>
+            </Link>
+  }
+
   return (
     <div>
       <div>
@@ -54,16 +85,7 @@ function LibraryCard({ entry }) {
               </Grid>
             </Grid>
             <Grid container item justifyContent="space-between">
-              <Link to={`/journal/${entry.title}`} style={{ textDecoration: 'none', color: '#474747' }}>
-                <Grid item xs
-                  style={{
-                    fontSize: 24,
-                    marginBottom: 10
-                  }}
-                >
-                  {entry.title}
-                </Grid>
-              </Link>
+              {title}
               <Grid item
                 style={{
                   fontSize: 14,
@@ -94,9 +116,7 @@ function LibraryCard({ entry }) {
                   marginLeft: 100
                 }}
               >
-                <Link to={`/individualAnalysis/${entry.title}`} style={{ textDecoration: 'none', color: '#474747' }}>
-                  Analysis
-                </Link>
+                {analysis}
               </Grid>
             </Grid>
           </Grid>
