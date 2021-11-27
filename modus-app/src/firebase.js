@@ -597,3 +597,7 @@ export const getTopThreeLatestEntries = async () => {
     console.log(result)
     return result
 }
+
+export const getUserName = () => {
+    return auth.currentUser.displayName
+}
