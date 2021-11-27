@@ -46,25 +46,18 @@ h1 {
   }
 
 h2 {
-position: absolute;
-width: 718px;
-height: 162px;
-left: 361px;
-top: 122px;
-font-family: Spectral;
-font-style: normal;
-font-weight: 500;
-font-size: 48px;
-line-height: 73px;
-color: #578ff1;
+    position: absolute;
+    font-family: Spectral;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 73px;
+    color: #578ff1;
 }
 
 h3 {
     position: absolute;
-    width: 371px;
     height: 53px;
-    left: 112px;
-    top: 588px;
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;

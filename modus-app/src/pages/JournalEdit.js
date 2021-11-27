@@ -10,10 +10,9 @@ import {
   searchByTitle,
   submitJournalEntry,
 } from "../firebase";
-import { Link, useHistory } from "react-router-dom";
 import { confirm } from "react-confirm-box";
 import { useParams } from "react-router";
-import { StyledEngineProvider } from "@mui/styled-engine";
+import { makeStyles } from "@mui/styles/";
 
 const optionsWithLabelChange = {
   closeOnOverlayClick: false,
@@ -37,11 +36,18 @@ const onClick = async (options) => {
   console.log("Submitting Cancelled");
 };
 
+const useStyles = makeStyles({
+  root: {
+    margin: "5rem"
+  },
+})
+
 function JournalEdit() {
   const [myValue, setValue] = useState("");
   const [textfield, setValue2] = useState("");
   const [value, setValue3] = useState("");
   const { title } = useParams();
+  const classes = useStyles();
   useEffect(() => {
     if (title !== undefined ){
       const promise = searchByTitle(title);
@@ -62,20 +68,19 @@ function JournalEdit() {
   };
 
   return (
-    <div className="dashboard">
-      <section className="journalEdit" id="journalEdit">
-        <h2>Journal Entry Name #342</h2>
+    <div className={classes.root}>
+      {/* <section className="journalEdit" id="journalEdit"> */}
         <h4>Date</h4>
         <form onSubmit={handleSubmit}>
-          <div className="title">
-            <h3>Title</h3>
+          {/* <div className="title"> */}
+            <h1>Title</h1>
             <TextField
               value={myValue}
               onChange={(e) => setValue(e.target.value)}
             />
-          </div>
-          <div className="entryContent">
-            <h3>Entry Content</h3>
+          {/* </div> */}
+          <div>
+            <h1>Entry Content</h1>
             <SunEditor
               value={textfield}
               onChange={setValue2}
@@ -83,7 +88,7 @@ function JournalEdit() {
               setOptions={{ height: "500px", width: "1000px" }}
             />
           </div>
-          <div className="buttons">
+          <div>
             <button
               className="save"
               onClick={() => saveJournalEntry(myValue, textfield)}
@@ -95,8 +100,7 @@ function JournalEdit() {
                 onClick(optionsWithLabelChange);
               }}
             >
-              {" "}
-              Submit{" "}
+              Submit
             </button>
             <button
               className="submit"
@@ -106,7 +110,7 @@ function JournalEdit() {
             </button>
           </div>
         </form>
-      </section>
+      {/* </section> */}
     </div>
   );
 }
