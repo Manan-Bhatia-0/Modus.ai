@@ -6,7 +6,7 @@ import Plotly from 'plotly.js-dist'
 import { useParams } from 'react-router-dom'
 
 function Analysis() {
-  getrecommendedMHResources()
+  
   return (
     <div>
       <Grid container style={{ margin: '5rem' }}>

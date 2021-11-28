@@ -100,6 +100,8 @@ export const signInWithEmailAndPassword = async (email, password) => {
     }
 };
 
+
+
 //add passwordconfirm to the state
 export const registerWithEmailAndPassword = async (name, email, password) => {
     try {
@@ -231,9 +233,13 @@ export const deleteJournalEntry = async (jid) => {
     console.log("deleted journal entry!!")
 }
 
+export async function awaitMHR () {
+    let x = await getrecommendedMHResources()
+    return x
+  }
 
-export const getrecommendedMHResources = async (resourceType) => {
-
+// retrieves recommended mental health resources and returns them in dict
+export const getrecommendedMHResources = async () => {
     // retrieve happiness score
     var score = null;
     const happy_score = getHappinessScore();
@@ -263,11 +269,10 @@ export const getrecommendedMHResources = async (resourceType) => {
     var mhr_obj = JSON.parse(JSON.stringify(entry));
     var keys = Object.keys(mhr_obj);
     console.log(mhr_obj)
+    console.log(keys)
 
     return mhr_obj;  
 }
-
-
 
 export const getJournalEntries = async () => {
     var journalEntries = [];
@@ -475,7 +480,7 @@ export const getAllMoodScores = async () => {
     return aggregatedScores
 }
 
-export const getHappinessScore = async() => {
+export const getHappinessScore = async () => {
     const docRef = doc(db, 'users', auth.currentUser.email)
     const docSnap = await getDoc(docRef)
     var score = docSnap.get('happiness')
