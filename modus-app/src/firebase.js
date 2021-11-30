@@ -233,10 +233,6 @@ export const deleteJournalEntry = async (jid) => {
     console.log("deleted journal entry!!")
 }
 
-export async function awaitMHR () {
-    let x = await getrecommendedMHResources()
-    return x
-  }
 
 // retrieves recommended mental health resources and returns them in dict
 export const getrecommendedMHResources = async () => {

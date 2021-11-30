@@ -1,10 +1,9 @@
-// import React from "react";
+
 import {Grid, Divider, Card} from '@mui/material'
-import { getrecommendedMHResources, awaitMHR } from "../firebase";
-// import Async from 'react-promise'
+import { getrecommendedMHResources} from "../firebase";
 import React, { Component } from 'react';
 
-export default class ListData extends Component {
+export default class MoodResources extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,9 +18,6 @@ export default class ListData extends Component {
   render() {
     const { data } = this.state;
     console.log(data)
-    // const itemList = data.map(function(item) {
-    //         return <li className="item" key={item.id}>{item.title}</li>;
-    //     });
   return (
       
     <div
@@ -44,10 +40,6 @@ export default class ListData extends Component {
           </h4>
         </Grid>
       </Grid>
-      {/* for key, value in resources_dict.items() { 
-         } */}
-
-     
       <Grid container direction="column" style={{marginTop: "2rem"}}>
         <Grid item>
           {Object.entries(data).map(([key, value]) => (
@@ -59,10 +51,6 @@ export default class ListData extends Component {
           )) 
 
           }
-           {/* <Card style={{width: "50rem", height: "40px", padding: "10px", margin: "10px"}}>
-           <a target="_blank" href="http://www.afsp.org/" style={{ color: '#578ff1' }}>American Foundation for Suicide Prevention</a>
-           </Card> */}
-         
             
         </Grid>
       </Grid>
