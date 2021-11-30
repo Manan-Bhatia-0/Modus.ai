@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Divider } from '@mui/material'
-import MoodResources from "../components/MoodResources";
+import ListData from "../components/MoodResources";
 import {getHappinessScore, getAllMoodScores, getrecommendedMHResources} from '../firebase'
 import Plotly from 'plotly.js-dist'
 import { useParams } from 'react-router-dom'
@@ -30,7 +30,7 @@ function Analysis() {
         </Grid>
         </Grid>
       </Grid>
-      <MoodResources />
+      <ListData />
     </div>
   );
 
