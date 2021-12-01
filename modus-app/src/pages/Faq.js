@@ -10,8 +10,10 @@ import "./modus.css";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: '60rem',
-    margin: "5rem"
+    maxWidth: '72rem',
+    marginTop: "5rem",
+    marginLeft: "5rem",
+    marginBottom: "5rem"
   },
   accordian: {
     marginTop: "2rem"
@@ -21,7 +23,7 @@ const useStyles = makeStyles({
 function Faq() {
   const classes = useStyles();
   return (
-    <div>
+    <div className="background">
       <Grid className={classes.root} container spacing={3} direction="column">
       <Grid item>
         <h1>FAQ</h1>

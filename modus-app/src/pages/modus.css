@@ -39,8 +39,13 @@ section {
   }
   
 root {
-    background-color: #c8d1e6;
+    /* background-color: #c8d1e6; */
     margin-top: 30 rem;
+    background: #F5F8FF;
+}
+
+.background {
+  background: #F5F8FF;
 }
 
 h1 {
