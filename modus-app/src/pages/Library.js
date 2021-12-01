@@ -1,61 +1,95 @@
 import React, { useEffect } from "react";
 import LibraryCard from "../components/LibraryCard";
-import {Button, Grid, Divider, Pagination, Select, MenuItem, InputLabel, TextField} from '@mui/material'
-import "../components/LibraryCard.css"
+// import {Button, Grid, Divider, Pagination, Select, MenuItem, InputLabel, TextField} from '@mui/material'
+import {Button, Grid, Divider, Pagination, TextField} from '@mui/material'
+import "./modus.css"
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateAdapter from '@mui/lab/AdapterDateFns';
-import {getJournalEntries} from "../firebase";
+import { makeStyles } from "@mui/styles/";
+import {getJournalEntries, searchByTitle, searchByDate} from "../firebase";
+
+const useStyles = makeStyles({
+  root: {
+    maxWidth: '60rem'
+  },
+  searchButton: {
+    width: 100
+  },
+  searchTextField: {
+    height: 55,
+    marginRight: 10
+  },
+  searchDateField: {
+    width: 100
+  }
+})
 
 function Library() {
-  useEffect(() => {
-    const entries = getJournalEntries();
-    console.log(entries);
-  });
-  const [sort, setSort] = React.useState('dateSaved');
-  // const [title, setTitle] = React.useState('');
-  // const [date, setDate] = React.useState('');
-  // const [content, setContent] = React.useState('');
-  // const [status, setStatus] = React.useState('');
-  const [entries, setEntries] = React.useState(null);
+  const classes = useStyles();
 
-  const handleChange = (event) => {
-    setSort(event.target.value);
-  }
+  // const [sort, setSort] = React.useState('dateSaved');
+  var [entries, setEntries] = React.useState(null);
   const [date, setDate] = React.useState(new Date());
+  const [searchField, setSearch] = React.useState('');
+
+  useEffect(() => {
+    const promise = getJournalEntries();
+    promise.then(function(result) {
+      setEntries(result);
+    })
+  }, 
+  []);
+
+  /* handles 'sort' field */
+  // const handleChange = (event) => {
+  //   setSort(event.target.value);
+  // }
 
   const handleDateChange = (newValue) => {
     setDate(newValue);
+    const searchResult = searchByDate(newValue);
+    searchResult.then(function(result) {
+      console.log(result);
+      if (result.length === 0) {
+        alert("No results found! Please try another journal entry.");
+      } else {
+        setEntries(result);
+      }
+    })
   };
 
-  // React.useEffect(() => {
-  //   fetch('http://localhost:8000/users')
-  //     .then(response => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       // console.log(data);
-  //       // console.log(data[0].uid[0].journalEntries[0].jid1[0].createdAt);
-  //       // console.log(data[0].uid[0].journalEntries);
-  //       setEntries(data[0].uid[0].journalEntries);
-        
-  //     })
-  // }, []);
+  const onSearchChange = (event) => {setSearch(event.target.value)}
+
+  const handleSearchSubmit = () => {
+    const searchResult = searchByTitle(searchField);
+    searchResult.then(function(result) {
+      console.log(result);
+      if (result.length === 0) {
+        alert("No results found! Please try another journal entry.");
+      } else {
+        setEntries(result);
+      }
+    })
+  }
   return (
     <div
+      className={classes.root}
       style={{margin: "5rem"}}
     >
-      <Grid container>
+      <Grid container justifyContent="space-between">
         <Grid item xs={5}>
           <h1 
             style={{
               marginTop: "5rem"
             }}>
-              User's Library
+              Library
           </h1>
         </Grid>
-        <Grid item xs={3} style={{
-          marginTop: "5rem"
+        <Grid item xs={2} 
+        className={classes.searchDateField}
+        style={{
+            marginTop: 69
           }}
         >
           <LocalizationProvider dateAdapter={DateAdapter}>
@@ -68,23 +102,29 @@ function Library() {
             />
           </LocalizationProvider>
         </Grid>
-        <Grid item xs={4} style={{marginTop:"5rem"}}>
-          {/* <form action="/" method="get"> */}
-          <form>
+        <Grid item xs={4} style={{marginTop:"4rem"}}>
             <input
                 type="text"
                 id="header-search"
                 placeholder="Search journal entries"
+                onChange={onSearchChange}
+                className={classes.searchTextField}
             />
-            <Button type ="submit" variant="outlined" style={{marginBottom: "5px"}}>Search</Button>
-          </form>
+            <button 
+              type ="submit" 
+              onClick={handleSearchSubmit}
+              className={classes.searchButton}
+            >
+              Search
+            </button>
+          {/* </form> */}
         </Grid>
         <Grid item xs={2} style={{
               marginTop: "3rem"
             }}
             >
-          <InputLabel id="sort-by-label" style={{marginBottom: 5}}>Sort by</InputLabel>
-          <Select
+          {/* <InputLabel id="sort-by-label" style={{marginBottom: 5}}>Sort by</InputLabel> */}
+          {/* <Select
             labelId="sort-by-label"
             id="sort-by"
             value={sort}
@@ -95,17 +135,19 @@ function Library() {
             <MenuItem value={"dateSaved"}>Date Saved</MenuItem>
             <MenuItem value={"alpha"}>Alphabetical</MenuItem>
             <MenuItem value={"dateCreated"}>Date Created</MenuItem>
-          </Select>
+          </Select> */}
         </Grid>
       </Grid>
       
       <Divider style={{width: "65rem"}}/>
       <Grid container direction="column" style={{marginTop: "2rem"}}>
-        <Grid item>
-          <LibraryCard/>
+        <Grid container item>
+          {entries && entries.map((entry) => {
+              return (<LibraryCard key={entry.title} entry={entry}/>)
+          })}
         </Grid>
         <Grid container item justifyContent="center">
-          <Pagination count={2} />
+          <Pagination count={1} />
         </Grid>
       </Grid>
     </div>

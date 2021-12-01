@@ -1,4 +1,6 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.css";
+import { handleLogout } from "../firebase";
 import { useHistory, useLocation } from "react-router";
 import {
         Typography, Drawer, 
@@ -13,9 +15,8 @@ import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { Link } from "react-router-dom";
 
-
-import {SignOut} from "../App";
 
 const drawerWidth = '12rem';
 
@@ -103,20 +104,22 @@ function NavBar() {
               key={item.text}
               button
               onClick={() => history.push(item.path)}
-              className={location.pathname == item.path ? classes.active : classes.linkText}
+              className={location.pathname === item.path ? classes.active : classes.linkText}
             >
                 <ListItemIcon className={classes.linkText}>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
             </ListItem>
           ))}
+          <Link to='/login'>
           <ListItem
             button
-            onClick={() => {history.push('/'); SignOut()}}
+            onClick={() => {history.push('/'); handleLogout()}}
             className={classes.linkText}
           >
             <ListItemIcon className={classes.linkText}><LogoutIcon color='#FFFFFF'/></ListItemIcon>
             <ListItemText primary='Logout' />
           </ListItem>
+          </Link>
         </List>
       </Drawer>
     </div>

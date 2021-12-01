@@ -1,78 +1,156 @@
-/* eslint-disable */ 
+/* eslint-disable */
 import React from "react";
-import ReactDOM from "react-dom";
 import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
-import TextField from "@mui/material/TextField";
-import "./journalEdit.css";
-import {useRef } from 'react'
-import {useState} from 'react' 
-import {deleteCurrentUser, getJournalEntries, saveJournalEntry, submitJournalEntry} from "../firebase";
+import "./modus.css";
+import { useState, useEffect } from "react";
+import {
+  saveJournalEntry,
+  searchByTitle,
+  submitJournalEntry,
+} from "../firebase";
+import { confirm } from "react-confirm-box";
+import { useParams } from "react-router";
+import { makeStyles } from "@mui/styles/";
+import {Grid, TextField} from '@mui/material'
+
+const optionsWithLabelChange = {
+  closeOnOverlayClick: false,
+  labels: {
+    confirmable: "Confirm",
+    cancellable: "Cancel",
+  },
+};
+
+const onClick = async (options) => {
+  const result = await confirm(
+    "Are you sure you want to submit your journal?",
+    options
+  );
+  if (result) {
+    submitJournalEntry(myValue, textfield);
+    history.push("/");
+    console.log("Submitted Journal!");
+    return;
+  }
+  console.log("Submitting Cancelled");
+};
+
+const useStyles = makeStyles({
+  root: {
+    margin: "5rem"
+  },
+  entryTextField: {
+    marginTop: "1rem"
+  },
+  subtitle: {
+    marginTop: "1rem",
+    fontSize: 25
+  },
+  saveButton: {
+    width: 200,
+    margin: "1rem",
+  },
+  submitButton: {
+    width: 200,
+    margin: "1rem",
+    backgroundColor: "#6384BD"
+  }
+})
 
 function JournalEdit() {
-  const [myValue, setValue] = useState('') 
-  const [textfield, setValue2] = useState('')
-  const [value, setValue3] = useState('')
-  
+  const [myValue, setValue] = useState("");
+  const [textfield, setValue2] = useState("");
+  const [value, setValue3] = useState("");
+  const { title } = useParams();
+  const classes = useStyles();
+  useEffect(() => {
+    if (title !== undefined ){
+      const promise = searchByTitle(title);
+      promise.then(function(result) {
+        setValue(result[0].title);
+        setValue2(result[0].text);
+        console.log("I set the values!");
+      })
+    } else {
+      // setValue("");
+      // setValue2("");
+    }
+  }), [];
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const entry = { myValue, textfield };
-    console.log(entry);
-    console.log(document.activeElement.getAttribute('value'));
-    submitfn(myValue, textfield) 
-  }
-  // const onSave = handleSubmit(e => {
-  //   e.submitAction = 'decline'
-  //   console.log("save")
-  // })
-
- // <form onSubmit={handleSubmit}> 
+  };
 
   return (
-    <div className="dashboard">
-      <section className="journalEdit" id="journalEdit">
-        <h2>Journal Entry Name #342</h2>
-        <h4>Date</h4>
+    <div className={classes.root}>
+      <Grid container direction="column">
         <form onSubmit={handleSubmit}>
-        <div className="title">
-          <h3>Title</h3>
-          <TextField value={myValue} 
-			onChange={(e) => setValue(e.target.value)} />
-        </div>
-        <div className="entryContent">
-          <h3>Entry Content</h3>
-          <SunEditor value={textfield} 
-      onChange={setValue2}
-      // onChange={(e) => setValue2(e.target.value)} 
-      setOptions={{ height: "500px", width: "1000px" }} />
-        </div>
-        <div className="buttons">
-          <button className="save"
-          onClick={() => saveJournalEntry(myValue, textfield)}>Save</button>  
-          <button className="submit" onClick={() => submitJournalEntry(myValue, textfield)}>Submit</button>
-        </div>
+          <Grid item container justifyContent="space-between">
+            <Grid item>
+              <TextField
+                value={myValue}
+                label="Title"
+                onChange={(e) => setValue(e.target.value)}
+              />
+            </Grid>
+            <Grid item>
+              <h5>{getDateStr()}</h5>
+            </Grid>
+          </Grid>
+          <Grid item className={classes.subtitle}>
+            Entry Content
+          </Grid>
+          <Grid item className={classes.entryTextField}>
+            <SunEditor
+              value={textfield}
+              onChange={setValue2}
+              // onChange={(e) => setValue2(e.target.value)}
+              setOptions={{ height: "500px", width: "1000px" }}
+            />
+          </Grid>
+          <Grid container item direction="column" alignItems="flex-end">
+            <Grid item>
+              <button
+                className={classes.saveButton}
+                onClick={() => saveJournalEntry(myValue, textfield)}
+              >
+                Save
+              </button>
+              <button
+                className={classes.submitButton}
+                onClick={() => {
+                  onClick(optionsWithLabelChange);
+                }}
+              >
+                Submit with message
+              </button>
+              <button
+                className={classes.submitButton}
+                onClick={() => submitJournalEntry(myValue, textfield)}
+              >
+                Submit
+              </button>
+            </Grid>
+            <Grid item>
+              
+            </Grid>
+          </Grid>
         </form>
-      </section>
+      </Grid>  
     </div>
   );
 }
 
-function submit() // no ';' here
-{
-    var elem = document.getElementsByClassName("submit2");
-    console.log(elem.value);
-}
+function getDateStr() {
+var dateObj = new Date();
+var month = dateObj.getUTCMonth() + 1; //months from 1-12
+var day = dateObj.getUTCDate();
+var year = dateObj.getUTCFullYear();
 
-
-function submitfn(myValue, textfield) {
-
-  console.log(myValue)
-  console.log(textfield)
-  // var title = document.getElementsByClassName('title').value;
-  // var entry_content = document.getElementsByClassName('entryContent').useRef;
-  console.log('Client-side code running');
-  // console.log(title)
-  // console.log(entry_content)
+var newDate =  month + '/' + day + '/' + year
+return newDate
 }
 
 export default JournalEdit;
