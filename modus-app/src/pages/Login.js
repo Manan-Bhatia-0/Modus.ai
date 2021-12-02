@@ -23,8 +23,11 @@ function Login() {
   }, [user, loading]);
 
   return (
+    <div>
+      <div className="loginPageHeader">
+        <h1>Welcome to Modus.ai</h1>
+      </div>
     <div className="loginPage">
-      <h1>Welcome to Modus.ai</h1>
       <div className="loginContainer">
         <input
           type="text"
@@ -54,14 +57,13 @@ function Login() {
           {" "}
           Log In with Facebook{" "}
         </button>
-        <a href="/reset">Forget your password?</a>
-        <a href="/register">Create account</a>
-        <input
-          type="checkbox"
-          name="save_login_state"
-          label="Keep me signed in"
-        />
+        <div style={{textAlign: "center", fontSize: 14}}>
+          <a href="/reset">Forgot your password?</a>
+          <br />
+          <a href="/register">Create account</a>
+        </div>
       </div>
+    </div>
     </div>
   );
 }
