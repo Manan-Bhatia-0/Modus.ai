@@ -17,7 +17,11 @@ import CreateAccount from "./pages/CreateAccount.js";
 import Reset from "./pages/ResetPassword.js";
 import Contact from "./pages/ContactUs";
 import AnalysisIndividual from './pages/AnalysisIndividual.js';
-
+import  {useDarkMode} from "./components/useDarkMode"
+import {ThemeProvider} from "styled-components";
+import { GlobalStyles } from "./components/globalStyles";
+import { lightTheme, darkTheme } from "./components/theme";
+import Toggle from "./components/Toggler";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
@@ -76,41 +80,51 @@ const CreateContainer = () => (
   </div>
 );
 
-const DefaultContainer = () => (
+const DefaultContainer = () => {
+  const [theme, themeToggler] = useDarkMode();
+
+  const themeMode = theme === 'light' ? lightTheme : darkTheme;
+  return(
   <Grid container spacing={2}>
       <Grid item>
         <NavBar />
       </Grid>
-      {/* <Grid container item direction="column" style={{display: "flex"}}> */}
-      <Grid container item direction="column" style={{marginLeft: "12rem"}}>
-        <Grid item>
-          <Route path="/home" exact component={JournalDashboard} />
-          <Route path="/profile" component={Profile} />
-          <Route exact path="/write/" component={JournalEdit} />
-          <Route path="/write/:title" component={JournalEdit} />
-          <Route path="/library" component={Library} />
-          <Route path="/individualAnalysis/:title"> <AnalysisIndividual/> </Route>
-          <Route path="/analysis" component={Analysis} />
-          <Route path="/faq" component={Faq}></Route>
-          <Route path="/contactus" component={Contact}></Route>
-          <Route path='/individual' component={AnalysisIndividual} />
-          <Route path="/journal/:title"> <SingleJournal /> </Route>
-        </Grid>
+      <ThemeProvider theme={themeMode}>
+      <Grid item style={{display: "flex"}}>
+        <Route path="/home" exact component={JournalDashboard} />
+        <Route path="/profile" component={Profile} />
+        <Route exact path="/write/" component={JournalEdit} />
+        <Route path="/write/:title" component={JournalEdit} />
+        <Route path="/library" component={Library} />
+        <Route path="/individualAnalysis/:title"> <AnalysisIndividual/> </Route>
+        <Route path="/analysis" component={Analysis} />
+        <Route path="/faq" component={Faq}></Route>
+        <Route path="/contactus" component={Contact}></Route>
+        <Route path='/individual' component={AnalysisIndividual} />
+        <Route path="/journal/:title"> <SingleJournal /> </Route>
+        <Toggle theme={theme} toggleTheme={themeToggler} />
       </Grid>
-      
+      </ThemeProvider>
   </Grid>
+
 );
+}
+
 
 function Welcome() {
+  
   return (
+    
     <Router>
       <Switch>
         <Route exact path="/" component={LoginContainer} />
         <Route exact path="/register" component={CreateContainer} />
         <Route exact path="/reset" component={ResetContainer} />
         <Route component={DefaultContainer} />
+        
       </Switch>
     </Router>
+    
   );
 }
 
