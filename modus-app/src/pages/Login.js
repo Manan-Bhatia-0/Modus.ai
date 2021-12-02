@@ -8,6 +8,7 @@ import {
 } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./modus.css";
+import bg_img from '../imgs/LoginBG.svg'
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -23,8 +24,12 @@ function Login() {
   }, [user, loading]);
 
   return (
+    <div className="background">
+        {/* <img src={bg_img} alt="background-img" width="100%"/> */}
+      <div className="loginPageHeader">
+        <h1>Welcome to Modus.ai</h1>
+      </div>
     <div className="loginPage">
-      <h1>Welcome to Modus.ai</h1>
       <div className="loginContainer">
         <input
           type="text"
@@ -54,14 +59,13 @@ function Login() {
           {" "}
           Log In with Facebook{" "}
         </button>
-        <a href="/reset">Forget your password?</a>
-        <a href="/register">Create account</a>
-        <input
-          type="checkbox"
-          name="save_login_state"
-          label="Keep me signed in"
-        />
+        <div style={{textAlign: "center", fontSize: 14}}>
+          <a href="/reset">Forgot your password?</a>
+          <br />
+          <a href="/register">Create account</a>
+        </div>
       </div>
+    </div>
     </div>
   );
 }

@@ -1,12 +1,12 @@
 import React from "react";
 import { Grid, Divider } from '@mui/material'
 import MoodResources from "../components/MoodResources";
-import {getHappinessScore, getAllMoodScores, getrecommendedMHResources} from '../firebase'
+import {getHappinessScore, getAllMoodScores, getrecommendedMHResources, getAgeGenderAnalysis} from '../firebase'
 import Plotly from 'plotly.js-dist'
 import { useParams } from 'react-router-dom'
 
 function Analysis() {
-  
+  // var gender = getAgeGenderAnalysis()
   return (
     <div>
       <Grid container style={{ margin: '5rem' }}>

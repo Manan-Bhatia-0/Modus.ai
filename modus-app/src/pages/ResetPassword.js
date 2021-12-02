@@ -14,6 +14,8 @@ function ResetPassword() {
   }, [user, loading]);
   return (
     <div className="Reset">
+      <div className="resetContainer">
+        <div className="loginContainer">
       <input
         type="text"
         placeholder="Email Address "
@@ -27,6 +29,8 @@ function ResetPassword() {
       >
         Reset Password
       </button>
+      </div>
+      </div>
     </div>
   );
 }
