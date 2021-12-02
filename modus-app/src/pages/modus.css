@@ -118,6 +118,68 @@ h4 {
     opacity: 0.8;
   }
 
+  .footer {
+    background: #00171f;
+    color: #fff;
+    text-align: center;
+    padding: 2em;
+    margin-right: '12rem';
+  }
+  
+  .footer .map {
+    display: flex;
+    padding: 20px;
+    background: #fff;
+    color: #00171f;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+  
+  .footer .map .phoneemail .phone {
+    background-color: #00171f;
+    color: #fff;
+    justify-items: center;
+    width: 200px;
+    padding: 30px;
+    margin: 20px;
+    outline: none;
+    border: none;
+  }
+  
+  .footer .map .phoneemail .email {
+    background-color: #00171f;
+    justify-items: center;
+    color: #fff;
+    width: 200px;
+    padding: 30px;
+    margin: 20px;
+    outline: none;
+    border: none;
+  }
+  
+  .footer .map .phoneemail {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .footer h3 {
+    font-size: 20px;
+    margin: 10px;
+    font-weight: 600;
+  }
+  
+  .footer p {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .footer p a {
+    color: #00a7e1;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
 /* The Modal (background) */
 /*
 .modal {

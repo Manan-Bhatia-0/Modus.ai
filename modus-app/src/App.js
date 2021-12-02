@@ -79,19 +79,23 @@ const DefaultContainer = () => (
       <Grid item>
         <NavBar />
       </Grid>
-      <Grid item style={{display: "flex"}}>
-        <Route path="/home" exact component={JournalDashboard} />
-        <Route path="/profile" component={Profile} />
-        <Route exact path="/write/" component={JournalEdit} />
-        <Route path="/write/:title" component={JournalEdit} />
-        <Route path="/library" component={Library} />
-        <Route path="/individualAnalysis/:title"> <AnalysisIndividual/> </Route>
-        <Route path="/analysis" component={Analysis} />
-        <Route path="/faq" component={Faq}></Route>
-        <Route path="/contactus" component={Contact}></Route>
-        <Route path='/individual' component={AnalysisIndividual} />
-        <Route path="/journal/:title"> <SingleJournal /> </Route>
+      {/* <Grid container item direction="column" style={{display: "flex"}}> */}
+      <Grid container item direction="column" style={{marginLeft: "12rem"}}>
+        <Grid item>
+          <Route path="/home" exact component={JournalDashboard} />
+          <Route path="/profile" component={Profile} />
+          <Route exact path="/write/" component={JournalEdit} />
+          <Route path="/write/:title" component={JournalEdit} />
+          <Route path="/library" component={Library} />
+          <Route path="/individualAnalysis/:title"> <AnalysisIndividual/> </Route>
+          <Route path="/analysis" component={Analysis} />
+          <Route path="/faq" component={Faq}></Route>
+          <Route path="/contactus" component={Contact}></Route>
+          <Route path='/individual' component={AnalysisIndividual} />
+          <Route path="/journal/:title"> <SingleJournal /> </Route>
+        </Grid>
       </Grid>
+      
   </Grid>
 );
 
