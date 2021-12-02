@@ -22,6 +22,7 @@
   /* } */
 
   .createAccountContainer,
+  .resetContainer,
   .loginPage {
     background-color: #ffffff;
     display: flex;
