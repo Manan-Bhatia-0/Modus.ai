@@ -9,9 +9,9 @@ const Contact = () => {
 
   const submit = () => {
     if (name && email && message) {
-      const serviceId = "service_id";
-      const templateId = "template_id";
-      const userId = "user_id";
+      const serviceId = "service_5b14yai";
+      const templateId = "template_vo3xa34";
+      const userId = "user_saHkHIC9enbzT47wydkDn";
       const templateParams = {
         name,
         email,
