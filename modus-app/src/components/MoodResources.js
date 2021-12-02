@@ -1,19 +1,23 @@
 
 import {Grid, Divider, Card} from '@mui/material'
-import { getrecommendedMHResources, MoodAnalysisFuncs} from "../firebase";
+import { getrecommendedMHResources, MoodAnalysisFuncs, getAgeGenderAnalysis} from "../firebase";
 import React, { Component } from 'react';
 
 export default class MoodResources extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+      data: [{"Guided Meditation":'https://mindfullycity.com/free-guided-meditation-resources-for-difficult-times/'}, 0.0]
     };
   }
   async componentDidMount() {
-    const data = await getrecommendedMHResources();
+    const data = await MoodAnalysisFuncs();
+    const data2 = await getAgeGenderAnalysis();
+    console.log(data)
+    console.log(data2)
+
     this.setState({ data });
-    console.log(this.state)
+    console.log(this.state.data)
     // await MoodAnalysisFuncs(function (data) {
     //   console.log(data)
     //   this.setState({ data });
@@ -42,11 +46,25 @@ export default class MoodResources extends Component {
         <Grid item xs={10}>
           <h1 
             style={{
-              marginTop: "5rem"
+              marginTop: "2rem"
             }}>
-              AGE AND GENDER QOOOOOOOOOOO 
+              How your demographics are doing: {data[1]}
           </h1>
-          <Divider style={{width: "60rem"}}/>
+          <h4 
+            style={{
+              marginTop: "1rem"
+            }}>
+              The above score shows how all users with the same age range and gender as you are doing. 
+        
+          </h4>
+          <h4 
+            style={{
+              marginTop: "3rem"
+            }}>
+              You can use this score to see how yours compares to the average or how the same demographic might be doing! 
+          </h4>
+          
+          {/* <Divider style={{width: "60rem"}}/> */}
          
         </Grid>
       </Grid>
@@ -71,7 +89,7 @@ export default class MoodResources extends Component {
       </Grid>
       <Grid container direction="column" style={{marginTop: "2rem"}}>
         <Grid item>
-          {Object.entries(data).map(([key, value]) => (
+          {Object.entries(data[0]).map(([key, value]) => (
 
 <Card style={{width: "50rem", height: "40px", padding: "10px", margin: "10px"}}>
            <a target="_blank" href={value} style={{ color: '#578ff1' }}>{key}</a>

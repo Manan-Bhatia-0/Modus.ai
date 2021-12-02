@@ -96,6 +96,9 @@ function Faq() {
         <Grid item>
           <Footer />
         </Grid>
+        <Grid item>
+          <Footer />
+        </Grid>
       </Grid>
     </div>
   );
