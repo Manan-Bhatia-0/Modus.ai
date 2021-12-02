@@ -136,6 +136,14 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
 
 };
 
+export const editProfile = async (name, gender, age) => {
+  await db.collection('users').doc(auth.currentUser.email).collection('profile').doc('profileInfo').set({
+      name: name,
+      gender: gender,
+      age: age
+  })
+}
+
 export const sendPasswordResetEmail = async (email) => {
     try {
         await auth.sendPasswordResetEmail(email);
