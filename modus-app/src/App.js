@@ -1,5 +1,5 @@
 /* eslint-disable */ 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
 
@@ -13,6 +13,7 @@ import Faq from "./pages/Faq.js";
 import Login from "./pages/Login.js";
 import CreateAccount from "./pages/CreateAccount.js";
 import Reset from "./pages/ResetPassword.js";
+import Contact from "./pages/ContactUs";
 import AnalysisIndividual from './pages/AnalysisIndividual.js';
 
 import firebase from "firebase/compat/app";
@@ -87,6 +88,7 @@ const DefaultContainer = () => (
         <Route path="/individualAnalysis/:title"> <AnalysisIndividual/> </Route>
         <Route path="/analysis" component={Analysis} />
         <Route path="/faq" component={Faq}></Route>
+        <Route path="/contactus" component={Contact}></Route>
         <Route path='/individual' component={AnalysisIndividual} />
         <Route path="/journal/:title"> <SingleJournal /> </Route>
       </Grid>

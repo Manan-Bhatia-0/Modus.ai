@@ -100,6 +100,8 @@ export const signInWithEmailAndPassword = async (email, password) => {
     }
 };
 
+
+
 //add passwordconfirm to the state
 export const registerWithEmailAndPassword = async (name, email, password) => {
     try {
@@ -221,74 +223,51 @@ export const saveJournalEntry = async (title, text) => {
 }
 
 // deletes a journal entry given a journal entry id
-// TODO: Add journal id as argument
 export const deleteJournalEntry = async (jid) => {
     const querySnapshot = db.collection('users').doc(auth.currentUser.email).collection('journalEntries').doc(jid).get()
         .then(function (result) {
             //console.log(result);
             result.ref.delete();
         })
-    //  .then(() => {
-    //     window.location.reload(false);
-    //  })
 
     console.log("deleted journal entry!!")
 }
 
-// TODO: post results onto MHR component
-export const getrecommendedMHResources = async (resourceType) => {
-    console.log("in mhr");
-    const score = -1;
-    var resources = [];
-    const querySnapshot = db.collection('users').doc(auth.currentUser.email).collection('journalEntries').orderByChild('createdAt')
-        .limitToLast(1).get()
-        .then(function (result) {
-            console.log(result);
-            score = parseInt(result['polarityEntryMoodAnalysis']);
-        })
-    if (score > 0.90) {
-        const querySnapshot = db.collection('mentalHealthResources').doc('Mindfulness').get()
-            .then(function (result) {
-                console.log(result);
-                resources.push(result);
-            })
 
-
-    } else if (score > 0.65) {
-        const querySnapshot = db.collection('Anxiety').doc('Mindfulness').get()
-            .then(function (result) {
-                console.log(result);
-                resources.push(result);
-            })
-
-    } else if (score > 0.35) {
-        const querySnapshot = db.collection('Depression').doc('Mindfulness').get()
-            .then(function (result) {
-                console.log(result);
-                resources.push(result);
-            })
-
-    } else {
-        const querySnapshot = db.collection('Suicide').doc('Mindfulness').get()
-            .then(function (result) {
-                console.log(result);
-                resources.push(result);
-            })
-    }
-    return resources;
-}
-
-// receives mental health resources given a specific mental health type (from mood score)
-// TODO:  connect title and links to display on UI
-// TODO: determine what type of mental health resource needed based on mood score
-export const getMHResources = async (resourceType) => {
-    const querySnapshot = db.collection('mentalHealthResources').doc(resourceType).get().then(function (result) {
-        const data = result.data();
-        const title = data['Title'];
-        const link = data['Link'];
-        console.log(title + ": " + link);
+// retrieves recommended mental health resources and returns them in dict
+export const getrecommendedMHResources = async () => {
+    // retrieve happiness score
+    var score = null;
+    const happy_score = getHappinessScore();
+    await happy_score.then(function (result) {
+        score = result
     })
-    console.log("received resources")
+    var level = null
+
+    // get correct level for MHRs
+    if (score < .250) {
+        level = "Level 3";
+    } else if (score < 0.50) {
+        level = "Level 2";
+    } else {
+        level = "Level 1";
+    }
+
+    // retrieve resources
+    var entry = null
+    const querySnapshot = await getDocs(collection(db.collection('mentalHealthResources').
+    doc(level), 'Resources'));
+    querySnapshot.forEach((doc) => {
+        entry = doc.data();
+    });
+
+    // convert resources to dictionary/ json
+    var mhr_obj = JSON.parse(JSON.stringify(entry));
+    var keys = Object.keys(mhr_obj);
+    console.log(mhr_obj)
+    console.log(keys)
+
+    return mhr_obj;  
 }
 
 export const getJournalEntries = async () => {
@@ -347,6 +326,21 @@ const entryConverter = {
             data.polaritySentMoodAnalysis);
     }
 };
+
+// // Firestore data converter
+// const entryConverter_mhr = {
+//     toFirestore: (id) => {
+//         return {
+//             jid: id.jid,
+//             text: id.text,
+
+//         };
+//     },
+//     fromFirestore: (snapshot, options) => {
+//         const data = snapshot.data(options);
+//         return new JournalEntry(data.jid, data.text);
+//     }
+// };
 
 export const searchByTitle = async (title) => {
     var result = []
@@ -482,7 +476,7 @@ export const getAllMoodScores = async () => {
     return aggregatedScores
 }
 
-export const getHappinessScore = async() => {
+export const getHappinessScore = async () => {
     const docRef = doc(db, 'users', auth.currentUser.email)
     const docSnap = await getDoc(docRef)
     var score = docSnap.get('happiness')
