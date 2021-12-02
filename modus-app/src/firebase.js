@@ -627,6 +627,8 @@ export const getAgeGenderAnalysis = async () => {
         
     });
 
+
+
     // convert resources to dictionary/ json
 
     var profile_obj = JSON.parse(JSON.stringify(entry));
@@ -677,10 +679,7 @@ export const getAgeGenderAnalysis = async () => {
     var average = Math.round((total/counter) * 100) / 100
     console.log('DONEEEE')
     console.log(average)
-
-
-
-    return average;
+    return average * 100;
     
 }
 

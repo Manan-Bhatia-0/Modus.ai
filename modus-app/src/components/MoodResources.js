@@ -14,9 +14,13 @@ export default class MoodResources extends Component {
     const data = await MoodAnalysisFuncs();
     const data2 = await getAgeGenderAnalysis();
     console.log(data)
-    console.log(data2)
 
+    console.log(data2)
+    if (data[1] == null) {
+      data[1] = 0.0
+    }
     this.setState({ data });
+
     console.log(this.state.data)
     // await MoodAnalysisFuncs(function (data) {
     //   console.log(data)
@@ -30,6 +34,8 @@ export default class MoodResources extends Component {
     console.log(this.state)
     var { data } = this.state;
     console.log(data)
+
+
     // if(data.length==0) {
     //   data = []
     //   data[0] = {"Guided Meditation":'https://mindfullycity.com/free-guided-meditation-resources-for-difficult-times/'}
