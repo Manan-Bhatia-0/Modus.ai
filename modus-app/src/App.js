@@ -3,6 +3,8 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
 
+import "./pages/modus.css";
+
 import JournalDashboard from "./pages/JournalDashboard.js";
 import NavBar from "./components/Navbar.js";
 import JournalEdit from "./pages/JournalEdit";

@@ -6,12 +6,16 @@ import Typography from "@mui/material/Typography";
 import faqimage from "./FAQ.png";
 import {Grid, Divider} from '@mui/material'
 import { makeStyles } from "@mui/styles/";
+import Footer from "../components/Footer.js"
 import "./modus.css";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: '60rem',
+    maxWidth: '65rem',
     margin: "5rem"
+    // marginTop: "5rem",
+    // marginLeft: "5rem",
+    // marginBottom: "5rem"
   },
   accordian: {
     marginTop: "2rem"
@@ -21,15 +25,16 @@ const useStyles = makeStyles({
 function Faq() {
   const classes = useStyles();
   return (
-    <div>
-      <Grid className={classes.root} container spacing={3} direction="column">
-      <Grid item>
-        <h1>FAQ</h1>
-        <Divider style={{width: "65rem"}}/>
-      </Grid>
-      <Grid item>
-        <img src={faqimage} alt="Logo" width="60%" height="60%" />
-      </Grid>
+    <div className="background">
+      <Grid container spacing={3} direction="column">
+        <div className={classes.root}>
+        <Grid item>
+          <h1>FAQ</h1>
+          <Divider style={{width: "65rem"}}/>
+        </Grid>
+        <Grid item>
+          <img src={faqimage} alt="Logo" width="60%" height="60%" />
+        </Grid>
         <Grid item className={classes.accordian}>
           <Accordion>
             <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
@@ -86,6 +91,10 @@ function Faq() {
               </Typography>
             </AccordionDetails>
           </Accordion>
+        </Grid>
+        </div>
+        <Grid item>
+          <Footer />
         </Grid>
       </Grid>
     </div>
