@@ -275,8 +275,23 @@ export const getrecommendedMHResources = async () => {
     console.log(mhr_obj)
     console.log(keys)
 
+    // await db.collection('users').doc(auth.currentUser.email).collection('MentalHealthResources').doc('Resources').set({
+    //     resources : mhr_obj 
+        
+    // })
+
     return mhr_obj;  
 }
+
+// export const getMHRfromdb = async () => {
+//     const querySnapshot = await getDocs(collection(db.collection('mentalHealthResources').
+//     doc(level), 'Resources'));
+//     querySnapshot.forEach((doc) => {
+//         entry = doc.data();
+//     }); 
+
+// }
+
 
 export const getJournalEntries = async () => {
     var journalEntries = [];
@@ -599,6 +614,67 @@ export const getTopThreeLatestEntries = async () => {
     console.log(result)
     return result
 }
+
+export const getAgeGenderAnalysis = async () => {
+
+
+    var entry = null
+
+    const querySnapshot = await getDocs(collection(db.collection('users').
+    doc(auth.currentUser.email), 'profile'));
+    querySnapshot.forEach((doc) => {
+        console.log(doc);
+        entry = doc.data();
+        
+    });
+
+    // convert resources to dictionary/ json
+
+    var profile_obj = JSON.parse(JSON.stringify(entry));
+    var keys = Object.keys(profile_obj);
+    const gender_var = profile_obj['gender'][0].toLowerCase()
+    console.log("heLLOOOOOOOOOO")
+    var counter = 0
+    var total = 0
+    const querySnapshot2 = await getDocs(collection(db.collection('users')));
+    querySnapshot2.forEach((doc) => {
+        console.log(doc);
+        entry = doc.data();
+        var user_obj = JSON.parse(JSON.stringify(entry));
+        console.log(user_obj['happiness'])
+        counter = counter + 1
+        total = total + user_obj['happiness'] 
+        
+        
+    }); 
+
+    console.log(total/counter)
+    console.log('DONEEEE')
+
+
+
+    return gender_var;
+    
+}
+
+export const MoodAnalysisFuncs = async () => {
+
+    const gender_var = await getAgeGenderAnalysis()
+    const resources = await getrecommendedMHResources();
+    var return_lst = [resources, gender_var]
+    console.log(return_lst)
+
+    if(return_lst==null) {
+        return [{"Guided Meditation":'https://mindfullycity.com/free-guided-meditation-resources-for-difficult-times/'}, "Male"]
+      }
+
+    //MoodAnalysisReturn(return_lst)
+    return return_lst 
+    
+}
+
+
+
 
 export const getUserName = () => {
     return auth.currentUser.displayName

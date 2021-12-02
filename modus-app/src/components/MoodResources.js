@@ -1,6 +1,6 @@
 
 import {Grid, Divider, Card} from '@mui/material'
-import { getrecommendedMHResources} from "../firebase";
+import { getrecommendedMHResources, MoodAnalysisFuncs} from "../firebase";
 import React, { Component } from 'react';
 
 export default class MoodResources extends Component {
@@ -13,18 +13,47 @@ export default class MoodResources extends Component {
   async componentDidMount() {
     const data = await getrecommendedMHResources();
     this.setState({ data });
+    console.log(this.state)
+    // await MoodAnalysisFuncs(function (data) {
+    //   console.log(data)
+    //   this.setState({ data });
+
+    // } )
+    
   }
 
   render() {
-    const { data } = this.state;
+    console.log(this.state)
+    var { data } = this.state;
     console.log(data)
+    // if(data.length==0) {
+    //   data = []
+    //   data[0] = {"Guided Meditation":'https://mindfullycity.com/free-guided-meditation-resources-for-difficult-times/'}
+    //   data[1] = "Male"
+    // }
+    console.log(data) 
+    // console.log(data[1])
   return (
       
     <div
       style={{margin: "5rem"}}
     >
+        <Grid container>
+        <Grid item xs={10}>
+          <h1 
+            style={{
+              marginTop: "5rem"
+            }}>
+              AGE AND GENDER QOOOOOOOOOOO 
+          </h1>
+          <Divider style={{width: "60rem"}}/>
+         
+        </Grid>
+      </Grid>
+
       <Grid container>
         <Grid item xs={10}>
+
           <h1 
             style={{
               marginTop: "5rem"
