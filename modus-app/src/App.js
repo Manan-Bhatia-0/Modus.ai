@@ -89,7 +89,7 @@ const DefaultContainer = () => {
       <Grid item>
         <NavBar />
       </Grid>
-      <ThemeProvider theme={themeMode}>
+      {/* <ThemeProvider theme={themeMode}> */}
       <Grid item style={{display: "flex"}}>
         <Route path="/home" exact component={JournalDashboard} />
         <Route path="/profile" component={Profile} />
@@ -102,9 +102,9 @@ const DefaultContainer = () => {
         <Route path="/contactus" component={Contact}></Route>
         <Route path='/individual' component={AnalysisIndividual} />
         <Route path="/journal/:title"> <SingleJournal /> </Route>
-        <Toggle theme={theme} toggleTheme={themeToggler} />
+        {/* <Toggle theme={theme} toggleTheme={themeToggler} /> */}
       </Grid>
-      </ThemeProvider>
+      {/* </ThemeProvider> */}
   </Grid>
 
 );

@@ -94,7 +94,11 @@ function Faq() {
         </Grid>
         </div>
         <Grid item>
-          <Footer />
+        <video width="500" controls>
+        <source src="Modusai_video.mp4" type="video/mp4"/>  
+
+  {/* <source src="modusai_vid.mp4" type="video/mp4"> */}
+</video>
         </Grid>
         <Grid item>
           <Footer />
