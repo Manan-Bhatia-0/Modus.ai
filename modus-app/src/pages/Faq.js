@@ -97,12 +97,26 @@ function Faq() {
         </Grid>
         </div>
         <Grid item>
-        <video width="500" controls>
+          <div className="faqVideo">
+        <video width="1040" controls>
         <source src={myVideo} type="video/mp4"/> 
-</video>
+        </video>
+        </div>
         </Grid>
         <Grid item>
+          <div>
+          <br></br>
+          <br></br>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
+          <br></br>
+          <br></br>
+          <br></br><br></br><br></br><br></br><br></br><br></br>
+          <br></br>
+          <br></br>
+          <br></br>
           <Footer />
+        
+          </div>
         </Grid>
       </Grid>
     </div>
