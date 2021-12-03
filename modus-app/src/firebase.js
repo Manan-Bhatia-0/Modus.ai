@@ -770,38 +770,11 @@ export const getAgeGenderAnalysis = async () => {
             counter = counter + 1 
         }
     });
-  
-
-    // db.collection("users").get().then(function(querySnapshot) {
-    //     querySnapshot.forEach(function(doc) {
-    //         // doc.data() is never undefined for query doc snapshots
-    //         entry = doc.data();
-    //         if (entry["happiness"] != null) {
-    //             total = total + entry['happiness']
-    //             counter = counter + 1 
-    //         }
-    //     });
-    // });
-// Object.keys(mhr_obj)
-
-    // const querySnapshot2 = await getDocs(collection(db.collection('users')));
-    // querySnapshot2.forEach((doc) => {
-    //     console.log(doc);
-    //     entry = doc.data();
-    //     var user_obj = JSON.parse(JSON.stringify(entry));
-    //     console.log(user_obj['happiness'])
-    //     counter = counter + 1
-    //     total = total + user_obj['happiness'] 
-        
-        
-    // }); 
 
     console.log(total)
     console.log(counter)
     var average = (total/counter) * 100;
-    average = average.toFixed(2);
-
-
+    average = average.toFixed(2)
     console.log(average)
     return average;
     

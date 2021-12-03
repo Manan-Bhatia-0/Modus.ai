@@ -8,6 +8,7 @@ import {Grid, Divider} from '@mui/material'
 import { makeStyles } from "@mui/styles/";
 import Footer from "../components/Footer.js"
 import "./modus.css";
+import myVideo from "./Modusai_video.mp4";
 
 const useStyles = makeStyles({
   root: {
@@ -88,6 +89,8 @@ function Faq() {
                 never exceed 1 but it may be less than 1. This is because it is possible that at any
                 given time, less than 100% of the journal entry may be properly analyzed and/or
                 some of the more complex emotions may not be considered by our NLP model for the analysis.
+
+
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -95,9 +98,7 @@ function Faq() {
         </div>
         <Grid item>
         <video width="500" controls>
-        <source src="Modusai_video.mp4" type="video/mp4"/>  
-
-  {/* <source src="modusai_vid.mp4" type="video/mp4"> */}
+        <source src={myVideo} type="video/mp4"/> 
 </video>
         </Grid>
         <Grid item>
