@@ -56,19 +56,19 @@ export default class MoodResources extends Component {
             }}>
               How your demographics are doing: {data[1]}
           </h1>
-          <h4 
+          <h6 
             style={{
               marginTop: "1rem"
             }}>
               The above score shows how all users with the same age range and gender as you are doing. 
         
-          </h4>
-          <h4 
+          </h6>
+          <h6 
             style={{
               marginTop: "3rem"
             }}>
               You can use this score to see how yours compares to the average or how the same demographic might be doing! 
-          </h4>
+          </h6>
           
           {/* <Divider style={{width: "60rem"}}/> */}
          

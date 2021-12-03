@@ -203,7 +203,7 @@ root {
 }
 
 h1 {
-    font-family: Spectral;
+    font-family: "Ubuntu", sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 48px;
@@ -212,8 +212,7 @@ h1 {
   }
 
 h2 {
-    position: absolute;
-    font-family: Spectral;
+    font-family: "Ubuntu", sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 48px;
@@ -224,7 +223,7 @@ h2 {
 h3 {
     position: absolute;
     /* height: 53px; */
-    font-family: Roboto;
+    font-family: "Ubuntu", sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 36px;
@@ -234,7 +233,7 @@ h3 {
 
 h4 {
     position: absolute;
-    font-family: Roboto;
+    font-family: "Ubuntu", sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -247,7 +246,7 @@ h4 {
     position: absolute;
     left: 83%;
     top: 12%;
-    font-family: Roboto;
+    font-family: "Ubuntu", sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -255,6 +254,17 @@ h4 {
   
     color: #474747;
   } 
+
+h6 {
+  position: absolute;
+  font-family: "Ubuntu", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+
+  color: #474747;
+} 
 
    /* Set a style for all buttons */
   button {
