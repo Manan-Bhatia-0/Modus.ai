@@ -54,11 +54,12 @@ export default class MoodResources extends Component {
             style={{
               marginTop: "2rem"
             }}>
-              How your demographics are doing: {data[1]}
+              How your demographics are doing: <b>{data[1]}</b>
           </h1>
           <Divider style={{width: "60rem"}}/>
           <h4 
             style={{
+              fontSize: 18,
               marginTop: "1rem"
             }}>
               The above score shows how all users with the same age range and gender as you are doing. 
@@ -66,6 +67,7 @@ export default class MoodResources extends Component {
           </h4>
           <h4 
             style={{
+              fontSize: 18,
               marginTop: "3rem"
             }}>
               You can use this score to see how yours compares to the average or how the same 
@@ -90,6 +92,7 @@ export default class MoodResources extends Component {
   
           <h4 
             style={{
+              fontSize: 18,
               marginTop: "1rem"
             }}>
               Here is what we recommend for you based on your latest entries:
@@ -101,9 +104,9 @@ export default class MoodResources extends Component {
         <Grid item>
           {Object.entries(data[0]).map(([key, value]) => (
 
-<Card style={{width: "50rem", height: "40px", padding: "10px", margin: "10px"}}>
-           <a target="_blank" href={value} style={{ color: '#578ff1' }}>{key}</a>
-           </Card>
+            <Card style={{width: "60rem", height: "40px", padding: "10px", marginBottom: "10px"}}>
+              <a target="_blank" href={value} style={{ color: '#578ff1' }}>{key}</a>
+            </Card>
           
           )) 
 

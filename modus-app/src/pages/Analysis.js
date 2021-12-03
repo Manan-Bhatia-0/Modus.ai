@@ -13,9 +13,10 @@ function Analysis() {
         <Grid item xs={10}>
           <h1
             style={{
-              marginTop: "0.5px"
+              marginTop: "0.5px",
+              marginBottom: "30px"
             }}>
-            <b> Mood Analysis Board </b>
+            Mood Analysis Board
           </h1>
           <div id='pieChartAvg'>
             {plotPieChartJs()}
