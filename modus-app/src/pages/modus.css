@@ -212,6 +212,16 @@ root {
   color: white;
 }
 
+.contactUsButton {
+  position: absolute;
+  width: 183px;
+  height: 50px;
+  left: 208px;
+  top: 300px;
+  background-color: #578FF1;
+  color: white;
+}
+
 h1 {
     font-family: "Ubuntu", sans-serif;
     font-style: normal;

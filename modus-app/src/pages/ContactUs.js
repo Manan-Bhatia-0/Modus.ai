@@ -33,26 +33,33 @@ const Contact = () => {
 
   return (
     <div id="contact-form">
-      <input
+      <h2>
+      <br></br>
+        Contact Us
+        </h2>
+      <br></br>
+      <textarea
         type="text"
         placeholder="Name "
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <input
+      <br></br>
+      <textarea
         type="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
+      <br></br>
       <textarea
         placeholder="Message"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       ></textarea>
-      <button onClick={submit}>Send</button>
+      <button className="contactUsButton" onClick={submit}>Send</button>
       <span className={emailSent ? "visible" : null}>
-        Thank you so much for the feedback!
+       <br></br> <br></br> <br></br> <br></br>Thank you so much for the feedback!
       </span>
     </div>
   );
