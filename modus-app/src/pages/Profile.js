@@ -37,7 +37,7 @@ function Profile() {
   // var gender = select.options[select.selectedIndex].value;
   //const history = useHistory();
   return (
-    <div class="profile container">
+    <div class="profilecontainer">
       <h1 class="text-primary">Edit Profile</h1>
       <label class="name-field">Name:</label>
       <input
@@ -66,7 +66,6 @@ function Profile() {
         <option value="Other">Other</option>
       </select> */}
       <label class="birthday-field">Birthday:</label>
-      /*{" "}
       <input
         class="form-control"
         type="date"

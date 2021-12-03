@@ -17,11 +17,6 @@ import CreateAccount from "./pages/CreateAccount.js";
 import Reset from "./pages/ResetPassword.js";
 import Contact from "./pages/ContactUs";
 import AnalysisIndividual from './pages/AnalysisIndividual.js';
-import  {useDarkMode} from "./components/useDarkMode"
-import {ThemeProvider} from "styled-components";
-import { GlobalStyles } from "./components/globalStyles";
-import { lightTheme, darkTheme } from "./components/theme";
-import Toggle from "./components/Toggler";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
@@ -81,15 +76,12 @@ const CreateContainer = () => (
 );
 
 const DefaultContainer = () => {
-  const [theme, themeToggler] = useDarkMode();
 
-  const themeMode = theme === 'light' ? lightTheme : darkTheme;
   return(
   <Grid container spacing={2}>
       <Grid item>
         <NavBar />
       </Grid>
-      {/* <ThemeProvider theme={themeMode}> */}
       <Grid item style={{display: "flex"}}>
         <Route path="/home" exact component={JournalDashboard} />
         <Route path="/profile" component={Profile} />
@@ -102,9 +94,7 @@ const DefaultContainer = () => {
         <Route path="/contactus" component={Contact}></Route>
         <Route path='/individual' component={AnalysisIndividual} />
         <Route path="/journal/:title"> <SingleJournal /> </Route>
-        {/* <Toggle theme={theme} toggleTheme={themeToggler} /> */}
       </Grid>
-      {/* </ThemeProvider> */}
   </Grid>
 
 );

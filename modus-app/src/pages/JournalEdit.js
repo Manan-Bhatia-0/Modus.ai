@@ -59,8 +59,8 @@ const useStyles = makeStyles({
 })
 
 function JournalEdit() {
-  const [myValue, setValue] = useState("");
-  const [textfield, setValue2] = useState("");
+  var [myValue, setValue] = useState("");
+  var [textfield, setValue2] = useState("");
   const [value, setValue3] = useState("");
   const { title } = useParams();
   const classes = useStyles();
@@ -76,7 +76,7 @@ function JournalEdit() {
       // setValue("");
       // setValue2("");
     }
-  }), [];
+  }), [title];
 
 
   const handleSubmit = (e) => {
