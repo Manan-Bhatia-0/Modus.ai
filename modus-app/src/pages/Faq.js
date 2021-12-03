@@ -31,7 +31,7 @@ function Faq() {
         <div className={classes.root}>
         <Grid item>
           <h1>FAQ</h1>
-          <Divider style={{width: "65rem"}}/>
+          <Divider style={{marginBottom: "2rem", width: "65rem"}}/>
         </Grid>
         <Grid item>
           <img src={faqimage} alt="Logo" width="70%" height="50%" />

@@ -39,12 +39,13 @@ function Profile() {
   return (
     <div class="profilecontainer">
       <br></br>
-      <h1 class="text-primary">Edit Profile</h1>
+      <h1>Edit Profile</h1>
       <label class="name-field">Name:</label>
       <input
         class="form-control"
         type="text"
         value={name}
+        style={{width: "20rem"}}
         onChange={(e) => setName(e.target.value)}
       />
       <label class="age-field">Age:</label>

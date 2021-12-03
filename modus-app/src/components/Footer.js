@@ -20,7 +20,7 @@ function Footer() {
             <button className="email">
               <FaEnvelope size={20} style={{ fill: "white" }} />
               {/* <FaEnvelope size={20} /> */}
-              <p>abcde@gmail.com</p>
+              <p>modus.ai@gmail.com</p>
             </button>
           </a>
         </span>
