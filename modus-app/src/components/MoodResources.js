@@ -56,20 +56,22 @@ export default class MoodResources extends Component {
             }}>
               How your demographics are doing: {data[1]}
           </h1>
-          <h6 
+          <Divider style={{width: "60rem"}}/>
+          <h4 
             style={{
               marginTop: "1rem"
             }}>
               The above score shows how all users with the same age range and gender as you are doing. 
         
-          </h6>
-          <h6 
+          </h4>
+          <h4 
             style={{
               marginTop: "3rem"
             }}>
-              You can use this score to see how yours compares to the average or how the same demographic might be doing! 
-          </h6>
-          
+              You can use this score to see how yours compares to the average or how the same 
+              <br></br> demographic might be doing! 
+          </h4>
+          <br></br><br></br>
           {/* <Divider style={{width: "60rem"}}/> */}
          
         </Grid>
@@ -77,7 +79,7 @@ export default class MoodResources extends Component {
 
       <Grid container>
         <Grid item xs={10}>
-
+        <br></br>
           <h1 
             style={{
               marginTop: "5rem"
@@ -85,12 +87,14 @@ export default class MoodResources extends Component {
               Mental Health Resources
           </h1>
           <Divider style={{width: "60rem"}}/>
+  
           <h4 
             style={{
               marginTop: "1rem"
             }}>
               Here is what we recommend for you based on your latest entries:
           </h4>
+          <br></br>
         </Grid>
       </Grid>
       <Grid container direction="column" style={{marginTop: "2rem"}}>
