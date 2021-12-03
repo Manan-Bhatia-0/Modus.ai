@@ -53,7 +53,8 @@ function pieChart(dict_t2e) {
       color: ['rgb(93, 87, 107)', 'rgb(183, 195, 243)',
         'rgb(180,248,200)', 'rgb(255,244,189)', 'rgb(255,174,188)']
     },
-    type: 'bar'
+    type: 'bar',
+    width: [0.6, 0.6, 0.6, 0.6, 0.6]
   }];
   var layout = {
     title: {
@@ -64,7 +65,7 @@ function pieChart(dict_t2e) {
         color: 'darkblue'
       }},
     height: 700,
-    width: 1000,
+    width: 960,
     xaxis: {
       title: {
         text: 'Moods',
@@ -136,8 +137,8 @@ function plotGaugeChart(result) {
   ];
   
   var layout = {
-    width: 950,
-    height: 800,
+    width: 960,
+    height: 600,
     margin: { t: 25, r: 25, l: 25, b: 25 },
     paper_bgcolor: "white",
     font: { color: "darkblue", family: "Arial" }
