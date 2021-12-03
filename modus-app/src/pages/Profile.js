@@ -54,17 +54,17 @@ function Profile() {
         onChange={(e) => setAge(e.target.value)}
       />
       <label class="gender-field">Gender:</label>
-      {/* <input class="form-control" type="text" value={gender} onChange = {(e) => setGender(e.target.value)}/> */}
-      <select
+      <input class="form-control" type="text" value={gender} onChange = {(e) => setGender(e.target.value)}/>
+      {/* <select
         id="genderForm"
         class="form-control"
         value={gender}
         onChange={(e) => setGender(e.target.value)}
-      >
-        <option value="Female">Female</option>
+      > */}
+        {/* <option value="Female">Female</option>
         <option value="Male">Male</option>
         <option value="Other">Other</option>
-      </select>
+      </select> */}
       <label class="birthday-field">Birthday:</label>
       /*{" "}
       <input

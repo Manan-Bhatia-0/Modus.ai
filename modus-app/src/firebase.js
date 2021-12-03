@@ -734,7 +734,7 @@ export const getTopThreeLatestEntries = async () => {
 };
 
 export const getAgeGenderAnalysis = async () => {
-<<<<<<< HEAD
+
 
     var entry = null
 
@@ -764,7 +764,8 @@ export const getAgeGenderAnalysis = async () => {
     const querySnapshot2 = await db.collection("users").get() 
     querySnapshot2.forEach((doc) => {
         entry = doc.data();
-        if (entry["happiness"] != null) {
+        console.log(entry)
+        if (entry["happiness"] != null && entry["happiness"] > 0) {
             total = total + entry['happiness']
             counter = counter + 1 
         }
@@ -795,75 +796,16 @@ export const getAgeGenderAnalysis = async () => {
         
     // }); 
 
-    var average = Math.round((total/counter) * 100) / 100
-    console.log('DONEEEE')
+    console.log(total)
+    console.log(counter)
+    var average = (total/counter) * 100;
+    average = average.toFixed(2);
+
+
     console.log(average)
-    return average * 100;
+    return average;
     
 }
-=======
-  var entry = null;
-
-  const querySnapshot = await getDocs(
-    collection(db.collection("users").doc(auth.currentUser.email), "profile")
-  );
-  querySnapshot.forEach((doc) => {
-    console.log(doc);
-    entry = doc.data();
-  });
-
-  // convert resources to dictionary/ json
-
-  var profile_obj = JSON.parse(JSON.stringify(entry));
-  var keys = Object.keys(profile_obj);
-  const gender_var = profile_obj["gender"][0].toLowerCase();
-  console.log("heLLOOOOOOOOOO");
-  var counter = 0;
-  var total = 0;
-  // const querySnapshot = await getDocs(collection(db.collection('users'))).;
-  // querySnapshot.forEach((doc) => {
-  //     entry = doc.data();
-  // });
-
-  const querySnapshot2 = await db.collection("users").get();
-  querySnapshot2.forEach((doc) => {
-    entry = doc.data();
-    if (entry["happiness"] != null) {
-      total = total + entry["happiness"];
-      counter = counter + 1;
-    }
-  });
-
-  // db.collection("users").get().then(function(querySnapshot) {
-  //     querySnapshot.forEach(function(doc) {
-  //         // doc.data() is never undefined for query doc snapshots
-  //         entry = doc.data();
-  //         if (entry["happiness"] != null) {
-  //             total = total + entry['happiness']
-  //             counter = counter + 1
-  //         }
-  //     });
-  // });
-  // Object.keys(mhr_obj)
-
-  // const querySnapshot2 = await getDocs(collection(db.collection('users')));
-  // querySnapshot2.forEach((doc) => {
-  //     console.log(doc);
-  //     entry = doc.data();
-  //     var user_obj = JSON.parse(JSON.stringify(entry));
-  //     console.log(user_obj['happiness'])
-  //     counter = counter + 1
-  //     total = total + user_obj['happiness']
-
-  // });
-
-  var average = Math.round((total / counter) * 100) / 100;
-  console.log("DONEEEE");
-  console.log(average);
-
-  return average;
-};
->>>>>>> 2fa05bcaab7910f043e4a594ce365a6e90533305
 
 export const MoodAnalysisFuncs = async () => {
   const gender_var = await getAgeGenderAnalysis();
