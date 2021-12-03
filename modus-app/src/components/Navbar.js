@@ -19,6 +19,7 @@ import AssessmentIcon from "@mui/icons-material/Assessment";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ContactSupportIcon from "@mui/icons-material/ContactSupport";
+import DarkModeToggle from "./DarkModeToggle";
 import { Link } from "react-router-dom";
 
 const drawerWidth = "12rem";
@@ -140,6 +141,7 @@ function NavBar() {
             </ListItem>
           </Link>
         </List>
+        <DarkModeToggle />
       </Drawer>
     </div>
   );

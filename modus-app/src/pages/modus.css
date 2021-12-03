@@ -5,10 +5,23 @@
     background: #F5F8FF;
   } */
   
-  body {
+  body.light-mode {
     background-color: #F5F8FF !important;
     font-family: "Ubuntu", sans-serif;
+    transition: background-color 0.3s ease;
   }
+
+  body.dark-mode {
+    background-color: #232833 !important;
+    font-family: "Ubuntu", sans-serif;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+
+  .darkmodeContainer {
+    display: flex;
+  }
+
   .createAccountHeader,
   .loginPageHeader {
     display: flex;
@@ -320,6 +333,50 @@ h4 {
     font-weight: 600;
     text-decoration: none;
   }
+
+  input[type='checkbox'].dmcheck {
+    top: 14px;
+    width: 40px;
+    height: 10px;
+    background: #555;
+    position: relative;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    vertical-align: 2px;
+    outline: none;
+  }
+  input[type='checkbox'].dmcheck:checked + label {
+    top: 473px;
+    left: 99px;
+}
+input[type='checkbox'].dmcheck:focus-visible {
+    outline: solid 2px white;
+}
+input[type='checkbox'].dmcheck + label {
+    top: 473px;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: absolute;
+    left: 69px;
+    background: #fff;
+    opacity: 0.9;
+    background-color: #f6f6f6;
+}
+.dark-mode-toggle > button {
+  font-size: 1.2em;
+  background-color: none !important;
+  border: none;
+  color: #ffe600;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
 
 /* The Modal (background) */
 /*
