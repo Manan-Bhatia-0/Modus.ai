@@ -38,6 +38,7 @@ function Profile() {
   //const history = useHistory();
   return (
     <div class="profilecontainer">
+      <br></br>
       <h1 class="text-primary">Edit Profile</h1>
       <label class="name-field">Name:</label>
       <input
@@ -72,12 +73,14 @@ function Profile() {
         value={birthday}
         onChange={(e) => setBirthday(e.target.value)}
       />
+      <br></br>
       <button
         className="saveProfile"
         onClick={() => editProfile(name, gender, age, birthday)}
       >
         Save Profile
       </button>
+      <br></br> <br></br>
       <button
         right="100px"
         justifyContent="center"
