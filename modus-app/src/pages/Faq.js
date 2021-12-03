@@ -34,7 +34,7 @@ function Faq() {
           <Divider style={{width: "65rem"}}/>
         </Grid>
         <Grid item>
-          <img src={faqimage} alt="Logo" width="60%" height="60%" />
+          <img src={faqimage} alt="Logo" width="70%" height="50%" />
         </Grid>
         <Grid item className={classes.accordian}>
           <Accordion>
