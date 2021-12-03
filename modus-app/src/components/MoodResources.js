@@ -71,7 +71,7 @@ export default class MoodResources extends Component {
               marginTop: "3rem"
             }}>
               You can use this score to see how yours compares to the average or how the same 
-              <br></br> demographic might be doing! 
+              demographic might be doing! 
           </h4>
           <br></br><br></br>
           {/* <Divider style={{width: "60rem"}}/> */}
