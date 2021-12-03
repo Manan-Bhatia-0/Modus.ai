@@ -318,12 +318,14 @@ export const getrecommendedMHResources = async () => {
 
 export const getJournalEntries = async () => {
   var journalEntries = [];
-  const querySnapshot = await getDocs(
+  const q = query(
     collection(
       db.collection("users").doc(auth.currentUser.email),
       "journalEntries"
-    ).withConverter(entryConverter)
+    ), orderBy("createdAt", "desc")
   );
+
+  const querySnapshot = await getDocs(q.withConverter(entryConverter));
 
   querySnapshot.forEach((doc) => {
     const entry = doc.data();
