@@ -18,7 +18,7 @@ import Reset from "./pages/ResetPassword.js";
 import Contact from "./pages/ContactUs";
 import AnalysisIndividual from './pages/AnalysisIndividual.js';
 import  {useDarkMode} from "./components/useDarkMode"
-import {ThemeProvider} from "styled-components";
+// import {ThemeProvider} from "styled-components";
 import { GlobalStyles } from "./components/globalStyles";
 import { lightTheme, darkTheme } from "./components/theme";
 import Toggle from "./components/Toggler";

@@ -4,10 +4,11 @@
     height: 100%;
     background: #F5F8FF;
   } */
-  /* body {
-    background-color: #f3ebf6;
+  
+  body {
+    background-color: #F5F8FF !important;
     font-family: "Ubuntu", sans-serif;
-  } */
+  }
   .createAccountHeader,
   .loginPageHeader {
     display: flex;
@@ -181,7 +182,7 @@
 root {
     /* background-color: #c8d1e6; */
     margin-top: 30 rem;
-    background: #F5F8FF;
+    
 }
 
 .container {

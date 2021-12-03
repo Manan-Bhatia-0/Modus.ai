@@ -8,7 +8,7 @@ import {
 } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./modus.css";
-import bg_img from '../imgs/LoginBG.svg'
+// import bg_img from '../imgs/LoginBG.svg'
 
 function Login() {
   const [email, setEmail] = useState("");
