@@ -17,6 +17,7 @@ import CreateAccount from "./pages/CreateAccount.js";
 import Reset from "./pages/ResetPassword.js";
 import Contact from "./pages/ContactUs";
 import AnalysisIndividual from './pages/AnalysisIndividual.js';
+import StarAnimation from "./pages/StarLogout";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
@@ -93,6 +94,7 @@ const DefaultContainer = () => {
         <Route path="/faq" component={Faq}></Route>
         <Route path="/contactus" component={Contact}></Route>
         <Route path='/individual' component={AnalysisIndividual} />
+        <Route path='/logout' component={StarAnimation} />
         <Route path="/journal/:title"> <SingleJournal /> </Route>
       </Grid>
   </Grid>
