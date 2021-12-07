@@ -3,6 +3,8 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
 
+import "./pages/modus.css";
+
 import JournalDashboard from "./pages/JournalDashboard.js";
 import NavBar from "./components/Navbar.js";
 import JournalEdit from "./pages/JournalEdit";
@@ -13,8 +15,8 @@ import Faq from "./pages/Faq.js";
 import Login from "./pages/Login.js";
 import CreateAccount from "./pages/CreateAccount.js";
 import Reset from "./pages/ResetPassword.js";
+import Contact from "./pages/ContactUs";
 import AnalysisIndividual from './pages/AnalysisIndividual.js';
-
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
@@ -73,7 +75,9 @@ const CreateContainer = () => (
   </div>
 );
 
-const DefaultContainer = () => (
+const DefaultContainer = () => {
+
+  return(
   <Grid container spacing={2}>
       <Grid item>
         <NavBar />
@@ -87,22 +91,30 @@ const DefaultContainer = () => (
         <Route path="/individualAnalysis/:title"> <AnalysisIndividual/> </Route>
         <Route path="/analysis" component={Analysis} />
         <Route path="/faq" component={Faq}></Route>
+        <Route path="/contactus" component={Contact}></Route>
         <Route path='/individual' component={AnalysisIndividual} />
         <Route path="/journal/:title"> <SingleJournal /> </Route>
       </Grid>
   </Grid>
+
 );
+}
+
 
 function Welcome() {
+  
   return (
+    
     <Router>
       <Switch>
         <Route exact path="/" component={LoginContainer} />
         <Route exact path="/register" component={CreateContainer} />
         <Route exact path="/reset" component={ResetContainer} />
         <Route component={DefaultContainer} />
+        
       </Switch>
     </Router>
+    
   );
 }
 

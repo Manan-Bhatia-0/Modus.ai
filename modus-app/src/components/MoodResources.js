@@ -1,30 +1,87 @@
 
 import {Grid, Divider, Card} from '@mui/material'
-import { getrecommendedMHResources} from "../firebase";
+import { getrecommendedMHResources, MoodAnalysisFuncs, getAgeGenderAnalysis} from "../firebase";
 import React, { Component } from 'react';
 
 export default class MoodResources extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+      data: [{"Guided Meditation":'https://mindfullycity.com/free-guided-meditation-resources-for-difficult-times/'}, 0.0]
     };
   }
   async componentDidMount() {
-    const data = await getrecommendedMHResources();
+    const data = await MoodAnalysisFuncs();
+    const data2 = await getAgeGenderAnalysis();
+    console.log(data)
+
+    console.log(data2)
+    if (data[1] == null) {
+      data[1] = 0.0
+    }
     this.setState({ data });
+
+    console.log(this.state.data)
+    // await MoodAnalysisFuncs(function (data) {
+    //   console.log(data)
+    //   this.setState({ data });
+
+    // } )
+    
   }
 
   render() {
-    const { data } = this.state;
+    console.log(this.state)
+    var { data } = this.state;
     console.log(data)
+
+
+    // if(data.length==0) {
+    //   data = []
+    //   data[0] = {"Guided Meditation":'https://mindfullycity.com/free-guided-meditation-resources-for-difficult-times/'}
+    //   data[1] = "Male"
+    // }
+    console.log(data) 
+    // console.log(data[1])
   return (
       
     <div
       style={{margin: "5rem"}}
     >
+        <Grid container>
+        <Grid item xs={10}>
+          <h1 
+            style={{
+              marginTop: "2rem"
+            }}>
+              How your demographics are doing: <b>{data[1]}</b>
+          </h1>
+          <Divider style={{width: "60rem"}}/>
+          <h4 
+            style={{
+              fontSize: 18,
+              marginTop: "1rem"
+            }}>
+              The above score shows how all users with the same age range and gender as you are doing. 
+        
+          </h4>
+          <h4 
+            style={{
+              fontSize: 18,
+              marginTop: "3rem"
+            }}>
+              You can use this score to see how yours compares to the average or how the same 
+              demographic might be doing! 
+          </h4>
+          <br></br><br></br>
+          {/* <Divider style={{width: "60rem"}}/> */}
+         
+        </Grid>
+      </Grid>
+
       <Grid container>
         <Grid item xs={10}>
+        <br></br>
           <h1 
             style={{
               marginTop: "5rem"
@@ -32,21 +89,24 @@ export default class MoodResources extends Component {
               Mental Health Resources
           </h1>
           <Divider style={{width: "60rem"}}/>
+  
           <h4 
             style={{
+              fontSize: 18,
               marginTop: "1rem"
             }}>
               Here is what we recommend for you based on your latest entries:
           </h4>
+          <br></br>
         </Grid>
       </Grid>
       <Grid container direction="column" style={{marginTop: "2rem"}}>
         <Grid item>
-          {Object.entries(data).map(([key, value]) => (
+          {Object.entries(data[0]).map(([key, value]) => (
 
-<Card style={{width: "50rem", height: "40px", padding: "10px", margin: "10px"}}>
-           <a target="_blank" href={value} style={{ color: '#578ff1' }}>{key}</a>
-           </Card>
+            <Card style={{width: "60rem", height: "40px", padding: "10px", marginBottom: "10px"}}>
+              <a target="_blank" href={value} style={{ color: '#578ff1' }}>{key}</a>
+            </Card>
           
           )) 
 

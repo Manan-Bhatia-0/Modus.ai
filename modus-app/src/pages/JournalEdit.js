@@ -59,8 +59,9 @@ const useStyles = makeStyles({
 })
 
 function JournalEdit() {
-  const [myValue, setValue] = useState("");
-  const [textfield, setValue2] = useState("");
+  var [myValue, setValue] = useState("");
+  var [textfield, setValue2] = useState("");
+  var [submitContent, setSubmitContent] = useState("");
   const [value, setValue3] = useState("");
   const { title } = useParams();
   const classes = useStyles();
@@ -70,14 +71,15 @@ function JournalEdit() {
       promise.then(function(result) {
         setValue(result[0].title);
         setValue2(result[0].text);
-        console.log("I set the values!");
       })
     } else {
-      // setValue("");
-      // setValue2("");
     }
   }), [];
 
+  function settingSubmitContent() {
+    setValue2(input);
+    setSubmitContent(textfield);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -106,6 +108,7 @@ function JournalEdit() {
             <SunEditor
               value={textfield}
               onChange={setValue2}
+              setContents={textfield}
               // onChange={(e) => setValue2(e.target.value)}
               setOptions={{ height: "500px", width: "1000px" }}
             />
@@ -120,21 +123,10 @@ function JournalEdit() {
               </button>
               <button
                 className={classes.submitButton}
-                onClick={() => {
-                  onClick(optionsWithLabelChange);
-                }}
-              >
-                Submit with message
-              </button>
-              <button
-                className={classes.submitButton}
                 onClick={() => submitJournalEntry(myValue, textfield)}
               >
                 Submit
               </button>
-            </Grid>
-            <Grid item>
-              
             </Grid>
           </Grid>
         </form>

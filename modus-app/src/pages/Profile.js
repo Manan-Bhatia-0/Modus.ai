@@ -1,9 +1,10 @@
 /* eslint-disable */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { deleteCurrentUser } from "../firebase";
 import { Link, useHistory } from "react-router-dom";
 import { confirm } from "react-confirm-box";
+import { getUserName, editProfile } from "../firebase";
 
 const optionsWithLabelChange = {
   closeOnOverlayClick: false,
@@ -28,19 +29,59 @@ const onClick = async (options) => {
 };
 
 function Profile() {
-  const history = useHistory();
+  const [name, setName] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [birthday, setBirthday] = useState("");
+  // var select = document.getElementById('gender');
+  // var gender = select.options[select.selectedIndex].value;
+  //const history = useHistory();
   return (
-    <div>
-      <h1>Profile</h1>
+    <div class="profilecontainer">
+      <br></br>
+      <h1>Edit Profile</h1>
+      <label class="name-field">Name:</label>
+      <input
+        class="form-control"
+        type="text"
+        value={name}
+        style={{width: "20rem"}}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <label class="age-field">Age:</label>
+      <input
+        class="form-control"
+        type="text"
+        value={age}
+        onChange={(e) => setAge(e.target.value)}
+      />
+      <label class="gender-field">Gender:</label>
+      <input class="form-control" type="text" value={gender} onChange = {(e) => setGender(e.target.value)}/>
+      {/* <select
+        id="genderForm"
+        class="form-control"
+        value={gender}
+        onChange={(e) => setGender(e.target.value)}
+      > */}
+        {/* <option value="Female">Female</option>
+        <option value="Male">Male</option>
+        <option value="Other">Other</option>
+      </select> */}
+      <label class="birthday-field">Birthday:</label>
+      <input
+        class="form-control"
+        type="date"
+        value={birthday}
+        onChange={(e) => setBirthday(e.target.value)}
+      />
+      <br></br>
       <button
-        onClick={() => {
-          onClick(optionsWithLabelChange);
-        }}
-        right="100px"
+        className="saveProfile"
+        onClick={() => editProfile(name, gender, age, birthday)}
       >
-        {" "}
-        Delete Profile{" "}
+        Save Profile
       </button>
+      <br></br> <br></br>
       <button
         right="100px"
         justifyContent="center"

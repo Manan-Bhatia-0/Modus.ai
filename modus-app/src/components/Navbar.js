@@ -3,52 +3,56 @@ import "bootstrap/dist/css/bootstrap.css";
 import { handleLogout } from "../firebase";
 import { useHistory, useLocation } from "react-router";
 import {
-        Typography, Drawer, 
-        List, ListItem, ListItemText, 
-        ListItemIcon
-      } from "@mui/material/";
+  Typography,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+} from "@mui/material/";
 import { makeStyles } from "@mui/styles/";
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import CreateIcon from '@mui/icons-material/Create';
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
-import AssessmentIcon from '@mui/icons-material/Assessment';
-import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
-import LogoutIcon from '@mui/icons-material/Logout';
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CreateIcon from "@mui/icons-material/Create";
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import AssessmentIcon from "@mui/icons-material/Assessment";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+import LogoutIcon from "@mui/icons-material/Logout";
+import ContactSupportIcon from "@mui/icons-material/ContactSupport";
+import DarkModeToggle from "./DarkModeToggle";
 import { Link } from "react-router-dom";
 
-
-const drawerWidth = '12rem';
+const drawerWidth = "12rem";
 
 const useStyles = makeStyles({
   root: {
-    display: 'flex'
+    display: "flex",
   },
   drawer: {
     width: drawerWidth,
   },
   active: {
-    background: '#5d88e3',
-    color: '#FFFFFF'
+    background: "#5d88e3",
+    color: "#FFFFFF",
   },
   drawerPaper: {
     width: drawerWidth,
-    backgroundColor: '#7699e4'
+    backgroundColor: "#7699e4",
   },
   title: {
     fontSize: 28,
-    color: '#FFFFFF',
-    paddingLeft: '1rem',
-    paddingTop: '1rem'
+    color: "#FFFFFF",
+    paddingLeft: "1rem",
+    paddingTop: "1rem",
   },
   link: {
-    color: '#FFFFFF',
-    paddingTop: '1rem'
+    color: "#FFFFFF",
+    paddingTop: "1rem",
   },
   linkText: {
-    color: '#FFFFFF',
-  }
-})
+    color: "#FFFFFF",
+  },
+});
 
 function NavBar() {
   const classes = useStyles();
@@ -57,40 +61,45 @@ function NavBar() {
 
   const menuItems = [
     {
-      text: 'Dashboard',
-      icon: <DashboardIcon color="#FFFFFF"/>,
-      path: '/'
+      text: "Dashboard",
+      icon: <DashboardIcon color="#FFFFFF" />,
+      path: "/",
     },
     {
-      text: 'Profile',
-      icon: <AccountCircleIcon color="#FFFFFF"/>,
-      path: '/profile'
+      text: "Profile",
+      icon: <AccountCircleIcon color="#FFFFFF" />,
+      path: "/profile",
     },
     {
-      text: 'New Entry',
-      icon: <CreateIcon color="#FFFFFF"/>,
-      path: '/write'
+      text: "New Entry",
+      icon: <CreateIcon color="#FFFFFF" />,
+      path: "/write",
     },
     {
-      text: 'Library',
-      icon: <LibraryBooksIcon color="#FFFFFF"/>,
-      path: '/library'
+      text: "Library",
+      icon: <LibraryBooksIcon color="#FFFFFF" />,
+      path: "/library",
     },
     {
-      text: 'Analysis',
-      icon: <AssessmentIcon color="#FFFFFF"/>,
-      path: '/analysis'
+      text: "Analysis",
+      icon: <AssessmentIcon color="#FFFFFF" />,
+      path: "/analysis",
     },
     {
-      text: 'FAQ',
-      icon: <QuestionAnswerIcon color="#FFFFFF"/>,
-      path: '/faq'
+      text: "FAQ",
+      icon: <QuestionAnswerIcon color="#FFFFFF" />,
+      path: "/faq",
     },
-  ]
+    {
+      text: "Contact Us",
+      icon: <ContactSupportIcon color="#FFFFFF" />,
+      path: "/contactus",
+    },
+  ];
 
   return (
-    <div className={classes.root}>  
-      <Drawer 
+    <div className={classes.root}>
+      <Drawer
         variant="permanent"
         anchor="left"
         className={classes.drawer}
@@ -98,29 +107,41 @@ function NavBar() {
       >
         <Typography className={classes.title}>Modus.ai</Typography>
         {/* list / links */}
-        <List>      
-          {menuItems.map(item => (
+        <List>
+          {menuItems.map((item) => (
             <ListItem
               key={item.text}
               button
               onClick={() => history.push(item.path)}
-              className={location.pathname === item.path ? classes.active : classes.linkText}
+              className={
+                location.pathname === item.path
+                  ? classes.active
+                  : classes.linkText
+              }
             >
-                <ListItemIcon className={classes.linkText}>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text} />
+              <ListItemIcon className={classes.linkText}>
+                {item.icon}
+              </ListItemIcon>
+              <ListItemText primary={item.text} />
             </ListItem>
           ))}
-          <Link to='/login'>
-          <ListItem
-            button
-            onClick={() => {history.push('/'); handleLogout()}}
-            className={classes.linkText}
-          >
-            <ListItemIcon className={classes.linkText}><LogoutIcon color='#FFFFFF'/></ListItemIcon>
-            <ListItemText primary='Logout' />
-          </ListItem>
+          <Link to="/login">
+            <ListItem
+              button
+              onClick={() => {
+                history.push("/");
+                handleLogout();
+              }}
+              className={classes.linkText}
+            >
+              <ListItemIcon className={classes.linkText}>
+                <LogoutIcon color="#FFFFFF" />
+              </ListItemIcon>
+              <ListItemText primary="Logout" />
+            </ListItem>
           </Link>
         </List>
+        <DarkModeToggle />
       </Drawer>
     </div>
   );

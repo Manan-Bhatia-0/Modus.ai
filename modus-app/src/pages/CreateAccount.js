@@ -22,7 +22,11 @@ function CreateAccount() {
 
   return (
     <div>
-      <h2>Create Account</h2>
+      <div className="createAccountHeader">
+        <h2>Create Account</h2>
+      </div>
+      <div className="createAccountContainer">
+        <div className="loginContainer">
       <input
         type="text"
         placeholder="Full Name"
@@ -47,6 +51,8 @@ function CreateAccount() {
       <button className="registerButton" onClick={registerWithEmailAndPassword}>
         Sign Up
       </button>
+      </div>
+      </div>
     </div>
   );
 }
