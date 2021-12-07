@@ -8,6 +8,7 @@ import LibraryCard from "../components/LibraryCard";
 import { Button, Grid, Divider, Pagination, TextField } from '@mui/material'
 import { makeStyles } from '@mui/styles';
 import { Link } from "react-router-dom";
+import StarAnimation from "./StarLogout";
 
 const useStyles = makeStyles({
   root: {
@@ -32,6 +33,7 @@ function JournalDashboard() {
       <Grid item>
         <div className="dashboard">
           <div>
+            {StarAnimation()}
             <img src={clouds} alt="Logo" width="100%" height="40%" />
             <Link to='/write'>
             <button class="writeButton">

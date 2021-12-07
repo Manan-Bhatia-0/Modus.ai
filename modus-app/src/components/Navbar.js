@@ -125,7 +125,7 @@ function NavBar() {
               <ListItemText primary={item.text} />
             </ListItem>
           ))}
-          <Link to="/login">
+          <Link to="/logout">
             <ListItem
               button
               onClick={() => {
