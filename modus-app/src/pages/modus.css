@@ -293,6 +293,7 @@ h6 {
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
+    border-radius: 8px !important;
     cursor: pointer;
     width: 100%;
   }
